@@ -4,12 +4,17 @@ dictionaries = [
 ]
 words = [
     "backpex",
+    "erd",
+    "figma",
     "htt",
     "iex",
+    "ipcc",
     "llm",
     "mce",
     "mcp",
     "otp",
+    "prd",
+    "saa",
 ]
 ignore_paths = ["package.json"]
 ignore_patterns = [

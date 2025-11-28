@@ -117,6 +117,12 @@ mix precommit                # Compile with warnings-as-errors, unlock unused de
   - Always keep in mind i18n support when writing texts: titles, labels, messages, etc.
   - The primary UI interface language of the project is Korean. The UI targe languages are Korean, English(US), and Portuguese(Brazil).
   - English is strictly used for development including code comments, commit messages, and documentation.
+  - Clear and technically precise language is preferred.
+  - British English spelling and conventions are preferred.
+
+## Uncertainty Map
+
+- Add a section at the end of your reponsed labeled “Uncertainty Map,” where you describe what you’re least confident about, what you may be oversimplifying, and what question or followups would change your opinion.
 
 @AGENTS.md
 
