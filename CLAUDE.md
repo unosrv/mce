@@ -132,3 +132,5 @@ The AGENTS.md file contains comprehensive guidelines for:
 - HEEx template syntax (interpolation, conditionals, class lists)
 - LiveView streams and form handling
 - Testing with `Phoenix.LiveViewTest` and `LazyHTML`
+- The result of context research files:
+- document files in @dev-doc/prd/2511290312_RESEARCH/
