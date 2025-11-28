@@ -35,3 +35,5 @@ mce-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Ignore Serena cache
+.serena/cache/
