@@ -1,0 +1,20 @@
+dictionaries = [
+    "en_us",
+    "en_gb",
+]
+words = [
+    "backpex",
+    "htt",
+    "iex",
+    "llm",
+    "mce",
+    "mcp",
+    "otp",
+]
+ignore_paths = ["package.json"]
+ignore_patterns = [
+    "[가-힣]+",
+    "[a-zA-Z0-9]+[가-힣]+",
+    "[가-힣]+[a-zA-Z0-9]+",
+    "[a-zA-Z0-9가-힣]+[가-힣]+",
+]
