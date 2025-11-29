@@ -1,0 +1,185 @@
+/* MCE Design Tokens
+
+   This file documents the design system colors and spacing scales used throughout
+   the Mce application. These are implemented as DaisyUI theme variables in app.css.
+
+   Reference: dev-doc/plan/2511290335_PORJECT_BASE_PLANS/01_UI_UX_DESIGN_PLAN.md
+*/
+
+/* =============================================================================
+   COLOUR PALETTE
+   ============================================================================= */
+
+/* Primary Color: Forest Green
+   Usage: Primary actions, CTAs, active states
+   OKLCH: 0.45 0.14 145
+
+   Light theme: oklch(45% 0.14 145)
+   Dark theme: oklch(45% 0.14 145)
+   Content (light): oklch(98% 0.02 145)
+   Content (dark): oklch(96% 0.02 145)
+*/
+:root {
+  --color-primary: oklch(45% 0.14 145);
+}
+
+/* Secondary Color: Ocean Blue
+   Usage: Secondary actions, links, info
+   OKLCH: 0.55 0.12 220
+
+   Light theme: oklch(55% 0.12 220)
+   Dark theme: oklch(55% 0.12 220)
+   Content (light): oklch(98% 0.015 215)
+   Content (dark): oklch(97% 0.015 215)
+*/
+:root {
+  --color-secondary: oklch(55% 0.12 220);
+}
+
+/* Accent Color: Sunlight Gold
+   Usage: Highlights, badges, emphasis
+   OKLCH: 0.65 0.15 85
+
+   Light theme: oklch(65% 0.15 85)
+   Dark theme: oklch(65% 0.15 85)
+   Content (light): oklch(20% 0.01 80)
+   Content (dark): oklch(15% 0.01 80)
+*/
+:root {
+  --color-accent: oklch(65% 0.15 85);
+}
+
+/* Neutral Color
+   Usage: Text, borders
+   OKLCH: 0.35 0.02 260
+
+   Light theme: oklch(35% 0.02 260)
+   Dark theme: oklch(35% 0.02 260)
+*/
+:root {
+  --color-neutral: oklch(35% 0.02 260);
+}
+
+/* Base Colors
+
+   Light theme background: oklch(98% 0 0)
+   Dark theme background: oklch(20% 0.01 260)
+*/
+:root {
+  --color-base-100-light: oklch(98% 0 0);
+  --color-base-100-dark: oklch(20% 0.01 260);
+}
+
+/* Status Colors */
+
+/* Success: Positive emissions, targets met
+   OKLCH: 0.65 0.18 145
+   Light: oklch(65% 0.18 145)
+   Dark: oklch(65% 0.18 145)
+   Content (light): oklch(98% 0.02 140)
+   Content (dark): oklch(97% 0.02 140)
+*/
+:root {
+  --color-success: oklch(65% 0.18 145);
+}
+
+/* Warning: Medium emissions, alerts
+   OKLCH: 0.75 0.15 85
+   Light: oklch(75% 0.15 85)
+   Dark: oklch(75% 0.15 85)
+   Content (light): oklch(20% 0.01 80)
+   Content (dark): oklch(15% 0.01 80)
+*/
+:root {
+  --color-warning: oklch(75% 0.15 85);
+}
+
+/* Error: High emissions, validation errors
+   OKLCH: 0.55 0.22 25
+   Light: oklch(55% 0.22 25)
+   Dark: oklch(55% 0.22 25)
+   Content (light): oklch(98% 0.015 20)
+   Content (dark): oklch(97% 0.015 20)
+*/
+:root {
+  --color-error: oklch(55% 0.22 25);
+}
+
+/* =============================================================================
+   SPACING SCALE
+   ============================================================================= */
+
+/* Based on 4px grid */
+:root {
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+}
+
+/* =============================================================================
+   BORDER RADIUS
+   ============================================================================= */
+
+:root {
+  --radius-button: 0.375rem;   /* 6px */
+  --radius-input: 0.375rem;    /* 6px */
+  --radius-card: 0.75rem;      /* 12px */
+  --radius-modal: 1rem;        /* 16px */
+}
+
+/* =============================================================================
+   TYPOGRAPHY
+   ============================================================================= */
+
+/* Font sizing based on system sans-serif */
+:root {
+  --text-h1: 2rem;       /* 32px, Bold (700) */
+  --text-h2: 1.5rem;     /* 24px, Semibold (600) */
+  --text-h3: 1.25rem;    /* 20px, Semibold (600) */
+  --text-body: 1rem;     /* 16px, Regular (400) */
+  --text-small: 0.875rem; /* 14px, Regular (400) */
+  --text-caption: 0.75rem; /* 12px, Regular (400) */
+}
+
+/* =============================================================================
+   COMPONENT CUSTOMIZATION
+   ============================================================================= */
+
+/* DaisyUI overrides for MCE theme consistency */
+
+/* Button sizes and styling */
+:root {
+  --btn-border-radius: 0.375rem;
+  --btn-padding-x: 1rem;
+  --btn-padding-y: 0.5rem;
+}
+
+/* Form inputs */
+:root {
+  --input-border-radius: 0.375rem;
+  --input-padding: 0.5rem 1rem;
+  --input-border: 1.5px solid;
+}
+
+/* Card styling */
+:root {
+  --card-border-radius: 0.75rem;
+  --card-padding: 1.5rem;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================================= */
+
+/* Tailwind breakpoints (inherited, no override needed) */
+:root {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}

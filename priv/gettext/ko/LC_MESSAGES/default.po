@@ -36,3 +36,18 @@ msgstr "인터넷에 연결할 수 없습니다"
 #, elixir-autogen, elixir-format
 msgid "close"
 msgstr "닫기"
+
+#: lib/mce_web/components/layouts.ex:126
+#, elixir-autogen, elixir-format
+msgid "System theme"
+msgstr "시스템 테마"
+
+#: lib/mce_web/components/layouts.ex:135
+#, elixir-autogen, elixir-format
+msgid "Light theme"
+msgstr "밝은 테마"
+
+#: lib/mce_web/components/layouts.ex:144
+#, elixir-autogen, elixir-format
+msgid "Dark theme"
+msgstr "어두운 테마"

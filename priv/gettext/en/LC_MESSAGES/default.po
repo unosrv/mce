@@ -36,3 +36,18 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "close"
 msgstr ""
+
+#: lib/mce_web/components/layouts.ex:126
+#, elixir-autogen, elixir-format
+msgid "System theme"
+msgstr ""
+
+#: lib/mce_web/components/layouts.ex:135
+#, elixir-autogen, elixir-format
+msgid "Light theme"
+msgstr ""
+
+#: lib/mce_web/components/layouts.ex:144
+#, elixir-autogen, elixir-format
+msgid "Dark theme"
+msgstr ""
