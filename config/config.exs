@@ -11,6 +11,11 @@ config :mce,
   ecto_repos: [Mce.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+# Gettext configuration
+config :mce, MceWeb.Gettext,
+  default_locale: "ko",
+  locales: ~w(ko en pt_BR)
+
 # Configures the endpoint
 config :mce, MceWeb.Endpoint,
   url: [host: "localhost"],

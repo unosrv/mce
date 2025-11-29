@@ -41,6 +41,21 @@ Created comprehensive project plan documentation in `dev-doc/plan/2511290335_POR
 - Definition of done criteria
 - Risk mitigation strategies
 
+## Clarified Requirements (2511291124)
+
+| Question | Answer |
+|----------|--------|
+| User Roles | Admin users access Backpex dashboard; regular users have standard access |
+| Data Migration | No existing data to import |
+| Feed Presets | Default data for USA, UK, Australia |
+| Report Branding | Include farm logos in PDF if provided |
+| Fiscal Year | Determines start/end dates for annual reports |
+
+## Schema Updates
+
+- Added `is_admin` boolean to users table
+- Added `logo_path` to farms table for PDF branding
+
 ## Next Steps
 
 1. Begin Phase 1 implementation (i18n infrastructure)

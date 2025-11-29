@@ -419,6 +419,48 @@ defmodule MceWeb.CoreComponents do
     """
   end
 
+  @doc """
+  Renders a language switcher dropdown.
+
+  ## Examples
+
+      <.language_switcher locale={@locale} />
+  """
+  attr :locale, :string, required: true
+
+  def language_switcher(assigns) do
+    ~H"""
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-sm gap-1">
+        <span class="text-base">{locale_flag(@locale)}</span>
+        <span class="hidden sm:inline">{locale_name(@locale)}</span>
+        <.icon name="hero-chevron-down" class="size-3" />
+      </div>
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-40 p-2 shadow-lg">
+        <li :for={loc <- ~w(ko en pt_BR)}>
+          <a
+            href={"?locale=#{loc}"}
+            class={[@locale == loc && "active"]}
+          >
+            <span class="text-base">{locale_flag(loc)}</span>
+            {locale_name(loc)}
+          </a>
+        </li>
+      </ul>
+    </div>
+    """
+  end
+
+  defp locale_flag("ko"), do: "🇰🇷"
+  defp locale_flag("en"), do: "🇺🇸"
+  defp locale_flag("pt_BR"), do: "🇧🇷"
+  defp locale_flag(_), do: "🌐"
+
+  defp locale_name("ko"), do: "한국어"
+  defp locale_name("en"), do: "English"
+  defp locale_name("pt_BR"), do: "Português"
+  defp locale_name(_), do: "Language"
+
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do

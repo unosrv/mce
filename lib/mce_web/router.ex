@@ -8,10 +8,23 @@ defmodule MceWeb.Router do
     plug :put_root_layout, html: {MceWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :set_locale_from_params
+    plug MceWeb.Plugs.SetLocale
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  # Handle locale query parameter
+  defp set_locale_from_params(conn, _opts) do
+    case conn.params["locale"] do
+      locale when locale in ~w(ko en pt_BR) ->
+        Plug.Conn.put_session(conn, :locale, locale)
+
+      _ ->
+        conn
+    end
   end
 
   scope "/", MceWeb do

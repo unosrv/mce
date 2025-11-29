@@ -91,6 +91,9 @@ defmodule MceWeb do
       alias Phoenix.LiveView.JS
       alias MceWeb.Layouts
 
+      # Unit conversion helpers
+      alias Mce.I18n.Units
+
       # Routes generation with the ~p sigil
       unquote(verified_routes())
     end
