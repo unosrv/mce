@@ -139,7 +139,8 @@ defmodule MceWeb.Live.Components.KoreanAddressInputTest do
         |> Phoenix.Component.assign(:field_prefix, "address")
 
       # Call handle_event directly
-      {:noreply, updated_socket} = KoreanAddressInput.handle_event("address-selected", params, socket)
+      {:noreply, updated_socket} =
+        KoreanAddressInput.handle_event("address-selected", params, socket)
 
       address_data = updated_socket.assigns.address_data
 
@@ -194,7 +195,8 @@ defmodule MceWeb.Live.Components.KoreanAddressInputTest do
         |> Phoenix.Component.assign(:include_hidden_fields, false)
         |> Phoenix.Component.assign(:field_prefix, "address")
 
-      {:noreply, updated_socket} = KoreanAddressInput.handle_event("address-selected", params, socket)
+      {:noreply, updated_socket} =
+        KoreanAddressInput.handle_event("address-selected", params, socket)
 
       # Display value should include building name in parentheses
       assert updated_socket.assigns.value == "서울특별시 강남구 테헤란로 152 (강남파이낸스센터)"
@@ -233,7 +235,8 @@ defmodule MceWeb.Live.Components.KoreanAddressInputTest do
         |> Phoenix.Component.assign(:include_hidden_fields, false)
         |> Phoenix.Component.assign(:field_prefix, "address")
 
-      {:noreply, updated_socket} = KoreanAddressInput.handle_event("address-selected", params, socket)
+      {:noreply, updated_socket} =
+        KoreanAddressInput.handle_event("address-selected", params, socket)
 
       # Display value should be just the road address
       assert updated_socket.assigns.value == "서울특별시 강남구 테헤란로 152"
@@ -278,7 +281,8 @@ defmodule MceWeb.Live.Components.KoreanAddressInputTest do
         |> Phoenix.Component.assign(:include_hidden_fields, false)
         |> Phoenix.Component.assign(:field_prefix, "address")
 
-      {:noreply, _updated_socket} = KoreanAddressInput.handle_event("address-selected", params, socket)
+      {:noreply, _updated_socket} =
+        KoreanAddressInput.handle_event("address-selected", params, socket)
 
       # Verify callback was called
       assert_receive {:address_selected, data}
@@ -307,7 +311,8 @@ defmodule MceWeb.Live.Components.KoreanAddressInputTest do
         |> Phoenix.Component.assign(:include_hidden_fields, false)
         |> Phoenix.Component.assign(:field_prefix, "address")
 
-      {:noreply, updated_socket} = KoreanAddressInput.handle_event("address-selected", params, socket)
+      {:noreply, updated_socket} =
+        KoreanAddressInput.handle_event("address-selected", params, socket)
 
       # Should default missing fields to empty strings
       assert updated_socket.assigns.address_data.road_address == "서울특별시 강남구 테헤란로 152"
@@ -325,7 +330,8 @@ defmodule MceWeb.Live.Components.KoreanAddressInputTest do
         |> Phoenix.Component.assign(:value, "")
         |> Phoenix.Component.assign(:address_data, %{})
 
-      {:noreply, updated_socket} = KoreanAddressInput.handle_event("address-cancelled", %{}, socket)
+      {:noreply, updated_socket} =
+        KoreanAddressInput.handle_event("address-cancelled", %{}, socket)
 
       # State should remain unchanged
       assert updated_socket.assigns.value == ""
