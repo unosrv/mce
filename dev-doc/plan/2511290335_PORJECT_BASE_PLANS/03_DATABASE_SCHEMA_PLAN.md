@@ -45,11 +45,13 @@ CREATE TABLE users (
   hashed_password VARCHAR(255) NOT NULL,
   confirmed_at TIMESTAMP,
   locale VARCHAR(10) DEFAULT 'ko',
+  is_admin BOOLEAN DEFAULT FALSE,  -- Admin can access Backpex dashboard
   inserted_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL
 );
 
 CREATE UNIQUE INDEX users_email_index ON users (email);
+CREATE INDEX users_is_admin_index ON users (is_admin) WHERE is_admin = TRUE;
 ```
 
 **Ecto Schema**:
@@ -61,6 +63,7 @@ schema "users" do
   field :hashed_password, :string, redact: true
   field :confirmed_at, :utc_datetime
   field :locale, :string, default: "ko"
+  field :is_admin, :boolean, default: false
 
   has_many :farms, Mce.Farms.Farm
 
@@ -119,6 +122,9 @@ CREATE TABLE farms (
   fiscal_year_start_month INTEGER DEFAULT 1,  -- 1-12
   fiscal_year_start_day INTEGER DEFAULT 1,    -- 1-31
 
+  -- Branding (for PDF reports)
+  logo_path VARCHAR(500),  -- Path to uploaded farm logo
+
   inserted_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL
 );
@@ -144,6 +150,7 @@ schema "farms" do
   field :longitude, :decimal
   field :fiscal_year_start_month, :integer, default: 1
   field :fiscal_year_start_day, :integer, default: 1
+  field :logo_path, :string  # For PDF report branding
 
   belongs_to :user, Mce.Accounts.User
   has_many :livestock_groups, Mce.Livestock.LivestockGroup
@@ -609,4 +616,5 @@ When reviewing the client-provided ERD:
 | Date | Change | Author |
 |------|--------|--------|
 | 2511290341 | Initial schema plan | Claude |
+| 2511291124 | Added is_admin to users, logo_path to farms | Claude |
 

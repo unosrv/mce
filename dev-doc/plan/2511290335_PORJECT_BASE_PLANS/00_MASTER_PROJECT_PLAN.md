@@ -157,13 +157,15 @@ MCE is a SaaS platform for measuring greenhouse gas emissions from livestock far
 
 ---
 
-## Open Questions
+## Clarified Requirements
 
-1. **User Roles**: What are the permission differences between admin and regular users?
-2. **Data Migration**: Is there existing data to import?
-3. **Feed Presets**: What preset feed data should be included per country?
-4. **Report Branding**: Should PDF reports include farm logos or custom branding?
-5. **Fiscal Year Logic**: How does fiscal year configuration affect reporting periods?
+| Question | Answer |
+|----------|--------|
+| **User Roles** | Admin users can access Backpex admin dashboard; regular users have standard farm management access |
+| **Data Migration** | No existing data to import - fresh start |
+| **Feed Presets** | Default preset data for major farming countries (USA, UK, Australia) |
+| **Report Branding** | Yes, include farm logos in PDF reports if provided by user |
+| **Fiscal Year Logic** | Determines start/end dates for annual reports, affecting data aggregation and period comparisons |
 
 ---
 
@@ -187,4 +189,5 @@ MCE is a SaaS platform for measuring greenhouse gas emissions from livestock far
 | Date | Change | Author |
 |------|--------|--------|
 | 2511290341 | Initial plan creation | Claude |
+| 2511291124 | Added clarified requirements (user roles, data migration, feed presets, branding, fiscal year) | Claude |
 

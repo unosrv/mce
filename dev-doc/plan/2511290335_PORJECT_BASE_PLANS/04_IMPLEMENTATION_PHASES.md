@@ -10,29 +10,29 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                    IMPLEMENTATION ROADMAP                            │
+│                    IMPLEMENTATION ROADMAP                           │
 ├─────────────────────────────────────────────────────────────────────┤
-│                                                                      │
+│                                                                     │
 │  PHASE 1: Foundation                                                │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │ i18n → Theme → Auth → DB Schema → Farm CRUD                  │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-│                              ↓                                       │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │ i18n → Theme → Auth → DB Schema → Farm CRUD                  │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+│                              ↓                                      │
 │  PHASE 2: Core Features                                             │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │ Address API → 5-Step Form → IPCC Engine → Reports            │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-│                              ↓                                       │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │ Address API → 5-Step Form → IPCC Engine → Reports            │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+│                              ↓                                      │
 │  PHASE 3: Dashboard & Polish                                        │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │ Charts → Dashboard → PDF → Admin Panel → Refinement          │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-│                              ↓                                       │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │ Charts → Dashboard → PDF → Admin Panel → Refinement          │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+│                              ↓                                      │
 │  PHASE 4: Testing & Delivery                                        │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │ Integration Tests → Performance → Documentation → Deploy     │  │
-│  └──────────────────────────────────────────────────────────────┘  │
-│                                                                      │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │ Integration Tests → Performance → Documentation → Deploy     │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+│                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -299,7 +299,8 @@ Implement data visualisation, PDF export, admin panel, and UI refinement.
 | Create PDF template for report | P0 | ☐ |
 | Implement PDF generation function | P0 | ☐ |
 | Create PDF download controller | P0 | ☐ |
-| Add farm branding (optional) | P2 | ☐ |
+| Add farm logo upload to farm form | P1 | ☐ |
+| Include farm logo in PDF reports | P1 | ☐ |
 | Style PDF for print | P0 | ☐ |
 
 **Acceptance Criteria**:
@@ -307,6 +308,7 @@ Implement data visualisation, PDF export, admin panel, and UI refinement.
 - PDF is downloadable
 - PDF content matches report
 - PDF is print-friendly
+- Farm logo appears in PDF header if uploaded
 
 #### 3.4 Backpex Admin Panel
 | Task | Priority | Status |
@@ -466,4 +468,4 @@ For each task:
 | Date | Change | Author |
 |------|--------|--------|
 | 2511290341 | Initial implementation plan | Claude |
-
+| 2511291124 | Updated farm branding tasks (logo upload, PDF inclusion) | Claude |

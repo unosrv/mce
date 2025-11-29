@@ -11,25 +11,25 @@
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                         BROWSER                                 │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │                   Phoenix LiveView                        │  │
-│  │  (Real-time updates, form validation, state management)  │  │
-│  └──────────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │                   Phoenix LiveView                       │   │
+│  │  (Real-time updates, form validation, state management)  │   │
+│  └──────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
                               │ WebSocket
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                     PHOENIX APPLICATION                         │
-│  ┌────────────────┐ ┌────────────────┐ ┌────────────────────┐  │
-│  │   MceWeb       │ │   Mce          │ │   External APIs    │  │
-│  │   (LiveViews,  │ │   (Contexts,   │ │   (Google Maps,    │  │
-│  │    Components) │ │    Schemas)    │ │    juso.go.kr)     │  │
-│  └────────────────┘ └────────────────┘ └────────────────────┘  │
+│  ┌────────────────┐ ┌────────────────┐ ┌────────────────────┐   │
+│  │   MceWeb       │ │   Mce          │ │   External APIs    │   │
+│  │   (LiveViews,  │ │   (Contexts,   │ │   (Google Maps,    │   │
+│  │    Components) │ │    Schemas)    │ │    juso.go.kr)     │   │
+│  └────────────────┘ └────────────────┘ └────────────────────┘   │
 │                              │                                  │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │              IPCC Calculation Engine                      │  │
-│  │   (Tier 2 methodology, emissions factors, aggregation)   │  │
-│  └──────────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              IPCC Calculation Engine                     │   │
+│  │   (Tier 2 methodology, emissions factors, aggregation)   │   │
+│  └──────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
                               │ Ecto
                               ▼
@@ -174,43 +174,43 @@ lib/mce_web/
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    CALCULATION PIPELINE                          │
+│                    CALCULATION PIPELINE                         │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  1. INPUT VALIDATION                                             │
+│                                                                 │
+│  1. INPUT VALIDATION                                            │
 │     └─> Validate livestock group data                           │
 │     └─> Apply country defaults where missing                    │
-│                                                                  │
-│  2. GROSS ENERGY CALCULATION                                     │
+│                                                                 │
+│  2. GROSS ENERGY CALCULATION                                    │
 │     └─> Calculate NE_m (maintenance)                            │
 │     └─> Calculate NE_a (activity)                               │
 │     └─> Calculate NE_l (lactation) - dairy only                 │
 │     └─> Calculate NE_p (pregnancy) - if applicable              │
 │     └─> Calculate NE_g (growth) - growing animals               │
 │     └─> Aggregate to GE (gross energy intake)                   │
-│                                                                  │
-│  3. ENTERIC FERMENTATION                                         │
+│                                                                 │
+│  3. ENTERIC FERMENTATION                                        │
 │     └─> Apply Ym factor (methane conversion)                    │
 │     └─> Calculate CH₄ emissions                                 │
 │     └─> Convert to CO₂e (GWP: 28)                               │
-│                                                                  │
-│  4. MANURE MANAGEMENT                                            │
+│                                                                 │
+│  4. MANURE MANAGEMENT                                           │
 │     └─> Calculate VS (volatile solids)                          │
 │     └─> Apply MCF by management system                          │
 │     └─> Calculate CH₄ from manure                               │
 │     └─> Calculate N₂O (direct + indirect)                       │
 │     └─> Convert to CO₂e (GWP: CH₄=28, N₂O=265)                  │
-│                                                                  │
-│  5. AGGREGATION                                                  │
+│                                                                 │
+│  5. AGGREGATION                                                 │
 │     └─> Sum by emission source                                  │
 │     └─> Sum by livestock group                                  │
 │     └─> Calculate farm totals                                   │
-│                                                                  │
-│  6. REPORT GENERATION                                            │
+│                                                                 │
+│  6. REPORT GENERATION                                           │
 │     └─> Store calculation results                               │
 │     └─> Generate breakdown tables                               │
 │     └─> Create visualisation data                               │
-│                                                                  │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -531,4 +531,3 @@ PHX_HOST=...
 | Date | Change | Author |
 |------|--------|--------|
 | 2511290341 | Initial architecture plan | Claude |
-

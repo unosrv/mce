@@ -2,7 +2,7 @@
 
 **Document ID**: 2511290341_TASK_TRACKER
 **Created**: 29 November 2025, 03:41
-**Last Updated**: 29 November 2025, 03:41
+**Last Updated**: 29 November 2025, 11:24
 **Status**: Active
 
 ---
@@ -13,9 +13,9 @@
 |-------|-------------|-----------|-------------|---------|----------|
 | Phase 1: Foundation | 38 | 0 | 0 | 0 | 0% |
 | Phase 2: Core Features | 45 | 0 | 0 | 0 | 0% |
-| Phase 3: Dashboard & Polish | 32 | 0 | 0 | 0 | 0% |
+| Phase 3: Dashboard & Polish | 34 | 0 | 0 | 0 | 0% |
 | Phase 4: Testing & Delivery | 20 | 0 | 0 | 0 | 0% |
-| **Total** | **135** | **0** | **0** | **0** | **0%** |
+| **Total** | **137** | **0** | **0** | **0** | **0%** |
 
 ---
 
@@ -205,7 +205,9 @@
 | 3.3.2 | Create PDF template | ☐ TODO | |
 | 3.3.3 | Implement PDF generation | ☐ TODO | |
 | 3.3.4 | Create PDF download controller | ☐ TODO | |
-| 3.3.5 | Style PDF for print | ☐ TODO | |
+| 3.3.5 | Add farm logo upload to farm form | ☐ TODO | P1 - Clarified requirement |
+| 3.3.6 | Include farm logo in PDF reports | ☐ TODO | P1 - Clarified requirement |
+| 3.3.7 | Style PDF for print | ☐ TODO | |
 
 ### 3.4 Backpex Admin Panel
 
@@ -319,4 +321,5 @@ _No entries yet. Add daily progress below._
 | Date | Change | Author |
 |------|--------|--------|
 | 2511290341 | Initial tracker creation | Claude |
+| 2511291124 | Added farm logo tasks (3.3.5, 3.3.6), updated task count to 137 | Claude |
 
