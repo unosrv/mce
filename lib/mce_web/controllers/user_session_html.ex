@@ -1,0 +1,9 @@
+defmodule MceWeb.UserSessionHTML do
+  use MceWeb, :html
+
+  embed_templates "user_session_html/*"
+
+  defp local_mail_adapter? do
+    Application.get_env(:mce, Mce.Mailer)[:adapter] == Swoosh.Adapters.Local
+  end
+end

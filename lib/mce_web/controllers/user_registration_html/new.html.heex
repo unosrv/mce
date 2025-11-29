@@ -1,0 +1,55 @@
+<Layouts.app flash={@flash} current_scope={@current_scope}>
+  <div class="mx-auto max-w-sm">
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-base-content mb-2">{gettext("Create account")}</h1>
+      <p class="text-base-content/60">
+        {gettext("Already registered?")}
+        <.link navigate={~p"/users/log-in"} class="link link-primary font-semibold">
+          {gettext("Log in")}
+        </.link>
+      </p>
+    </div>
+
+    <.form :let={f} for={@changeset} action={~p"/users/register"} class="space-y-4">
+      <.input
+        field={f[:email]}
+        type="email"
+        label={gettext("Email")}
+        placeholder="user@example.com"
+        autocomplete="email"
+        required
+        phx-mounted={JS.focus()}
+      />
+
+      <.input
+        field={f[:nickname]}
+        type="text"
+        label={gettext("Nickname")}
+        placeholder={gettext("Your display name")}
+        required
+      />
+
+      <.input
+        field={f[:password]}
+        type="password"
+        label={gettext("Password")}
+        placeholder={gettext("At least 12 characters")}
+        autocomplete="new-password"
+        required
+      />
+
+      <.input
+        field={f[:password_confirmation]}
+        type="password"
+        label={gettext("Confirm password")}
+        placeholder={gettext("Repeat password")}
+        autocomplete="new-password"
+        required
+      />
+
+      <.button phx-disable-with={gettext("Creating account...")} class="btn btn-primary w-full">
+        {gettext("Create account")}
+      </.button>
+    </.form>
+  </div>
+</Layouts.app>

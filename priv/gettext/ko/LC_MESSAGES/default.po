@@ -16,18 +16,18 @@ msgstr ""
 msgid "Actions"
 msgstr "작업"
 
-#: lib/mce_web/components/layouts.ex:99
-#: lib/mce_web/components/layouts.ex:111
+#: lib/mce_web/components/layouts.ex:93
+#: lib/mce_web/components/layouts.ex:105
 #, elixir-autogen, elixir-format
 msgid "Attempting to reconnect"
 msgstr "재연결 시도 중"
 
-#: lib/mce_web/components/layouts.ex:106
+#: lib/mce_web/components/layouts.ex:100
 #, elixir-autogen, elixir-format
 msgid "Something went wrong!"
 msgstr "오류가 발생했습니다!"
 
-#: lib/mce_web/components/layouts.ex:94
+#: lib/mce_web/components/layouts.ex:88
 #, elixir-autogen, elixir-format
 msgid "We can't find the internet"
 msgstr "인터넷에 연결할 수 없습니다"
@@ -37,17 +37,73 @@ msgstr "인터넷에 연결할 수 없습니다"
 msgid "close"
 msgstr "닫기"
 
-#: lib/mce_web/components/layouts.ex:126
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:6
 #, elixir-autogen, elixir-format
-msgid "System theme"
-msgstr "시스템 테마"
+msgid "Already registered?"
+msgstr "이미 계정이 있으신가요?"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:36
+#, elixir-autogen, elixir-format
+msgid "At least 12 characters"
+msgstr "최소 12자 이상"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:44
+#, elixir-autogen, elixir-format
+msgid "Confirm password"
+msgstr "비밀번호 확인"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:4
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:51
+#, elixir-autogen, elixir-format
+msgid "Create account"
+msgstr "계정 만들기"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:50
+#, elixir-autogen, elixir-format
+msgid "Creating account..."
+msgstr "계정 생성 중..."
+
+#: lib/mce_web/components/layouts.ex:144
+#, elixir-autogen, elixir-format
+msgid "Dark theme"
+msgstr "어두운 테마"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "Email"
+msgstr "이메일"
 
 #: lib/mce_web/components/layouts.ex:135
 #, elixir-autogen, elixir-format
 msgid "Light theme"
 msgstr "밝은 테마"
 
-#: lib/mce_web/components/layouts.ex:144
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:8
 #, elixir-autogen, elixir-format
-msgid "Dark theme"
-msgstr "어두운 테마"
+msgid "Log in"
+msgstr "로그인"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:27
+#, elixir-autogen, elixir-format
+msgid "Nickname"
+msgstr "닉네임"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:35
+#, elixir-autogen, elixir-format
+msgid "Password"
+msgstr "비밀번호"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:45
+#, elixir-autogen, elixir-format
+msgid "Repeat password"
+msgstr "비밀번호 반복"
+
+#: lib/mce_web/components/layouts.ex:126
+#, elixir-autogen, elixir-format
+msgid "System theme"
+msgstr "시스템 테마"
+
+#: lib/mce_web/controllers/user_registration_html/new.html.heex:28
+#, elixir-autogen, elixir-format
+msgid "Your display name"
+msgstr "표시할 이름"
