@@ -43,6 +43,16 @@ defmodule MceWeb.Layouts do
           <.icon name="hero-chart-bar" class="size-8 text-primary" />
           <span class="text-lg font-bold text-primary">MCE</span>
         </a>
+        <nav :if={@current_scope} class="ml-8 hidden md:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li>
+              <.link navigate={~p"/farms"} class="gap-2">
+                <.icon name="hero-building-office-2" class="size-4" />
+                {gettext("Farms")}
+              </.link>
+            </li>
+          </ul>
+        </nav>
       </div>
       <div class="flex-none">
         <ul class="flex flex-row px-1 space-x-2 items-center">
@@ -52,17 +62,53 @@ defmodule MceWeb.Layouts do
           <li>
             <.theme_toggle />
           </li>
+          <li :if={@current_scope}>
+            <.user_menu user={@current_scope.user} />
+          </li>
         </ul>
       </div>
     </header>
 
-    <main class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl space-y-4">
-        {render_slot(@inner_block)}
-      </div>
+    <main class="min-h-screen bg-base-200/50">
+      {render_slot(@inner_block)}
     </main>
 
     <.flash_group flash={@flash} />
+    """
+  end
+
+  @doc """
+  User menu dropdown with settings and logout.
+  """
+  attr :user, :map, required: true
+
+  def user_menu(assigns) do
+    ~H"""
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-sm gap-2">
+        <.icon name="hero-user-circle" class="size-5" />
+        <span class="hidden sm:inline">{@user.nickname || @user.email}</span>
+        <.icon name="hero-chevron-down" class="size-3" />
+      </div>
+      <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow-lg">
+        <li class="menu-title">
+          <span class="text-xs font-normal text-base-content/60">{@user.email}</span>
+        </li>
+        <li>
+          <.link href={~p"/users/settings"} class="gap-2">
+            <.icon name="hero-cog-6-tooth" class="size-4" />
+            {gettext("Settings")}
+          </.link>
+        </li>
+        <div class="divider my-1"></div>
+        <li>
+          <.link href={~p"/users/log-out"} method="delete" class="gap-2 text-error">
+            <.icon name="hero-arrow-right-on-rectangle" class="size-4" />
+            {gettext("Log out")}
+          </.link>
+        </li>
+      </ul>
+    </div>
     """
   end
 

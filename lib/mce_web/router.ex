@@ -76,6 +76,23 @@ defmodule MceWeb.Router do
   end
 
   scope "/", MceWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live_session :authenticated_user,
+      on_mount: [
+        {MceWeb.UserAuth, :mount_current_scope},
+        {MceWeb.LiveLocale, :default}
+      ] do
+      # Farm Management
+      live "/farms", FarmLive.Index, :index
+      live "/farms/new", FarmLive.Index, :new
+      live "/farms/:id/edit", FarmLive.Index, :edit
+      live "/farms/:id", FarmLive.Show, :show
+      live "/farms/:id/show/edit", FarmLive.Show, :edit
+    end
+  end
+
+  scope "/", MceWeb do
     pipe_through [:browser]
 
     get "/users/log-in", UserSessionController, :new

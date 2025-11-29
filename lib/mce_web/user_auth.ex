@@ -7,6 +7,39 @@ defmodule MceWeb.UserAuth do
   alias Mce.Accounts
   alias Mce.Accounts.Scope
 
+  @doc """
+  LiveView on_mount callback to assign current_scope from session token.
+
+  Usage in router.ex:
+      live_session :authenticated,
+        on_mount: [{MceWeb.UserAuth, :mount_current_scope}] do
+        # routes...
+      end
+  """
+  def on_mount(:mount_current_scope, _params, session, socket) do
+    case session do
+      %{"user_token" => token} ->
+        case Accounts.get_user_by_session_token(token) do
+          {user, _inserted_at} ->
+            {:cont, Phoenix.Component.assign(socket, :current_scope, Scope.for_user(user))}
+
+          nil ->
+            {:halt, Phoenix.LiveView.redirect(socket, to: ~p"/users/log-in")}
+        end
+
+      _ ->
+        {:halt, Phoenix.LiveView.redirect(socket, to: ~p"/users/log-in")}
+    end
+  end
+
+  def on_mount(:ensure_authenticated, _params, _session, socket) do
+    if socket.assigns[:current_scope] && socket.assigns.current_scope.user do
+      {:cont, socket}
+    else
+      {:halt, Phoenix.LiveView.redirect(socket, to: ~p"/users/log-in")}
+    end
+  end
+
   # Make the remember me cookie valid for 14 days. This should match
   # the session validity setting in UserToken.
   @max_cookie_age_in_days 14

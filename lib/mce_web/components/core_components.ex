@@ -269,13 +269,104 @@ defmodule MceWeb.CoreComponents do
     """
   end
 
-  # Helper used by inputs to generate form errors
-  defp error(assigns) do
+  @doc """
+  Generates a generic error message.
+  """
+  slot :inner_block, required: true
+
+  def error(assigns) do
     ~H"""
     <p class="mt-1.5 flex gap-2 items-center text-sm text-error">
       <.icon name="hero-exclamation-circle" class="size-5" />
       {render_slot(@inner_block)}
     </p>
+    """
+  end
+
+  @doc """
+  Renders a modal.
+
+  ## Examples
+
+      <.modal id="confirm-modal">
+        This is a modal.
+      </.modal>
+
+  JS commands may be passed to the `:on_cancel` to configure
+  the closing/cancel event, for example:
+
+      <.modal id="confirm" on_cancel={JS.navigate(~p"/posts")}>
+        This is another modal.
+      </.modal>
+
+  """
+  attr :id, :string, required: true
+  attr :show, :boolean, default: false
+  attr :on_cancel, JS, default: %JS{}
+  slot :inner_block, required: true
+
+  def modal(assigns) do
+    ~H"""
+    <dialog
+      id={@id}
+      class="modal"
+      phx-mounted={@show && show_modal(@id)}
+      phx-remove={hide_modal(@id)}
+      data-cancel={JS.exec(@on_cancel, "phx-remove")}
+    >
+      <div id={"#{@id}-container"} class="modal-box max-w-xl relative">
+        <button
+          phx-click={JS.exec("data-cancel", to: "##{@id}")}
+          type="button"
+          class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          aria-label={gettext("close")}
+        >
+          <.icon name="hero-x-mark" class="size-5" />
+        </button>
+        <div id={"#{@id}-content"}>
+          {render_slot(@inner_block)}
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button phx-click={JS.exec("data-cancel", to: "##{@id}")}>{gettext("close")}</button>
+      </form>
+    </dialog>
+    """
+  end
+
+  @doc """
+  Renders a simple form.
+
+  ## Examples
+
+      <.simple_form for={@form} phx-change="validate" phx-submit="save">
+        <.input field={@form[:email]} label="Email"/>
+        <.input field={@form[:username]} label="Username" />
+        <:actions>
+          <.button>Save</.button>
+        </:actions>
+      </.simple_form>
+  """
+  attr :for, :any, required: true, doc: "the data structure for the form"
+  attr :as, :any, default: nil, doc: "the server side parameter to collect all input under"
+
+  attr :rest, :global,
+    include: ~w(autocomplete name rel action enctype method novalidate target multipart),
+    doc: "the arbitrary HTML attributes to apply to the form tag"
+
+  slot :inner_block, required: true
+  slot :actions, doc: "the slot for form actions, such as a submit button"
+
+  def simple_form(assigns) do
+    ~H"""
+    <.form :let={f} for={@for} as={@as} {@rest}>
+      <div class="space-y-4">
+        {render_slot(@inner_block, f)}
+        <div :for={action <- @actions} class="mt-6 flex items-center justify-between gap-6">
+          {render_slot(action, f)}
+        </div>
+      </div>
+    </.form>
     """
   end
 
@@ -482,6 +573,16 @@ defmodule MceWeb.CoreComponents do
         {"transition-all ease-in duration-200", "opacity-100 translate-y-0 sm:scale-100",
          "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
     )
+  end
+
+  def show_modal(js \\ %JS{}, id) when is_binary(id) do
+    js
+    |> JS.exec("showModal()", to: "##{id}")
+  end
+
+  def hide_modal(js \\ %JS{}, id) do
+    js
+    |> JS.exec("close()", to: "##{id}")
   end
 
   @doc """
