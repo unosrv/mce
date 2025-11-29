@@ -2,7 +2,7 @@
 
 **Document ID**: 2511290341_TASK_TRACKER
 **Created**: 29 November 2025, 03:41
-**Last Updated**: 29 November 2025, 19:01
+**Last Updated**: 29 November 2025, 20:38
 **Status**: Active
 
 ---
@@ -13,9 +13,9 @@
 |-------|-------------|-----------|-------------|---------|----------|
 | Phase 1: Foundation | 38 | 34 | 0 | 0 | 89% |
 | Phase 2: Core Features | 45 | 45 | 0 | 0 | 100% |
-| Phase 3: Dashboard & Polish | 34 | 25 | 0 | 0 | 74% |
-| Phase 4: Testing & Delivery | 20 | 3 | 0 | 0 | 15% |
-| **Total** | **137** | **107** | **0** | **0** | **78%** |
+| Phase 3: Dashboard & Polish | 34 | 29 | 0 | 0 | 85% |
+| Phase 4: Testing & Delivery | 20 | 4 | 0 | 0 | 20% |
+| **Total** | **137** | **112** | **0** | **0** | **82%** |
 
 ---
 
@@ -25,8 +25,7 @@
 
 | Task ID | Description | Assignee | Status | Notes |
 |---------|-------------|----------|--------|-------|
-| 3.3.5 | Add farm logo upload to farm form | - | ☐ TODO | Next priority |
-| 3.3.6 | Include farm logo in PDF reports | - | ☐ TODO | P1 |
+| - | All P1 tasks complete | - | - | Ready for Phase 4 |
 
 ### Blocked Tasks
 
@@ -202,12 +201,12 @@
 
 | ID | Task | Status | Notes |
 |----|------|--------|-------|
-| 3.3.1 | Evaluate PDF libraries | ✅ DONE | Browser print for MVP |
-| 3.3.2 | Create PDF template | ☐ TODO | Print styles exist |
-| 3.3.3 | Implement PDF generation | ☐ TODO | Using browser print |
-| 3.3.4 | Create PDF download controller | ☐ TODO | |
-| 3.3.5 | Add farm logo upload to farm form | ☐ TODO | P1 |
-| 3.3.6 | Include farm logo in PDF reports | ☐ TODO | P1 |
+| 3.3.1 | Evaluate PDF libraries | ✅ DONE | ChromicPDF selected |
+| 3.3.2 | Create PDF template | ✅ DONE | Styled HTML template with farm logo |
+| 3.3.3 | Implement PDF generation | ✅ DONE | ChromicPDF HTML-to-PDF |
+| 3.3.4 | Create PDF download controller | ✅ DONE | ReportController |
+| 3.3.5 | Add farm logo upload to farm form | ✅ DONE | LiveView upload component |
+| 3.3.6 | Include farm logo in PDF reports | ✅ DONE | Base64 data URI embedding |
 | 3.3.7 | Style PDF for print | ✅ DONE | @media print in app.css |
 
 ### 3.4 Backpex Admin Panel
@@ -244,7 +243,7 @@
 |----|------|--------|-------|
 | 4.1.1 | Write context unit tests | ✅ DONE | 121 tests pass |
 | 4.1.2 | Write calculation tests | ✅ DONE | 114 calculator tests |
-| 4.1.3 | Write LiveView integration tests | ☐ TODO | |
+| 4.1.3 | Write LiveView integration tests | ✅ DONE | 20 tests pass |
 | 4.1.4 | Write form submission tests | ☐ TODO | |
 | 4.1.5 | Test i18n across locales | ☐ TODO | |
 | 4.1.6 | Test external APIs | ☐ TODO | |
@@ -281,6 +280,51 @@
 ---
 
 ## Daily Log
+
+### 2025-11-29 (Evening Update - 21:05)
+
+**Completed**:
+- [4.1.3] Written LiveView integration tests for dashboard, farms, and comparison views
+- Created test fixtures for farm data generation with consistent defaults
+- Fixed FarmLive.Show to support logo uploads with allow_upload configuration
+- Tests cover authentication redirects, page rendering, navigation, and data isolation
+- All 141 tests passing with no warnings
+
+**In Progress**:
+- None
+
+**Blocked**:
+- None
+
+**Notes**:
+- Created 4 new test files: 3 LiveView test modules + 1 fixtures module
+- 20 total LiveView integration tests passing
+- Phase 4 progress: 20% (4 of 20 tasks complete)
+- Overall project: 82% (112 of 137 tasks complete)
+- Next priority: Form submission tests (4.1.4) and other Phase 4 testing tasks
+
+### 2025-11-29 (Evening Update - 20:38)
+
+**Completed**:
+- [3.3.2] Created PDF template with styled HTML for emission reports
+- [3.3.3] Implemented PDF generation using ChromicPDF library
+- [3.3.4] Created ReportController for PDF downloads
+- [3.3.5] Added farm logo upload to farm form using LiveView uploads
+- [3.3.6] Included farm logos in PDF reports via base64 data URI embedding
+
+**In Progress**:
+- None
+
+**Blocked**:
+- None
+
+**Notes**:
+- PDF Export feature complete: ChromicPDF for HTML-to-PDF conversion
+- Farm logos embedded in PDFs as base64 data URIs
+- Routes added: `/reports/farms/:farm_id/emissions/:year/pdf` and `/reports/compare/:year/pdf`
+- All 121 tests passing
+- Phase 3 at 85% completion, overall project at 81%
+- Next priority: Phase 4 testing and deployment tasks
 
 ### 2025-11-29 (Evening Update - 19:01)
 
@@ -365,3 +409,4 @@
 | 2511291124 | Added farm logo tasks (3.3.5, 3.3.6), updated task count to 137 | Claude |
 | 2511291707 | Major status update: Phase 1-2 complete, Phase 3-4 in progress | Claude |
 | 2511291901 | Backpex admin panel complete: 3.4.1-3.4.4, 3.4.7 done. Progress: 73% | Claude |
+| 2511292038 | PDF export complete: 3.3.2-3.3.6 done. ChromicPDF + farm logos. Progress: 81% | Claude |
