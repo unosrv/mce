@@ -3,6 +3,7 @@ defmodule MceWeb.FarmLive.Show do
 
   alias Mce.Farms
   alias Mce.Livestock
+  alias Mce.Emissions
 
   @impl true
   def mount(%{"id" => id}, _session, socket) do
@@ -10,12 +11,16 @@ defmodule MceWeb.FarmLive.Show do
 
     if farm do
       livestock_groups = Livestock.list_livestock_groups(farm.id)
+      current_year = Date.utc_today().year
+      emission_report = Emissions.get_emission_report_for_year(farm.id, current_year)
 
       {:ok,
        socket
        |> assign(:page_title, farm.name)
        |> assign(:farm, farm)
        |> assign(:livestock_empty?, Enum.empty?(livestock_groups))
+       |> assign(:emission_report, emission_report)
+       |> assign(:report_year, current_year)
        |> stream(:livestock_groups, livestock_groups)}
     else
       {:ok,
@@ -125,6 +130,78 @@ defmodule MceWeb.FarmLive.Show do
                   {gettext("Starts")}: <span class="font-medium">{format_fiscal_year(@farm)}</span>
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <%!-- Emissions Summary Card --%>
+        <div class="mt-8">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <div class="bg-primary/10 p-3 rounded-full">
+                    <.icon name="hero-chart-pie" class="size-8 text-primary" />
+                  </div>
+                  <div>
+                    <h2 class="card-title">{gettext("Emissions Report")}</h2>
+                    <p class="text-sm text-base-content/60">
+                      {gettext("Fiscal Year")} {@report_year}
+                    </p>
+                  </div>
+                </div>
+
+                <%= if @emission_report do %>
+                  <div class="flex flex-wrap items-center gap-6">
+                    <div class="text-center">
+                      <p class="text-2xl font-bold text-primary">
+                        {format_emissions(@emission_report.total_emissions)}
+                      </p>
+                      <p class="text-xs text-base-content/60">{gettext("t CO₂e Total")}</p>
+                    </div>
+                    <.link navigate={~p"/farms/#{@farm.id}/emissions"}>
+                      <.button class="btn-primary gap-2">
+                        <.icon name="hero-document-chart-bar" class="size-5" />
+                        {gettext("View Report")}
+                      </.button>
+                    </.link>
+                  </div>
+                <% else %>
+                  <div class="flex items-center gap-4">
+                    <p class="text-base-content/60">{gettext("No report calculated yet")}</p>
+                    <.link navigate={~p"/farms/#{@farm.id}/emissions"}>
+                      <.button class="btn-primary gap-2">
+                        <.icon name="hero-calculator" class="size-5" />
+                        {gettext("Calculate Emissions")}
+                      </.button>
+                    </.link>
+                  </div>
+                <% end %>
+              </div>
+
+              <%= if @emission_report do %>
+                <div class="divider"></div>
+                <div class="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <p class="font-semibold text-success">
+                      {format_emissions(@emission_report.enteric_emissions)}
+                    </p>
+                    <p class="text-xs text-base-content/60">{gettext("Enteric")}</p>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-warning">
+                      {format_emissions(@emission_report.manure_ch4_emissions)}
+                    </p>
+                    <p class="text-xs text-base-content/60">{gettext("Manure CH₄")}</p>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-error">
+                      {format_emissions(@emission_report.manure_n2o_emissions)}
+                    </p>
+                    <p class="text-xs text-base-content/60">{gettext("Manure N₂O")}</p>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -299,4 +376,18 @@ defmodule MceWeb.FarmLive.Show do
   defp species_label("beef_cattle"), do: gettext("Beef Cattle")
   defp species_label("swine"), do: gettext("Swine")
   defp species_label(_), do: gettext("Unknown")
+
+  defp format_emissions(nil), do: "-"
+
+  defp format_emissions(%Decimal{} = value) do
+    value
+    |> Decimal.round(1)
+    |> Decimal.to_string()
+  end
+
+  defp format_emissions(value) when is_float(value) do
+    :erlang.float_to_binary(value, decimals: 1)
+  end
+
+  defp format_emissions(value), do: to_string(value)
 end

@@ -103,3 +103,54 @@
 [data-phx-session], [data-phx-teleported-src] { display: contents }
 
 /* This file is for your main application CSS */
+
+/* Print Styles for Emissions Report */
+@media print {
+  /* Hide navigation and action buttons */
+  .print\\:hidden {
+    display: none !important;
+  }
+
+  /* Reset padding for print */
+  .print\\:p-0 {
+    padding: 0 !important;
+  }
+
+  /* Force grid columns for print */
+  .print\\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* Ensure proper page breaks */
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Force light background for printing */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .card, .card-body {
+    background: white !important;
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb;
+  }
+
+  /* Ensure charts are visible */
+  [phx-hook="ApexChart"] {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Table styling for print */
+  table {
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid #e5e7eb;
+  }
+}
