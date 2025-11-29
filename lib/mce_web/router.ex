@@ -83,6 +83,9 @@ defmodule MceWeb.Router do
         {MceWeb.UserAuth, :mount_current_scope},
         {MceWeb.LiveLocale, :default}
       ] do
+      # Dashboard
+      live "/dashboard", DashboardLive.Index, :index
+
       # Farm Management
       live "/farms", FarmLive.Index, :index
       live "/farms/new", FarmLive.Index, :new

@@ -83,4 +83,55 @@ defmodule Mce.Farms do
   def change_farm(%Farm{} = farm, attrs \\ %{}) do
     Farm.changeset(farm, attrs)
   end
+
+  # Dashboard statistics functions
+
+  @doc """
+  Returns dashboard statistics for a user.
+
+  Returns a map with:
+  - `farm_count` - number of farms
+  - `livestock_group_count` - number of livestock groups
+  - `total_emissions` - sum of total emissions from all emission reports (in tonnes CO₂e)
+  """
+  def get_dashboard_stats(user_id) do
+    alias Mce.Livestock.LivestockGroup
+    alias Mce.Emissions.EmissionReport
+
+    farm_count =
+      Farm
+      |> where(user_id: ^user_id)
+      |> Repo.aggregate(:count, :id)
+
+    livestock_group_count =
+      LivestockGroup
+      |> join(:inner, [lg], f in Farm, on: lg.farm_id == f.id)
+      |> where([lg, f], f.user_id == ^user_id)
+      |> Repo.aggregate(:count, :id)
+
+    total_emissions =
+      EmissionReport
+      |> join(:inner, [er], f in Farm, on: er.farm_id == f.id)
+      |> where([er, f], f.user_id == ^user_id)
+      |> Repo.aggregate(:sum, :total_emissions) || Decimal.new(0)
+
+    %{
+      farm_count: farm_count,
+      livestock_group_count: livestock_group_count,
+      total_emissions: total_emissions
+    }
+  end
+
+  @doc """
+  Returns recent farms with preloaded livestock groups and latest emission report.
+  Limited to the most recent `limit` farms by updated_at.
+  """
+  def list_recent_farms_with_stats(user_id, limit \\ 5) do
+    Farm
+    |> where(user_id: ^user_id)
+    |> order_by(desc: :updated_at)
+    |> limit(^limit)
+    |> preload([:livestock_groups, :emission_reports])
+    |> Repo.all()
+  end
 end
