@@ -9,6 +9,10 @@ defmodule Mce.Accounts.User do
     field :confirmed_at, :utc_datetime
     field :authenticated_at, :utc_datetime, virtual: true
     field :nickname, :string
+    field :locale, :string, default: "ko"
+    field :is_admin, :boolean, default: false
+
+    has_many :farms, Mce.Farms.Farm
 
     timestamps(type: :utc_datetime)
   end
