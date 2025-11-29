@@ -590,7 +590,9 @@ defmodule MceWeb.FarmLive.FormComponent do
       "building_name" => data[:building_name] || "",
       "postal_code" => data[:postal_code] || "",
       "city" => data[:city] || "",
-      "state_province" => data[:state_province] || ""
+      "state_province" => data[:state_province] || "",
+      "latitude" => data[:latitude],
+      "longitude" => data[:longitude]
     }
   end
 

@@ -2,8 +2,8 @@
 
 **Document ID**: 2511290341_TASK_TRACKER
 **Created**: 29 November 2025, 03:41
-**Last Updated**: 30 November 2025, 00:15
-**Status**: Active
+**Last Updated**: 30 November 2025, 00:53
+**Status**: IN PROGRESS
 
 ---
 
@@ -11,11 +11,11 @@
 
 | Phase | Total Tasks | Completed | In Progress | Blocked | Progress |
 |-------|-------------|-----------|-------------|---------|----------|
-| Phase 1: Foundation | 38 | 34 | 0 | 0 | 89% |
+| Phase 1: Foundation | 38 | 38 | 0 | 0 | 100% |
 | Phase 2: Core Features | 45 | 45 | 0 | 0 | 100% |
-| Phase 3: Dashboard & Polish | 34 | 29 | 0 | 0 | 85% |
-| Phase 4: Testing & Delivery | 20 | 18 | 0 | 0 | 90% |
-| **Total** | **137** | **126** | **0** | **0** | 92% |
+| Phase 3: Dashboard & Polish | 34 | 34 | 0 | 0 | 100% |
+| Phase 4: Testing & Delivery | 20 | 16 | 0 | 0 | 80% |
+| **Total** | **137** | **133** | **0** | **0** | **97%** |
 
 ---
 
@@ -46,7 +46,7 @@
 | 1.1.3 | Create LiveView locale hook | ✅ DONE | MceWeb.LiveLocale module |
 | 1.1.4 | Set up domain structure | ✅ DONE | Default domain |
 | 1.1.5 | Create language switcher component | ✅ DONE | In layouts |
-| 1.1.6 | Implement unit conversion module | ☐ TODO | P2 - Not critical path |
+| 1.1.6 | Implement unit conversion module | ✅ DONE | Units module with area/weight conversion |
 | 1.1.7 | Extract initial .pot files | ✅ DONE | gettext.pot exists |
 
 ### 1.2 DaisyUI Theme Configuration
@@ -67,7 +67,7 @@
 | 1.3.2 | Translate auth pages | ✅ DONE | Gettext markers in place |
 | 1.3.3 | Style auth forms with DaisyUI | ✅ DONE | Form components styled |
 | 1.3.4 | Add nickname field | ✅ DONE | User schema has nickname |
-| 1.3.5 | Configure email confirmation | ☐ TODO | P2 - Optional |
+| 1.3.5 | Configure email confirmation | ✅ DONE | Already configured via phx.gen.auth |
 
 ### 1.4 Database Schema
 
@@ -81,8 +81,8 @@
 | 1.4.6 | Create barn_info migration | ✅ DONE | Embedded in livestock |
 | 1.4.7 | Create manure_systems migration | ✅ DONE | Embedded in livestock |
 | 1.4.8 | Create emission_reports migration | ✅ DONE | Mce.Emissions.EmissionReport |
-| 1.4.9 | Create reference data migrations | ☐ TODO | P2 - Using defaults module |
-| 1.4.10 | Create seed data files | ☐ TODO | Basic seeds exist |
+| 1.4.9 | Create reference data migrations | ✅ DONE | feed_presets, ipcc_emission_factors tables |
+| 1.4.10 | Create seed data files | ✅ DONE | Seeds with IPCC factors + feed presets |
 
 ### 1.5 Farm Management CRUD
 
@@ -110,7 +110,7 @@
 | 2.1.3 | Create address_input component | ✅ DONE | In farm form |
 | 2.1.4 | Implement Korean address autocomplete | ✅ DONE | Juso API integration |
 | 2.1.5 | Implement US/BR address autocomplete | ✅ DONE | Manual input fallback |
-| 2.1.6 | Add map preview | ☐ TODO | P2 - Future enhancement |
+| 2.1.6 | Add map preview | ✅ DONE | Geocoder for Korean addresses, OpenStreetMap preview |
 | 2.1.7 | Store coordinates | ✅ DONE | lat/lng in farm schema |
 
 ### 2.2 Livestock 5-Step Form
@@ -136,7 +136,7 @@
 | 2.2.17 | Step 5: Branching logic | ✅ DONE | System-specific fields |
 | 2.2.18 | Create WizardLive module | ✅ DONE | lib/mce_web/live/livestock_live/ |
 | 2.2.19 | Add step validation | ✅ DONE | Per-step changesets |
-| 2.2.20 | Add save draft | ☐ TODO | P2 - Future enhancement |
+| 2.2.20 | Add save draft | ✅ DONE | Draft status, wizard_step tracking, draft badge in UI |
 
 ### 2.3 IPCC Calculation Engine
 
@@ -180,7 +180,7 @@
 | 3.1.1 | Add ApexCharts | ✅ DONE | assets/vendor/apexcharts.js |
 | 3.1.2 | Create chart_container component | ✅ DONE | EmissionsComponents |
 | 3.1.3 | Create ApexCharts phx-hook | ✅ DONE | assets/js/hooks/apex_chart.js |
-| 3.1.4 | Implement line chart | ☐ TODO | Not needed yet |
+| 3.1.4 | Implement line chart | ✅ DONE | LineChart component in dashboard |
 | 3.1.5 | Implement pie chart | ✅ DONE | Donut chart variant |
 | 3.1.6 | Implement bar chart | ✅ DONE | Stacked bar chart |
 | 3.1.7 | Add chart theme support | ✅ DONE | Dark mode compatible |
@@ -192,8 +192,8 @@
 |----|------|--------|-------|
 | 3.2.1 | Create DashboardLive | ✅ DONE | lib/mce_web/live/dashboard_live/index.ex |
 | 3.2.2 | Implement stats cards | ✅ DONE | Total emissions, farms, livestock groups |
-| 3.2.3 | Implement trend chart | ☐ TODO | P2 - Future enhancement |
-| 3.2.4 | Implement emissions by type chart | ☐ TODO | P2 - Future enhancement |
+| 3.2.3 | Implement trend chart | ✅ DONE | LineChart with yearly trend data |
+| 3.2.4 | Implement emissions by type chart | ✅ DONE | DonutChart with emission breakdown |
 | 3.2.5 | Implement recent farms table | ✅ DONE | With empty state |
 | 3.2.6 | Add farm comparison view | ✅ DONE | CompareLive.Index with charts |
 
@@ -217,8 +217,8 @@
 | 3.4.2 | Configure Users resource | ✅ DONE | MceWeb.Admin.UserLive |
 | 3.4.3 | Configure Farms resource | ✅ DONE | MceWeb.Admin.FarmLive |
 | 3.4.4 | Configure LivestockGroups resource | ✅ DONE | MceWeb.Admin.LivestockGroupLive |
-| 3.4.5 | Configure Feed Presets | ☐ TODO | P2 - Future enhancement |
-| 3.4.6 | Configure IPCC Factors | ☐ TODO | P2 - Future enhancement |
+| 3.4.5 | Configure Feed Presets | ✅ DONE | MceWeb.Admin.FeedPresetLive with Backpex |
+| 3.4.6 | Configure IPCC Factors | ✅ DONE | MceWeb.Admin.IpccEmissionFactorLive with Backpex |
 | 3.4.7 | Add admin auth guard | ✅ DONE | MceWeb.Plugs.AdminAuth |
 
 ### 3.5 UI/UX Refinement
@@ -280,6 +280,30 @@
 ---
 
 ## Daily Log
+
+### 2025-11-30 (Early Morning - 00:43)
+
+**Completed**:
+- [3.2.3] Dashboard trend chart: LineChart component with yearly emissions data aggregation
+- [3.2.4] Emissions by type chart: DonutChart component with emission breakdown (enteric, CH4, N2O)
+- [3.4.5] Feed presets admin: FeedPresetLive with Backpex, full CRUD at /admin/feed-presets
+- [3.4.6] IPCC factors admin: IpccEmissionFactorLive with Backpex, full CRUD at /admin/ipcc-factors
+- [3.1.4] Line chart implementation: Reusable LineChart component with ApexCharts hook
+- Added chart data functions to Farms context (get_emissions_trend_data, get_emissions_breakdown)
+- All 242 tests passing
+
+**In Progress**:
+- None
+
+**Blocked**:
+- None
+
+**Notes**:
+- Progress: 97% (133/137 tasks complete)
+- Phase 2 P2 tasks completed: 2.1.6 (map preview with Geocoder), 2.2.20 (save draft with UI badge)
+- Remaining Phase 4: 4.2.5 (realistic data), 4.4.2 (SSL), 4.4.3 (backups), 4.4.4 (monitoring)
+- Dashboard now shows trend charts and emission breakdown when data exists
+- Admin panel extended with reference data management
 
 ### 2025-11-30 (Early Morning - 00:15)
 
@@ -473,4 +497,5 @@
 | 2511291124 | Added farm logo tasks (3.3.5, 3.3.6), updated task count to 137 | Claude |
 | 2511291707 | Major status update: Phase 1-2 complete, Phase 3-4 in progress | Claude |
 | 2511291901 | Backpex admin panel complete: 3.4.1-3.4.4, 3.4.7 done. Progress: 73% | Claude |
-| 2511292038 | PDF export complete: 3.3.2-3.3.6 done. ChromicPDF + farm logos. Progress: 81% | Claude |
+| 2511292038 | PDF export complete: 3.3.2-3.3.6 done. ChromicPDF + farm logos. Progress: 81% |
+| 2511300043 | Dashboard charts (3.2.3-3.2.4, 3.1.4), Admin panels (3.4.5-3.4.6). Progress: 96% (131/137) | Claude |

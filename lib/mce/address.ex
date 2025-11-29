@@ -7,7 +7,7 @@ defmodule Mce.Address do
   - US, BR: Google Maps Places API
   """
 
-  alias Mce.Address.{JusoApi, GoogleMapsApi}
+  alias Mce.Address.{JusoApi, GoogleMapsApi, Geocoder}
 
   @type search_result :: %{
           id: String.t(),
@@ -98,6 +98,13 @@ defmodule Mce.Address do
   def get_details(result, country, opts \\ [])
 
   def get_details(%{data: data}, "KR", _opts) do
+    # Geocode the road address to get coordinates for map preview
+    coords =
+      case Geocoder.geocode(data.road_address, "KR") do
+        {:ok, %{latitude: lat, longitude: lon}} -> %{latitude: lat, longitude: lon}
+        _ -> %{latitude: nil, longitude: nil}
+      end
+
     {:ok,
      %{
        road_address: data.road_address,
@@ -105,7 +112,9 @@ defmodule Mce.Address do
        building_name: data.building_name,
        postal_code: data.postal_code,
        city: data.sigungu,
-       state_province: data.sido
+       state_province: data.sido,
+       latitude: coords.latitude,
+       longitude: coords.longitude
      }}
   end
 

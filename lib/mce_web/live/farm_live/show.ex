@@ -259,7 +259,16 @@ defmodule MceWeb.FarmLive.Show do
                 <div class="card-body">
                   <div class="flex items-start justify-between">
                     <div>
-                      <h3 class="card-title">{group.name}</h3>
+                      <div class="flex items-center gap-2">
+                        <h3 class="card-title">{group.name}</h3>
+                        <span
+                          :if={group.status == "draft"}
+                          class="badge badge-warning badge-sm gap-1"
+                        >
+                          <.icon name="hero-pencil-square" class="size-3" />
+                          {gettext("Draft")}
+                        </span>
+                      </div>
                       <p class="text-sm text-base-content/60">
                         {species_label(group.species)} · {group.head_count} {gettext("head")}
                       </p>
@@ -312,10 +321,18 @@ defmodule MceWeb.FarmLive.Show do
                   <div class="card-actions justify-end mt-2">
                     <.link
                       navigate={~p"/farms/#{@farm.id}/livestock/#{group.id}/edit"}
-                      class="btn btn-sm btn-ghost gap-1"
+                      class={[
+                        "btn btn-sm gap-1",
+                        if(group.status == "draft", do: "btn-warning", else: "btn-ghost")
+                      ]}
                     >
-                      <.icon name="hero-pencil-square" class="size-4" />
-                      {gettext("Edit Details")}
+                      <%= if group.status == "draft" do %>
+                        <.icon name="hero-arrow-right" class="size-4" />
+                        {gettext("Continue")}
+                      <% else %>
+                        <.icon name="hero-pencil-square" class="size-4" />
+                        {gettext("Edit Details")}
+                      <% end %>
                     </.link>
                   </div>
                 </div>
