@@ -80,6 +80,7 @@ mix precommit                # Compile with warnings-as-errors, unlock unused de
 ## Documentation Standards
 
 **Document File Naming:** `YYMMDDHHMM_[DESCRIPTIVE_NAME].md`
+- Note the SNAKE_CASE with UPPERCASE for descriptive name.
 
 **Get timestamp:** Run `date "+%y%m%d%H%M"` and use EXACT output - never estimate or round.
 - Use this command to get precise timestamps for other titles, labels, document contents as well.

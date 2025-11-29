@@ -89,6 +89,10 @@ defmodule MceWeb.Router do
       live "/farms/:id/edit", FarmLive.Index, :edit
       live "/farms/:id", FarmLive.Show, :show
       live "/farms/:id/show/edit", FarmLive.Show, :edit
+
+      # Livestock Management
+      live "/farms/:farm_id/livestock/new", LivestockLive.WizardLive, :new
+      live "/farms/:farm_id/livestock/:id/edit", LivestockLive.WizardLive, :edit
     end
   end
 

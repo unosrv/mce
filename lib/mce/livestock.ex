@@ -178,7 +178,8 @@ defmodule Mce.Livestock do
   Creates or updates barn info for a livestock group.
   """
   def upsert_barn_info(livestock_group_id, attrs) do
-    attrs = Map.put(attrs, :livestock_group_id, livestock_group_id)
+    # Use string key to avoid mixed atom/string key map errors with Ecto.cast
+    attrs = Map.put(attrs, "livestock_group_id", livestock_group_id)
 
     case get_barn_info(livestock_group_id) do
       nil ->

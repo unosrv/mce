@@ -15,6 +15,7 @@ defmodule MceWeb.FarmLive.Show do
        socket
        |> assign(:page_title, farm.name)
        |> assign(:farm, farm)
+       |> assign(:livestock_empty?, Enum.empty?(livestock_groups))
        |> stream(:livestock_groups, livestock_groups)}
     else
       {:ok,
@@ -45,6 +46,20 @@ defmodule MceWeb.FarmLive.Show do
      socket
      |> assign(:farm, farm)
      |> assign(:page_title, farm.name)}
+  end
+
+  @impl true
+  def handle_event("delete_livestock", %{"id" => id}, socket) do
+    livestock_group = Livestock.get_livestock_group!(id)
+    {:ok, _} = Livestock.delete_livestock_group(livestock_group)
+
+    livestock_groups = Livestock.list_livestock_groups(socket.assigns.farm.id)
+
+    {:noreply,
+     socket
+     |> assign(:livestock_empty?, Enum.empty?(livestock_groups))
+     |> stream_delete(:livestock_groups, livestock_group)
+     |> put_flash(:info, gettext("Livestock group deleted successfully"))}
   end
 
   @impl true
@@ -122,16 +137,18 @@ defmodule MceWeb.FarmLive.Show do
             </div>
             <:subtitle>{gettext("Manage animals and their emissions data")}</:subtitle>
             <:actions>
-              <.button class="btn-primary gap-2" disabled>
-                <.icon name="hero-plus" class="size-5" />
-                {gettext("Add Group")}
-              </.button>
+              <.link navigate={~p"/farms/#{@farm.id}/livestock/new"}>
+                <.button class="btn-primary gap-2">
+                  <.icon name="hero-plus" class="size-5" />
+                  {gettext("Add Group")}
+                </.button>
+              </.link>
             </:actions>
           </.header>
 
           <div class="mt-6">
             <div
-              :if={Enum.empty?(@streams.livestock_groups |> Enum.to_list())}
+              :if={@livestock_empty?}
               class="card bg-base-200 p-8 text-center"
             >
               <.icon name="hero-beaker" class="mx-auto size-16 text-base-content/30" />
@@ -139,10 +156,12 @@ defmodule MceWeb.FarmLive.Show do
               <p class="mt-2 text-base-content/60">
                 {gettext("Add livestock groups to start calculating emissions.")}
               </p>
-              <.button class="btn-primary mt-4 gap-2" disabled>
-                <.icon name="hero-plus" class="size-5" />
-                {gettext("Add Livestock Group")}
-              </.button>
+              <.link navigate={~p"/farms/#{@farm.id}/livestock/new"} class="mt-4 inline-block">
+                <.button class="btn-primary gap-2">
+                  <.icon name="hero-plus" class="size-5" />
+                  {gettext("Add Livestock Group")}
+                </.button>
+              </.link>
             </div>
 
             <div
@@ -153,13 +172,70 @@ defmodule MceWeb.FarmLive.Show do
               <div
                 :for={{id, group} <- @streams.livestock_groups}
                 id={id}
-                class="card bg-base-100 shadow"
+                class="card bg-base-100 shadow hover:shadow-lg transition-shadow"
               >
                 <div class="card-body">
-                  <h3 class="card-title">{group.name}</h3>
-                  <p class="text-sm text-base-content/60">
-                    {species_label(group.species)} · {group.head_count} {gettext("head")}
-                  </p>
+                  <div class="flex items-start justify-between">
+                    <div>
+                      <h3 class="card-title">{group.name}</h3>
+                      <p class="text-sm text-base-content/60">
+                        {species_label(group.species)} · {group.head_count} {gettext("head")}
+                      </p>
+                    </div>
+                    <div class="dropdown dropdown-end">
+                      <div tabindex="0" role="button" class="btn btn-ghost btn-sm btn-square">
+                        <.icon name="hero-ellipsis-vertical" class="size-5" />
+                      </div>
+                      <ul
+                        tabindex="0"
+                        class="dropdown-content menu bg-base-100 rounded-box z-50 w-40 p-2 shadow-lg"
+                      >
+                        <li>
+                          <.link
+                            navigate={~p"/farms/#{@farm.id}/livestock/#{group.id}/edit"}
+                            class="gap-2"
+                          >
+                            <.icon name="hero-pencil" class="size-4" />
+                            {gettext("Edit")}
+                          </.link>
+                        </li>
+                        <li>
+                          <button
+                            phx-click="delete_livestock"
+                            phx-value-id={group.id}
+                            class="gap-2 text-error"
+                            data-confirm={
+                              gettext("Are you sure you want to delete this livestock group?")
+                            }
+                          >
+                            <.icon name="hero-trash" class="size-4" />
+                            {gettext("Delete")}
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+                    <div :if={group.average_weight}>
+                      <span class="text-base-content/60">{gettext("Avg Weight")}:</span>
+                      <span class="font-medium">{group.average_weight} kg</span>
+                    </div>
+                    <div :if={group.milk_yield}>
+                      <span class="text-base-content/60">{gettext("Milk Yield")}:</span>
+                      <span class="font-medium">{group.milk_yield} L/day</span>
+                    </div>
+                  </div>
+
+                  <div class="card-actions justify-end mt-2">
+                    <.link
+                      navigate={~p"/farms/#{@farm.id}/livestock/#{group.id}/edit"}
+                      class="btn btn-sm btn-ghost gap-1"
+                    >
+                      <.icon name="hero-pencil-square" class="size-4" />
+                      {gettext("Edit Details")}
+                    </.link>
+                  </div>
                 </div>
               </div>
             </div>
