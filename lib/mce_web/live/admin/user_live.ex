@@ -36,11 +36,7 @@ defmodule MceWeb.Admin.UserLive do
       locale: %{
         module: Backpex.Fields.Select,
         label: "Locale",
-        options: [
-          %{label: "Korean", value: "ko"},
-          %{label: "English", value: "en"},
-          %{label: "Portuguese (Brazil)", value: "pt_BR"}
-        ]
+        options: [Korean: "ko", English: "en", "Portuguese (Brazil)": "pt_BR"]
       },
       is_admin: %{
         module: Backpex.Fields.Boolean,

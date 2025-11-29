@@ -31,11 +31,7 @@ defmodule MceWeb.Admin.LivestockGroupLive do
       species: %{
         module: Backpex.Fields.Select,
         label: "Species",
-        options: [
-          %{label: "Beef Cattle", value: "beef_cattle"},
-          %{label: "Dairy Cattle", value: "dairy_cattle"},
-          %{label: "Swine", value: "swine"}
-        ]
+        options: ["Beef Cattle": "beef_cattle", "Dairy Cattle": "dairy_cattle", Swine: "swine"]
       },
       sub_category: %{
         module: Backpex.Fields.Text,
