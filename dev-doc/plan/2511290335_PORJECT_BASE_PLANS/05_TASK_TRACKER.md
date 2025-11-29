@@ -2,7 +2,7 @@
 
 **Document ID**: 2511290341_TASK_TRACKER
 **Created**: 29 November 2025, 03:41
-**Last Updated**: 29 November 2025, 20:38
+**Last Updated**: 29 November 2025, 20:56
 **Status**: Active
 
 ---
@@ -14,8 +14,8 @@
 | Phase 1: Foundation | 38 | 34 | 0 | 0 | 89% |
 | Phase 2: Core Features | 45 | 45 | 0 | 0 | 100% |
 | Phase 3: Dashboard & Polish | 34 | 29 | 0 | 0 | 85% |
-| Phase 4: Testing & Delivery | 20 | 4 | 0 | 0 | 20% |
-| **Total** | **137** | **112** | **0** | **0** | **82%** |
+| Phase 4: Testing & Delivery | 20 | 5 | 0 | 0 | 25% |
+| **Total** | **137** | **113** | **0** | **0** | 82% |
 
 ---
 
@@ -244,7 +244,7 @@
 | 4.1.1 | Write context unit tests | ✅ DONE | 121 tests pass |
 | 4.1.2 | Write calculation tests | ✅ DONE | 114 calculator tests |
 | 4.1.3 | Write LiveView integration tests | ✅ DONE | 20 tests pass |
-| 4.1.4 | Write form submission tests | ☐ TODO | |
+| 4.1.4 | Write form submission tests | ✅ DONE | 21 form tests pass |
 | 4.1.5 | Test i18n across locales | ☐ TODO | |
 | 4.1.6 | Test external APIs | ☐ TODO | |
 | 4.1.7 | Manual UI testing | ☐ TODO | |
@@ -280,6 +280,24 @@
 ---
 
 ## Daily Log
+
+### 2025-11-29 (Evening Update - 20:56)
+
+**Completed**:
+- [4.1.4] Written form submission tests for farm and livestock wizard
+- Farm form tests: creation, validation, editing, country selection, fiscal year (11 tests)
+- Livestock wizard tests: navigation, step indicators, auth, form elements (10 tests)
+- Fixed FormComponent to check if uploads are configured before consuming
+- All 162 tests passing with no warnings
+
+**In Progress**:
+- None
+
+**Blocked**:
+- None
+
+**Notes**:
+- Next: i18n tests (4.1.5) or external API tests (4.1.6)
 
 ### 2025-11-29 (Evening Update - 21:05)
 
