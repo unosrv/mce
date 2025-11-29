@@ -1,9 +1,11 @@
 defmodule Mce.Address.GoogleMapsApi do
   @moduledoc """
-  Client for the Google Maps Places API.
+  Client for the Google Maps Places API (New).
 
-  Provides address autocomplete for US and Brazil addresses.
-  API Documentation: https://developers.google.com/maps/documentation/places/web-service/autocomplete
+  Provides address autocomplete for US and Brazil addresses using the new
+  Places API endpoints with POST requests.
+
+  API Documentation: https://developers.google.com/maps/documentation/places/web-service/place-autocomplete
 
   ## Configuration
 
@@ -14,12 +16,20 @@ defmodule Mce.Address.GoogleMapsApi do
         use_mock: false
 
   When `use_mock` is true, returns mock data for development without an API key.
+
+  ## API Version
+
+  This module uses the Places API (New) which:
+  - Uses POST requests for autocomplete
+  - Uses `X-Goog-Api-Key` header for authentication
+  - Returns a different response structure than the legacy API
   """
 
   require Logger
 
-  @autocomplete_url "https://maps.googleapis.com/maps/api/place/autocomplete/json"
-  @details_url "https://maps.googleapis.com/maps/api/place/details/json"
+  # New Places API endpoints
+  @autocomplete_url "https://places.googleapis.com/v1/places:autocomplete"
+  @details_base_url "https://places.googleapis.com/v1/places"
 
   @type address_result :: %{
           place_id: String.t(),
@@ -35,7 +45,7 @@ defmodule Mce.Address.GoogleMapsApi do
         }
 
   @doc """
-  Search for addresses using Google Places Autocomplete.
+  Search for addresses using Google Places Autocomplete (New).
 
   ## Parameters
 
@@ -81,6 +91,7 @@ defmodule Mce.Address.GoogleMapsApi do
     end
   end
 
+  # New API: POST request with JSON body
   defp autocomplete_api(input, country, opts) do
     api_key = get_api_key()
 
@@ -88,21 +99,26 @@ defmodule Mce.Address.GoogleMapsApi do
       Logger.warning("Google Maps API key not configured, falling back to mock data")
       autocomplete_mock(input, country)
     else
-      params =
+      body =
         %{
           input: input,
-          types: "address",
-          components: "country:#{String.downcase(country)}",
-          key: api_key
+          includedRegionCodes: [String.downcase(country)],
+          includedPrimaryTypes: ["street_address", "route", "premise", "subpremise"]
         }
-        |> maybe_add_session_token(opts)
+        |> maybe_add_session_token_to_body(opts)
 
-      case Req.get(@autocomplete_url, params: params) do
-        {:ok, %{status: 200, body: body}} ->
-          parse_autocomplete_response(body)
+      headers = [
+        {"Content-Type", "application/json"},
+        {"X-Goog-Api-Key", api_key}
+      ]
 
-        {:ok, %{status: status}} ->
-          {:error, {:http_error, status}}
+      case Req.post(@autocomplete_url, json: body, headers: headers) do
+        {:ok, %{status: 200, body: response_body}} ->
+          parse_autocomplete_response(response_body)
+
+        {:ok, %{status: status, body: error_body}} ->
+          Logger.error("Google Maps API error: status=#{status}, body=#{inspect(error_body)}")
+          {:error, {:http_error, status, error_body}}
 
         {:error, reason} ->
           Logger.error("Google Maps API request failed: #{inspect(reason)}")
@@ -111,6 +127,7 @@ defmodule Mce.Address.GoogleMapsApi do
     end
   end
 
+  # New API: GET request with headers
   defp get_place_details_api(place_id, opts) do
     api_key = get_api_key()
 
@@ -118,20 +135,28 @@ defmodule Mce.Address.GoogleMapsApi do
       Logger.warning("Google Maps API key not configured, falling back to mock data")
       get_place_details_mock(place_id)
     else
-      params =
-        %{
-          place_id: place_id,
-          fields: "address_components,formatted_address,geometry",
-          key: api_key
-        }
-        |> maybe_add_session_token(opts)
+      # Build URL with place ID
+      url = "#{@details_base_url}/#{place_id}"
 
-      case Req.get(@details_url, params: params) do
-        {:ok, %{status: 200, body: body}} ->
-          parse_details_response(body)
+      # Fields we need for address details
+      field_mask =
+        "id,displayName,formattedAddress,addressComponents,location,shortFormattedAddress"
 
-        {:ok, %{status: status}} ->
-          {:error, {:http_error, status}}
+      headers =
+        [
+          {"Content-Type", "application/json"},
+          {"X-Goog-Api-Key", api_key},
+          {"X-Goog-FieldMask", field_mask}
+        ]
+        |> maybe_add_session_token_to_headers(opts)
+
+      case Req.get(url, headers: headers) do
+        {:ok, %{status: 200, body: response_body}} ->
+          parse_details_response(response_body)
+
+        {:ok, %{status: status, body: error_body}} ->
+          Logger.error("Google Maps API error: status=#{status}, body=#{inspect(error_body)}")
+          {:error, {:http_error, status, error_body}}
 
         {:error, reason} ->
           Logger.error("Google Maps API request failed: #{inspect(reason)}")
@@ -140,75 +165,85 @@ defmodule Mce.Address.GoogleMapsApi do
     end
   end
 
-  defp maybe_add_session_token(params, opts) do
+  defp maybe_add_session_token_to_body(body, opts) do
     case Keyword.get(opts, :session_token) do
-      nil -> params
-      token -> Map.put(params, :sessiontoken, token)
+      nil -> body
+      token -> Map.put(body, :sessionToken, token)
     end
   end
 
-  defp parse_autocomplete_response(%{"status" => "OK", "predictions" => predictions}) do
+  defp maybe_add_session_token_to_headers(headers, opts) do
+    case Keyword.get(opts, :session_token) do
+      nil -> headers
+      token -> [{"X-Goog-Session-Token", token} | headers]
+    end
+  end
+
+  # Parse new API response format
+  defp parse_autocomplete_response(%{"suggestions" => suggestions}) when is_list(suggestions) do
     parsed =
-      Enum.map(predictions, fn pred ->
+      suggestions
+      |> Enum.filter(&Map.has_key?(&1, "placePrediction"))
+      |> Enum.map(fn %{"placePrediction" => pred} ->
         %{
-          place_id: pred["place_id"],
-          description: pred["description"],
-          main_text: get_in(pred, ["structured_formatting", "main_text"]),
-          secondary_text: get_in(pred, ["structured_formatting", "secondary_text"])
+          place_id: pred["placeId"],
+          description: get_in(pred, ["text", "text"]) || "",
+          main_text: get_in(pred, ["structuredFormat", "mainText", "text"]),
+          secondary_text: get_in(pred, ["structuredFormat", "secondaryText", "text"])
         }
       end)
 
     {:ok, parsed}
   end
 
-  defp parse_autocomplete_response(%{"status" => "ZERO_RESULTS"}) do
+  defp parse_autocomplete_response(%{"suggestions" => []}) do
     {:ok, []}
   end
 
-  defp parse_autocomplete_response(%{"status" => status, "error_message" => message}) do
-    {:error, {:api_error, status, message}}
+  defp parse_autocomplete_response(%{} = response) when map_size(response) == 0 do
+    {:ok, []}
   end
 
-  defp parse_autocomplete_response(%{"status" => status}) do
-    {:error, {:api_error, status, nil}}
+  defp parse_autocomplete_response(%{"error" => error}) do
+    {:error, {:api_error, error["code"], error["message"]}}
   end
 
   defp parse_autocomplete_response(_), do: {:error, :invalid_response}
 
-  defp parse_details_response(%{"status" => "OK", "result" => result}) do
-    components = result["address_components"] || []
-    geometry = result["geometry"] || %{}
-    location = geometry["location"] || %{}
+  # Parse new API place details response
+  defp parse_details_response(%{"id" => place_id} = result) do
+    components = result["addressComponents"] || []
+    location = result["location"] || %{}
 
     address = %{
-      place_id: nil,
-      description: result["formatted_address"],
-      address_line1: extract_street_address(components),
+      place_id: place_id,
+      description: result["formattedAddress"] || result["shortFormattedAddress"],
+      address_line1: extract_street_address_new(components),
       address_line2: nil,
-      city: find_component(components, "locality") || find_component(components, "sublocality"),
-      state_province: find_component(components, "administrative_area_level_1", :short_name),
-      postal_code: find_component(components, "postal_code"),
-      country: find_component(components, "country", :short_name),
-      latitude: location["lat"],
-      longitude: location["lng"]
+      city:
+        find_component_new(components, "locality") ||
+          find_component_new(components, "sublocality") ||
+          find_component_new(components, "administrative_area_level_2"),
+      state_province: find_component_new(components, "administrative_area_level_1", :short),
+      postal_code: find_component_new(components, "postal_code"),
+      country: find_component_new(components, "country", :short),
+      latitude: location["latitude"],
+      longitude: location["longitude"]
     }
 
     {:ok, address}
   end
 
-  defp parse_details_response(%{"status" => status, "error_message" => message}) do
-    {:error, {:api_error, status, message}}
-  end
-
-  defp parse_details_response(%{"status" => status}) do
-    {:error, {:api_error, status, nil}}
+  defp parse_details_response(%{"error" => error}) do
+    {:error, {:api_error, error["code"], error["message"]}}
   end
 
   defp parse_details_response(_), do: {:error, :invalid_response}
 
-  defp extract_street_address(components) do
-    street_number = find_component(components, "street_number")
-    route = find_component(components, "route")
+  # New API uses different component structure
+  defp extract_street_address_new(components) do
+    street_number = find_component_new(components, "street_number")
+    route = find_component_new(components, "route")
 
     case {street_number, route} do
       {nil, nil} -> nil
@@ -218,8 +253,9 @@ defmodule Mce.Address.GoogleMapsApi do
     end
   end
 
-  defp find_component(components, type, name_type \\ :long_name) do
-    name_key = if name_type == :short_name, do: "short_name", else: "long_name"
+  # New API component structure: {types: [...], longText: "...", shortText: "..."}
+  defp find_component_new(components, type, name_type \\ :long) do
+    name_key = if name_type == :short, do: "shortText", else: "longText"
 
     components
     |> Enum.find(fn comp ->

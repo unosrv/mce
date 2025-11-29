@@ -187,11 +187,14 @@ JUSO_API_KEY=your_confm_key_here
 
 ### Current Implementation Status
 
-MCE uses the legacy Places API endpoints:
-- `https://maps.googleapis.com/maps/api/place/autocomplete/json`
-- `https://maps.googleapis.com/maps/api/place/details/json`
+MCE uses the **Places API (New)** endpoints:
+- Autocomplete: `https://places.googleapis.com/v1/places:autocomplete` (POST)
+- Place Details: `https://places.googleapis.com/v1/places/{placeId}` (GET)
 
-This continues to work for existing projects but new projects should use Places API (New).
+This implementation uses:
+- `X-Goog-Api-Key` header for authentication
+- `X-Goog-FieldMask` header for field selection
+- JSON request/response bodies
 
 ### Step 1: Create a Google Cloud Project
 
@@ -238,17 +241,21 @@ Add to your `.env` file:
 GOOGLE_MAPS_API_KEY=your_api_key_here
 ```
 
-### Future Migration to Places API (New)
+### API Setup for Places API (New)
 
-When migrating to the new API:
+To use the Google Maps integration:
 
 1. Enable "Places API (New)" in Google Cloud Console
-2. Update API endpoints to use POST requests
-3. Update event handlers:
-   - `gmp-placeselect` → `gmp-select`
-   - Event now returns `placePrediction` instead of `place`
+2. Create an API key with appropriate restrictions
+3. Set the `GOOGLE_MAPS_API_KEY` environment variable
 
-See [Google Migration Guide](https://developers.google.com/maps/documentation/places/web-service/legacy/migrate-autocomplete) for details.
+The implementation handles:
+- POST requests for autocomplete with JSON body
+- GET requests for place details with field masks
+- Session token support for billing optimization
+- Automatic fallback to mock data when no API key is configured
+
+See [Google Migration Guide](https://developers.google.com/maps/documentation/places/web-service/legacy/migrate-autocomplete) for details on the API differences.
 
 ---
 
