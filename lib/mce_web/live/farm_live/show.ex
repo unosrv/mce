@@ -21,7 +21,12 @@ defmodule MceWeb.FarmLive.Show do
        |> assign(:livestock_empty?, Enum.empty?(livestock_groups))
        |> assign(:emission_report, emission_report)
        |> assign(:report_year, current_year)
-       |> stream(:livestock_groups, livestock_groups)}
+       |> stream(:livestock_groups, livestock_groups)
+       |> allow_upload(:logo,
+         accept: ~w(.jpg .jpeg .png .gif .svg),
+         max_entries: 1,
+         max_file_size: 2_000_000
+       )}
     else
       {:ok,
        socket
@@ -333,6 +338,7 @@ defmodule MceWeb.FarmLive.Show do
           action={:edit}
           farm={@farm}
           current_scope={@current_scope}
+          uploads={@uploads}
           patch={~p"/farms/#{@farm}"}
         />
       </.modal>
