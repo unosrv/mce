@@ -2,6 +2,8 @@ defmodule MceWeb.PageController do
   use MceWeb, :controller
 
   def home(conn, _params) do
-    render(conn, :home)
+    conn
+    |> assign(:hide_root_nav, true)
+    |> render(:home)
   end
 end
