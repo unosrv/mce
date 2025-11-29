@@ -134,4 +134,29 @@ defmodule Mce.Farms do
     |> preload([:livestock_groups, :emission_reports])
     |> Repo.all()
   end
+
+  @doc """
+  Returns all farms for a user with their latest emission reports for comparison.
+
+  Each farm will have its `emission_reports` preloaded (sorted by year desc).
+  """
+  def list_farms_with_emissions(user_id) do
+    Farm
+    |> where(user_id: ^user_id)
+    |> order_by(:name)
+    |> preload(:emission_reports)
+    |> Repo.all()
+  end
+
+  @doc """
+  Gets multiple farms by IDs for a specific user with emission reports.
+
+  Returns only farms that belong to the user.
+  """
+  def get_farms_by_ids(ids, user_id) when is_list(ids) do
+    Farm
+    |> where([f], f.id in ^ids and f.user_id == ^user_id)
+    |> preload(:emission_reports)
+    |> Repo.all()
+  end
 end

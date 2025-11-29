@@ -13,9 +13,9 @@
 |-------|-------------|-----------|-------------|---------|----------|
 | Phase 1: Foundation | 38 | 34 | 0 | 0 | 89% |
 | Phase 2: Core Features | 45 | 45 | 0 | 0 | 100% |
-| Phase 3: Dashboard & Polish | 34 | 18 | 0 | 0 | 53% |
+| Phase 3: Dashboard & Polish | 34 | 25 | 0 | 0 | 74% |
 | Phase 4: Testing & Delivery | 20 | 3 | 0 | 0 | 15% |
-| **Total** | **137** | **100** | **0** | **0** | **73%** |
+| **Total** | **137** | **107** | **0** | **0** | **78%** |
 
 ---
 
@@ -25,7 +25,8 @@
 
 | Task ID | Description | Assignee | Status | Notes |
 |---------|-------------|----------|--------|-------|
-| 3.5.1 | Review design consistency | - | ☐ TODO | Next priority |
+| 3.3.5 | Add farm logo upload to farm form | - | ☐ TODO | Next priority |
+| 3.3.6 | Include farm logo in PDF reports | - | ☐ TODO | P1 |
 
 ### Blocked Tasks
 
@@ -195,7 +196,7 @@
 | 3.2.3 | Implement trend chart | ☐ TODO | P2 - Future enhancement |
 | 3.2.4 | Implement emissions by type chart | ☐ TODO | P2 - Future enhancement |
 | 3.2.5 | Implement recent farms table | ✅ DONE | With empty state |
-| 3.2.6 | Add farm comparison view | ☐ TODO | P1 |
+| 3.2.6 | Add farm comparison view | ✅ DONE | CompareLive.Index with charts |
 
 ### 3.3 PDF Export
 

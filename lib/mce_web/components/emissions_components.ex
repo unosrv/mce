@@ -287,6 +287,129 @@ defmodule MceWeb.EmissionsComponents do
   defp to_float(nil), do: 0.0
   defp to_float(_), do: 0.0
 
+  @doc """
+  Renders a grouped bar chart comparing emissions across multiple farms.
+
+  ## Examples
+
+      <.farm_comparison_chart
+        id="comparison-chart"
+        farms={[
+          %{name: "Farm A", total: 100.0, enteric: 60.0, manure_ch4: 25.0, manure_n2o: 15.0},
+          %{name: "Farm B", total: 150.0, enteric: 90.0, manure_ch4: 35.0, manure_n2o: 25.0}
+        ]}
+      />
+  """
+  attr :id, :string, required: true
+  attr :farms, :list, required: true
+  attr :class, :string, default: nil
+
+  def farm_comparison_chart(assigns) do
+    categories = Enum.map(assigns.farms, & &1.name)
+
+    series = [
+      %{
+        name: gettext("Enteric"),
+        data: Enum.map(assigns.farms, &to_float(&1.enteric))
+      },
+      %{
+        name: gettext("Manure CH₄"),
+        data: Enum.map(assigns.farms, &to_float(&1.manure_ch4))
+      },
+      %{
+        name: gettext("Manure N₂O"),
+        data: Enum.map(assigns.farms, &to_float(&1.manure_n2o))
+      }
+    ]
+
+    colors = ["#22c55e", "#f59e0b", "#ef4444"]
+
+    options = %{
+      chart: %{stacked: true},
+      xaxis: %{categories: categories},
+      plotOptions: %{bar: %{horizontal: false, columnWidth: "50%"}},
+      legend: %{position: "top"},
+      yaxis: %{title: %{text: gettext("tonnes CO₂e")}}
+    }
+
+    assigns =
+      assigns
+      |> assign(:series, Jason.encode!(series))
+      |> assign(:colors, Jason.encode!(colors))
+      |> assign(:options, Jason.encode!(options))
+
+    ~H"""
+    <div class={["card bg-base-100 shadow-xl", @class]}>
+      <div class="card-body">
+        <h2 class="card-title text-base-content/80">
+          <.icon name="hero-chart-bar" class="size-5" />
+          {gettext("Emissions Comparison")}
+        </h2>
+        <div
+          id={@id}
+          phx-hook="ApexChart"
+          phx-update="ignore"
+          data-chart-type="bar"
+          data-chart-series={@series}
+          data-chart-colors={@colors}
+          data-chart-options={@options}
+          data-chart-height="350"
+          class="w-full"
+        >
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders a comparison table for multiple farms.
+
+  ## Examples
+
+      <.farm_comparison_table farms={farms_data} />
+  """
+  attr :farms, :list, required: true
+  attr :class, :string, default: nil
+
+  def farm_comparison_table(assigns) do
+    ~H"""
+    <div class={["card bg-base-100 shadow-xl", @class]}>
+      <div class="card-body">
+        <h2 class="card-title text-base-content/80">
+          <.icon name="hero-table-cells" class="size-5" />
+          {gettext("Comparison Details")}
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="table table-zebra">
+            <thead>
+              <tr>
+                <th>{gettext("Farm")}</th>
+                <th class="text-right">{gettext("Enteric")}</th>
+                <th class="text-right">{gettext("Manure CH₄")}</th>
+                <th class="text-right">{gettext("Manure N₂O")}</th>
+                <th class="text-right">{gettext("Total")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr :for={farm <- @farms}>
+                <td class="font-medium">{farm.name}</td>
+                <td class="text-right text-success">{format_emission(farm.enteric)}</td>
+                <td class="text-right text-warning">{format_emission(farm.manure_ch4)}</td>
+                <td class="text-right text-error">{format_emission(farm.manure_n2o)}</td>
+                <td class="text-right font-bold">{format_emission(farm.total)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-base-content/60 mt-2">
+          {gettext("All values in tonnes CO₂ equivalent")}
+        </p>
+      </div>
+    </div>
+    """
+  end
+
   # Import icon component from core_components
   defp icon(assigns) do
     MceWeb.CoreComponents.icon(assigns)

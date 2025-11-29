@@ -109,6 +109,9 @@ defmodule MceWeb.Router do
       # Dashboard
       live "/dashboard", DashboardLive.Index, :index
 
+      # Farm Comparison
+      live "/compare", CompareLive.Index, :index
+
       # Farm Management
       live "/farms", FarmLive.Index, :index
       live "/farms/new", FarmLive.Index, :new

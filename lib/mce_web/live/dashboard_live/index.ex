@@ -67,6 +67,12 @@ defmodule MceWeb.DashboardLive.Index do
               {gettext("View All Farms")}
             </.button>
           </.link>
+          <.link navigate={~p"/compare"}>
+            <.button class="btn-outline gap-2">
+              <.icon name="hero-scale" class="size-5" />
+              {gettext("Compare Farms")}
+            </.button>
+          </.link>
         </div>
 
         <%!-- Recent Farms Table --%>

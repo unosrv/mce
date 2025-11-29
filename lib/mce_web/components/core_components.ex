@@ -43,7 +43,11 @@ defmodule MceWeb.CoreComponents do
   attr :flash, :map, default: %{}, doc: "the map of flash messages to display"
   attr :title, :string, default: nil
   attr :kind, :atom, values: [:info, :error], doc: "used for styling and flash lookup"
-  attr :auto_dismiss, :integer, default: nil, doc: "auto-dismiss after milliseconds (nil to disable)"
+
+  attr :auto_dismiss, :integer,
+    default: nil,
+    doc: "auto-dismiss after milliseconds (nil to disable)"
+
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
 
   slot :inner_block, doc: "the optional inner block that renders the flash message"
