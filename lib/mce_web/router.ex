@@ -96,6 +96,10 @@ defmodule MceWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm-email/:token", UserSettingsController, :confirm_email
+
+    # PDF Report Downloads
+    get "/reports/farms/:farm_id/emissions/:year/pdf", ReportController, :download_emission_report
+    get "/reports/compare/:year/pdf", ReportController, :download_comparison_report
   end
 
   scope "/", MceWeb do

@@ -12,7 +12,12 @@ defmodule MceWeb.FarmLive.Index do
      socket
      |> assign(:page_title, gettext("Farms"))
      |> assign(:farms_empty?, Enum.empty?(farms))
-     |> stream(:farms, farms)}
+     |> stream(:farms, farms)
+     |> allow_upload(:logo,
+       accept: ~w(.jpg .jpeg .png .gif .svg),
+       max_entries: 1,
+       max_file_size: 2_000_000
+     )}
   end
 
   @impl true
@@ -133,6 +138,7 @@ defmodule MceWeb.FarmLive.Index do
           action={@live_action}
           farm={@farm}
           current_scope={@current_scope}
+          uploads={@uploads}
           patch={~p"/farms"}
         />
       </.modal>

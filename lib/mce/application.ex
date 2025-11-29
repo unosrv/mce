@@ -12,8 +12,8 @@ defmodule Mce.Application do
       Mce.Repo,
       {DNSCluster, query: Application.get_env(:mce, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Mce.PubSub},
-      # Start a worker by calling: Mce.Worker.start_link(arg)
-      # {Mce.Worker, arg},
+      # PDF generation with ChromicPDF
+      {ChromicPDF, chromic_pdf_opts()},
       # Start to serve requests, typically the last entry
       MceWeb.Endpoint
     ]
@@ -30,5 +30,11 @@ defmodule Mce.Application do
   def config_change(changed, _new, removed) do
     MceWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp chromic_pdf_opts do
+    [
+      session_pool: [size: 2]
+    ]
   end
 end

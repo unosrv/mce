@@ -29,6 +29,96 @@ defmodule MceWeb.FarmLive.FormComponent do
         <div class="space-y-6">
           <.input field={@form[:name]} type="text" label={gettext("Farm Name")} required />
 
+          <%!-- Logo Upload Section --%>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">{gettext("Farm Logo")}</span>
+            </label>
+
+            <div class="flex items-start gap-4">
+              <%!-- Current/Preview Logo --%>
+              <div class="shrink-0">
+                <%= cond do %>
+                  <% has_pending_upload?(@parent_uploads.logo.entries) -> %>
+                    <%!-- Show pending upload preview --%>
+                    <div :for={entry <- @parent_uploads.logo.entries} class="relative">
+                      <.live_img_preview
+                        entry={entry}
+                        class="h-20 w-20 rounded-lg border border-base-300 object-cover"
+                      />
+                      <button
+                        type="button"
+                        phx-click="cancel_upload"
+                        phx-value-ref={entry.ref}
+                        phx-target={@myself}
+                        class="btn btn-circle btn-error btn-xs absolute -top-2 -right-2"
+                      >
+                        <.icon name="hero-x-mark" class="size-3" />
+                      </button>
+                    </div>
+                  <% @farm.logo_path && !@remove_logo -> %>
+                    <%!-- Show existing logo --%>
+                    <div class="relative">
+                      <img
+                        src={@farm.logo_path}
+                        class="h-20 w-20 rounded-lg border border-base-300 object-cover"
+                        alt={gettext("Farm logo")}
+                      />
+                      <button
+                        type="button"
+                        phx-click="remove_logo"
+                        phx-target={@myself}
+                        class="btn btn-circle btn-error btn-xs absolute -top-2 -right-2"
+                      >
+                        <.icon name="hero-x-mark" class="size-3" />
+                      </button>
+                    </div>
+                  <% true -> %>
+                    <%!-- Empty state placeholder --%>
+                    <div class="flex h-20 w-20 items-center justify-center rounded-lg border-2 border-dashed border-base-300 bg-base-200">
+                      <.icon name="hero-photo" class="size-8 text-base-content/30" />
+                    </div>
+                <% end %>
+              </div>
+
+              <%!-- Upload Zone --%>
+              <div class="flex-1">
+                <div
+                  phx-drop-target={@parent_uploads.logo.ref}
+                  class={[
+                    "flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-4 transition-colors",
+                    "hover:border-primary hover:bg-primary/5",
+                    "border-base-300"
+                  ]}
+                >
+                  <.live_file_input upload={@parent_uploads.logo} class="hidden" />
+                  <label for={@parent_uploads.logo.ref} class="cursor-pointer text-center">
+                    <.icon name="hero-cloud-arrow-up" class="mx-auto size-8 text-base-content/50" />
+                    <p class="mt-2 text-sm text-base-content/70">
+                      {gettext("Click to upload or drag and drop")}
+                    </p>
+                    <p class="text-xs text-base-content/50">
+                      {gettext("PNG, JPG, GIF, SVG up to 2MB")}
+                    </p>
+                  </label>
+                </div>
+
+                <%!-- Upload Errors --%>
+                <div :for={entry <- @parent_uploads.logo.entries} class="mt-2">
+                  <div
+                    :for={err <- upload_errors(@parent_uploads.logo, entry)}
+                    class="text-sm text-error"
+                  >
+                    {upload_error_message(err)}
+                  </div>
+                </div>
+                <div :for={err <- upload_errors(@parent_uploads.logo)} class="mt-2 text-sm text-error">
+                  {upload_error_message(err)}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="form-control w-full">
             <label class="label">
               <span class="label-text">{gettext("Country")} <span class="text-error">*</span></span>
@@ -224,15 +314,21 @@ defmodule MceWeb.FarmLive.FormComponent do
   def update(%{farm: farm} = assigns, socket) do
     selected_country = farm.country || "KR"
 
+    # Exclude :uploads from assigns since it's a reserved key in LiveComponents
+    # Pass it as :parent_uploads instead
+    {uploads, assigns} = Map.pop(assigns, :uploads)
+
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:parent_uploads, uploads)
      |> assign(:countries, @countries)
      |> assign(:selected_country, selected_country)
      |> assign_new(:address_query, fn -> "" end)
      |> assign_new(:address_results, fn -> [] end)
      |> assign_new(:address_loading, fn -> false end)
      |> assign_new(:show_suggestions, fn -> false end)
+     |> assign_new(:remove_logo, fn -> false end)
      |> assign_new(:form, fn ->
        to_form(Farms.change_farm(farm, %{country: selected_country}))
      end)}
@@ -331,11 +427,32 @@ defmodule MceWeb.FarmLive.FormComponent do
   end
 
   @impl true
+  def handle_event("cancel_upload", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :logo, ref)}
+  end
+
+  @impl true
+  def handle_event("remove_logo", _params, socket) do
+    {:noreply, assign(socket, :remove_logo, true)}
+  end
+
+  @impl true
   def handle_event("save", %{"farm" => farm_params}, socket) do
     save_farm(socket, socket.assigns.action, farm_params)
   end
 
   defp save_farm(socket, :edit, farm_params) do
+    farm_params = handle_logo_upload(socket, farm_params)
+
+    # Handle logo removal
+    farm_params =
+      if socket.assigns[:remove_logo] do
+        delete_old_logo(socket.assigns.farm.logo_path)
+        Map.put(farm_params, "logo_path", nil)
+      else
+        farm_params
+      end
+
     case Farms.update_farm(socket.assigns.farm, farm_params) do
       {:ok, farm} ->
         notify_parent({:saved, farm})
@@ -351,7 +468,11 @@ defmodule MceWeb.FarmLive.FormComponent do
   end
 
   defp save_farm(socket, :new, farm_params) do
-    farm_params = Map.put(farm_params, "user_id", socket.assigns.current_scope.user.id)
+    farm_params =
+      farm_params
+      |> Map.put("user_id", socket.assigns.current_scope.user.id)
+
+    farm_params = handle_logo_upload(socket, farm_params)
 
     case Farms.create_farm(farm_params) do
       {:ok, farm} ->
@@ -367,7 +488,53 @@ defmodule MceWeb.FarmLive.FormComponent do
     end
   end
 
+  defp handle_logo_upload(socket, farm_params) do
+    case consume_uploaded_entries(socket, :logo, fn %{path: path}, entry ->
+           dest_filename = generate_filename(entry.client_name)
+           dest_path = Path.join(uploads_dir(), dest_filename)
+           File.cp!(path, dest_path)
+           {:ok, "/uploads/logos/#{dest_filename}"}
+         end) do
+      [logo_path] ->
+        # Delete old logo if exists
+        delete_old_logo(socket.assigns.farm.logo_path)
+        Map.put(farm_params, "logo_path", logo_path)
+
+      [] ->
+        farm_params
+    end
+  end
+
+  defp generate_filename(original_name) do
+    ext = Path.extname(original_name)
+    "#{Ecto.UUID.generate()}#{ext}"
+  end
+
+  defp uploads_dir do
+    Path.join([:code.priv_dir(:mce), "static", "uploads", "logos"])
+  end
+
+  defp delete_old_logo(nil), do: :ok
+
+  defp delete_old_logo(logo_path) do
+    full_path = Path.join([:code.priv_dir(:mce), "static", logo_path])
+
+    if File.exists?(full_path) do
+      File.rm(full_path)
+    end
+  end
+
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+
+  defp has_pending_upload?(entries), do: length(entries) > 0
+
+  defp upload_error_message(:too_large), do: gettext("File is too large. Maximum size is 2MB.")
+  defp upload_error_message(:too_many_files), do: gettext("You can only upload one file.")
+
+  defp upload_error_message(:not_accepted),
+    do: gettext("Invalid file type. Please upload PNG, JPG, GIF, or SVG.")
+
+  defp upload_error_message(_), do: gettext("Upload error. Please try again.")
 
   defp month_options do
     [
