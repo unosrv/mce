@@ -60,6 +60,40 @@ defmodule Mce.Livestock do
     LivestockGroup.changeset(livestock_group, attrs)
   end
 
+  @doc """
+  Updates the wizard step for a livestock group.
+  """
+  def update_wizard_step(%LivestockGroup{} = livestock_group, step) when is_atom(step) do
+    update_wizard_step(livestock_group, Atom.to_string(step))
+  end
+
+  def update_wizard_step(%LivestockGroup{} = livestock_group, step) when is_binary(step) do
+    livestock_group
+    |> LivestockGroup.changeset(%{wizard_step: step})
+    |> Repo.update()
+  end
+
+  @doc """
+  Marks a livestock group as complete.
+  """
+  def complete_livestock_group(%LivestockGroup{} = livestock_group) do
+    livestock_group
+    |> LivestockGroup.changeset(%{status: "complete", wizard_step: "complete"})
+    |> Repo.update()
+  end
+
+  @doc """
+  Marks a livestock group as draft.
+  """
+  def save_as_draft(%LivestockGroup{} = livestock_group, step \\ nil) do
+    attrs = %{status: "draft"}
+    attrs = if step, do: Map.put(attrs, :wizard_step, to_string(step)), else: attrs
+
+    livestock_group
+    |> LivestockGroup.changeset(attrs)
+    |> Repo.update()
+  end
+
   # -------------------------------------------------------------------
   # Feed Items
   # -------------------------------------------------------------------

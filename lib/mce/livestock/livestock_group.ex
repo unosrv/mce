@@ -19,6 +19,9 @@ defmodule Mce.Livestock.LivestockGroup do
     field :days_pregnant, :integer
     # Grazing
     field :grazing_hours_per_day, :decimal
+    # Wizard state
+    field :status, :string, default: "draft"
+    field :wizard_step, :string, default: "basic_info"
 
     belongs_to :farm, Mce.Farms.Farm
     has_many :feed_items, Mce.Livestock.FeedItem
@@ -39,8 +42,12 @@ defmodule Mce.Livestock.LivestockGroup do
     :milk_fat_content,
     :pregnant_percentage,
     :days_pregnant,
-    :grazing_hours_per_day
+    :grazing_hours_per_day,
+    :status,
+    :wizard_step
   ]
+
+  @status_types ~w(draft complete)
 
   @species_types ~w(beef_cattle dairy_cattle swine)
 
@@ -50,6 +57,7 @@ defmodule Mce.Livestock.LivestockGroup do
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
     |> validate_inclusion(:species, @species_types)
+    |> validate_inclusion(:status, @status_types)
     |> validate_number(:head_count, greater_than: 0)
     |> validate_number(:average_weight, greater_than: 0)
     |> validate_number(:mature_weight, greater_than: 0)
@@ -67,6 +75,16 @@ defmodule Mce.Livestock.LivestockGroup do
     )
     |> foreign_key_constraint(:farm_id)
   end
+
+  @doc """
+  Returns true if the livestock group is a draft.
+  """
+  def draft?(%__MODULE__{status: status}), do: status == "draft"
+
+  @doc """
+  Returns true if the livestock group is complete.
+  """
+  def complete?(%__MODULE__{status: status}), do: status == "complete"
 
   @doc """
   A changeset for creating livestock groups from admin panel.

@@ -78,6 +78,8 @@ defmodule MceWeb.Router do
       live_resources "/users", UserLive
       live_resources "/farms", FarmLive
       live_resources "/livestock-groups", LivestockGroupLive
+      live_resources "/feed-presets", FeedPresetLive
+      live_resources "/ipcc-factors", IpccEmissionFactorLive
     end
   end
 

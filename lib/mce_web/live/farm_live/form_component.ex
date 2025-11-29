@@ -280,6 +280,21 @@ defmodule MceWeb.FarmLive.FormComponent do
                 label={gettext("Postal Code")}
               />
             </div>
+
+            <%!-- Map Preview (for addresses with coordinates) --%>
+            <div :if={has_coordinates?(@map_latitude, @map_longitude)} class="mt-4">
+              <label class="label">
+                <span class="label-text">{gettext("Location Preview")}</span>
+              </label>
+              <.live_component
+                module={MceWeb.Live.Components.MapPreview}
+                id="farm-map-preview"
+                latitude={@map_latitude}
+                longitude={@map_longitude}
+                width={400}
+                height={200}
+              />
+            </div>
           </div>
 
           <div class="divider">{gettext("Fiscal Year Settings")}</div>
@@ -329,6 +344,8 @@ defmodule MceWeb.FarmLive.FormComponent do
      |> assign_new(:address_loading, fn -> false end)
      |> assign_new(:show_suggestions, fn -> false end)
      |> assign_new(:remove_logo, fn -> false end)
+     |> assign_new(:map_latitude, fn -> farm.latitude end)
+     |> assign_new(:map_longitude, fn -> farm.longitude end)
      |> assign_new(:form, fn ->
        to_form(Farms.change_farm(farm, %{country: selected_country}))
      end)}
@@ -406,6 +423,8 @@ defmodule MceWeb.FarmLive.FormComponent do
            socket
            |> assign(:form, form)
            |> assign(:address_query, result.display)
+           |> assign(:map_latitude, data[:latitude])
+           |> assign(:map_longitude, data[:longitude])
            |> assign(:show_suggestions, false)}
 
         {:error, _reason} ->
@@ -591,5 +610,9 @@ defmodule MceWeb.FarmLive.FormComponent do
   defp build_address_params(data, country) do
     %{"country" => country}
     |> Map.merge(Map.new(data, fn {k, v} -> {to_string(k), v} end))
+  end
+
+  defp has_coordinates?(lat, _lon) do
+    is_number(lat) or is_struct(lat, Decimal)
   end
 end

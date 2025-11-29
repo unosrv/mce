@@ -436,6 +436,9 @@ defmodule MceWeb.LivestockLive.WizardLive do
       end)
 
     if Enum.all?(results, fn {status, _} -> status == :ok end) do
+      # Mark the livestock group as complete
+      Livestock.complete_livestock_group(socket.assigns.livestock_group)
+
       {:noreply,
        socket
        |> put_flash(:info, gettext("Livestock group saved successfully"))
@@ -466,6 +469,30 @@ defmodule MceWeb.LivestockLive.WizardLive do
       {:noreply, assign(socket, :current_step, Enum.at(@steps, current_index - 1))}
     else
       {:noreply, socket}
+    end
+  end
+
+  def handle_event("save_draft", _params, socket) do
+    livestock_group = socket.assigns.livestock_group
+
+    if livestock_group.id do
+      case Livestock.save_as_draft(livestock_group, socket.assigns.current_step) do
+        {:ok, _} ->
+          {:noreply,
+           socket
+           |> put_flash(:info, gettext("Draft saved successfully"))
+           |> push_navigate(to: ~p"/farms/#{socket.assigns.farm.id}")}
+
+        {:error, _} ->
+          {:noreply, put_flash(socket, :error, gettext("Error saving draft"))}
+      end
+    else
+      {:noreply,
+       socket
+       |> put_flash(
+         :warning,
+         gettext("Please complete the basic info step first to save as draft")
+       )}
     end
   end
 
@@ -740,14 +767,25 @@ defmodule MceWeb.LivestockLive.WizardLive do
         </div>
       </div>
 
-      <div class="card-actions justify-end mt-6">
+      <div class="card-actions justify-between mt-6">
         <.link navigate={~p"/farms/#{@livestock_group.farm_id}"} class="btn btn-ghost">
           {gettext("Cancel")}
         </.link>
-        <button type="submit" class="btn btn-primary">
-          {gettext("Next: Feed")}
-          <.icon name="hero-arrow-right" class="size-5" />
-        </button>
+        <div class="flex gap-2">
+          <button
+            :if={@livestock_group.id}
+            type="button"
+            class="btn btn-outline"
+            phx-click="save_draft"
+          >
+            <.icon name="hero-document" class="size-5" />
+            {gettext("Save Draft")}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {gettext("Next: Feed")}
+            <.icon name="hero-arrow-right" class="size-5" />
+          </button>
+        </div>
       </div>
     </.form>
     """
@@ -917,10 +955,16 @@ defmodule MceWeb.LivestockLive.WizardLive do
           <.icon name="hero-arrow-left" class="size-5" />
           {gettext("Back")}
         </button>
-        <button type="submit" class="btn btn-primary">
-          {gettext("Next: Housing")}
-          <.icon name="hero-arrow-right" class="size-5" />
-        </button>
+        <div class="flex gap-2">
+          <button type="button" class="btn btn-outline" phx-click="save_draft">
+            <.icon name="hero-document" class="size-5" />
+            {gettext("Save Draft")}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {gettext("Next: Housing")}
+            <.icon name="hero-arrow-right" class="size-5" />
+          </button>
+        </div>
       </div>
     </.form>
     """
@@ -1019,10 +1063,16 @@ defmodule MceWeb.LivestockLive.WizardLive do
           <.icon name="hero-arrow-left" class="size-5" />
           {gettext("Back")}
         </button>
-        <button type="submit" class="btn btn-primary">
-          {gettext("Next: Barn Info")}
-          <.icon name="hero-arrow-right" class="size-5" />
-        </button>
+        <div class="flex gap-2">
+          <button type="button" class="btn btn-outline" phx-click="save_draft">
+            <.icon name="hero-document" class="size-5" />
+            {gettext("Save Draft")}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {gettext("Next: Barn Info")}
+            <.icon name="hero-arrow-right" class="size-5" />
+          </button>
+        </div>
       </div>
     </.form>
     """
@@ -1143,10 +1193,16 @@ defmodule MceWeb.LivestockLive.WizardLive do
           <.icon name="hero-arrow-left" class="size-5" />
           {gettext("Back")}
         </button>
-        <button type="submit" class="btn btn-primary">
-          {gettext("Next: Manure")}
-          <.icon name="hero-arrow-right" class="size-5" />
-        </button>
+        <div class="flex gap-2">
+          <button type="button" class="btn btn-outline" phx-click="save_draft">
+            <.icon name="hero-document" class="size-5" />
+            {gettext("Save Draft")}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {gettext("Next: Manure")}
+            <.icon name="hero-arrow-right" class="size-5" />
+          </button>
+        </div>
       </div>
     </.form>
     """
@@ -1289,10 +1345,16 @@ defmodule MceWeb.LivestockLive.WizardLive do
           <.icon name="hero-arrow-left" class="size-5" />
           {gettext("Back")}
         </button>
-        <button type="submit" class="btn btn-primary">
-          <.icon name="hero-check" class="size-5" />
-          {gettext("Save Livestock Group")}
-        </button>
+        <div class="flex gap-2">
+          <button type="button" class="btn btn-outline" phx-click="save_draft">
+            <.icon name="hero-document" class="size-5" />
+            {gettext("Save Draft")}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <.icon name="hero-check" class="size-5" />
+            {gettext("Save Livestock Group")}
+          </button>
+        </div>
       </div>
     </.form>
     """

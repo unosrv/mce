@@ -58,4 +58,18 @@ defmodule Mce.Reference.FeedPreset do
       _ -> preset.name_en || preset.name_ko
     end
   end
+
+  @doc """
+  A changeset for creating feed presets from admin panel.
+  """
+  def create_changeset(feed_preset, attrs, _metadata \\ %{}) do
+    changeset(feed_preset, attrs)
+  end
+
+  @doc """
+  A changeset for updating feed presets from admin panel.
+  """
+  def update_changeset(feed_preset, attrs, _metadata \\ %{}) do
+    changeset(feed_preset, attrs)
+  end
 end

@@ -2,18 +2,23 @@ defmodule MceWeb.DashboardLive.Index do
   use MceWeb, :live_view
 
   alias Mce.Farms
+  alias MceWeb.Live.Components.{LineChart, DonutChart}
 
   @impl true
   def mount(_params, _session, socket) do
     user_id = socket.assigns.current_scope.user.id
     stats = Farms.get_dashboard_stats(user_id)
     recent_farms = Farms.list_recent_farms_with_stats(user_id, 5)
+    trend_data = Farms.get_emissions_trend_data(user_id)
+    breakdown_data = Farms.get_emissions_breakdown(user_id)
 
     {:ok,
      socket
      |> assign(:page_title, gettext("Dashboard"))
      |> assign(:stats, stats)
-     |> assign(:recent_farms, recent_farms)}
+     |> assign(:recent_farms, recent_farms)
+     |> assign(:trend_data, trend_data)
+     |> assign(:breakdown_data, breakdown_data)}
   end
 
   @impl true
@@ -51,6 +56,57 @@ defmodule MceWeb.DashboardLive.Index do
             icon="hero-beaker"
             color="secondary"
           />
+        </div>
+
+        <%!-- Charts Section --%>
+        <div :if={has_chart_data?(@trend_data, @breakdown_data)} class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <%!-- Emissions Trend Chart --%>
+          <div class="card bg-base-100 shadow-lg lg:col-span-2">
+            <div class="card-body">
+              <h2 class="card-title flex items-center gap-2">
+                <.icon name="hero-chart-bar" class="size-5 text-primary" />
+                {gettext("Emissions Trend")}
+              </h2>
+              <.live_component
+                module={LineChart}
+                id="emissions-trend-chart"
+                series={@trend_data.series}
+                categories={Enum.map(@trend_data.years, &to_string/1)}
+                height={300}
+                y_axis_title={gettext("tonnes CO₂e")}
+                show_legend={true}
+              />
+            </div>
+          </div>
+
+          <%!-- Emissions by Type Donut Chart --%>
+          <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+              <h2 class="card-title flex items-center gap-2">
+                <.icon name="hero-chart-pie" class="size-5 text-secondary" />
+                {gettext("Emissions by Type")}
+              </h2>
+              <.live_component
+                module={DonutChart}
+                id="emissions-breakdown-chart"
+                series={@breakdown_data.series}
+                labels={@breakdown_data.labels}
+                height={280}
+                show_legend={true}
+              />
+            </div>
+          </div>
+        </div>
+
+        <%!-- Empty Charts State --%>
+        <div :if={not has_chart_data?(@trend_data, @breakdown_data)} class="mt-8">
+          <div class="card bg-base-200 p-8 text-center">
+            <.icon name="hero-chart-bar" class="mx-auto size-16 text-base-content/30" />
+            <h3 class="mt-4 text-lg font-semibold">{gettext("No emissions data yet")}</h3>
+            <p class="mt-2 text-base-content/60">
+              {gettext("Charts will appear once you have emission reports for your farms.")}
+            </p>
+          </div>
         </div>
 
         <%!-- Quick Actions --%>
@@ -236,5 +292,9 @@ defmodule MceWeb.DashboardLive.Index do
     farm.emission_reports
     |> Enum.sort_by(& &1.report_year, :desc)
     |> List.first()
+  end
+
+  defp has_chart_data?(trend_data, breakdown_data) do
+    trend_data.years != [] or breakdown_data.series != []
   end
 end

@@ -48,4 +48,18 @@ defmodule Mce.Reference.IpccEmissionFactor do
     |> validate_number(:value, greater_than_or_equal_to: 0)
     |> validate_length(:country, is: 2)
   end
+
+  @doc """
+  A changeset for creating IPCC emission factors from admin panel.
+  """
+  def create_changeset(ipcc_emission_factor, attrs, _metadata \\ %{}) do
+    changeset(ipcc_emission_factor, attrs)
+  end
+
+  @doc """
+  A changeset for updating IPCC emission factors from admin panel.
+  """
+  def update_changeset(ipcc_emission_factor, attrs, _metadata \\ %{}) do
+    changeset(ipcc_emission_factor, attrs)
+  end
 end

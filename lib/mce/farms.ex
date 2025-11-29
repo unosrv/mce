@@ -159,4 +159,92 @@ defmodule Mce.Farms do
     |> preload(:emission_reports)
     |> Repo.all()
   end
+
+  @doc """
+  Returns emissions trend data grouped by year for charting.
+
+  Returns a map with:
+  - `years` - list of years with data
+  - `series` - list of series for the chart, each with name and data
+  """
+  def get_emissions_trend_data(user_id) do
+    alias Mce.Emissions.EmissionReport
+
+    reports =
+      EmissionReport
+      |> join(:inner, [er], f in Farm, on: er.farm_id == f.id)
+      |> where([er, f], f.user_id == ^user_id)
+      |> group_by([er], er.report_year)
+      |> select([er], %{
+        year: er.report_year,
+        total: sum(er.total_emissions),
+        enteric: sum(er.enteric_emissions),
+        manure_ch4: sum(er.manure_ch4_emissions),
+        manure_n2o: sum(er.manure_n2o_emissions)
+      })
+      |> order_by([er], er.report_year)
+      |> Repo.all()
+
+    years = Enum.map(reports, & &1.year)
+
+    series = [
+      %{
+        name: "Total",
+        data: Enum.map(reports, &decimal_to_float(&1.total))
+      },
+      %{
+        name: "Enteric",
+        data: Enum.map(reports, &decimal_to_float(&1.enteric))
+      },
+      %{
+        name: "Manure CH₄",
+        data: Enum.map(reports, &decimal_to_float(&1.manure_ch4))
+      },
+      %{
+        name: "Manure N₂O",
+        data: Enum.map(reports, &decimal_to_float(&1.manure_n2o))
+      }
+    ]
+
+    %{years: years, series: series}
+  end
+
+  @doc """
+  Returns emissions breakdown by type for donut chart.
+
+  Returns a map with:
+  - `series` - list of numeric values (percentages or absolute)
+  - `labels` - list of emission type labels
+  """
+  def get_emissions_breakdown(user_id) do
+    alias Mce.Emissions.EmissionReport
+
+    totals =
+      EmissionReport
+      |> join(:inner, [er], f in Farm, on: er.farm_id == f.id)
+      |> where([er, f], f.user_id == ^user_id)
+      |> select([er], %{
+        enteric: sum(er.enteric_emissions),
+        manure_ch4: sum(er.manure_ch4_emissions),
+        manure_n2o: sum(er.manure_n2o_emissions)
+      })
+      |> Repo.one()
+
+    if totals do
+      %{
+        series: [
+          decimal_to_float(totals.enteric),
+          decimal_to_float(totals.manure_ch4),
+          decimal_to_float(totals.manure_n2o)
+        ],
+        labels: ["Enteric Fermentation", "Manure CH₄", "Manure N₂O"]
+      }
+    else
+      %{series: [], labels: []}
+    end
+  end
+
+  defp decimal_to_float(nil), do: 0.0
+  defp decimal_to_float(%Decimal{} = d), do: Decimal.to_float(d)
+  defp decimal_to_float(n) when is_number(n), do: n / 1
 end

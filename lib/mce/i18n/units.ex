@@ -26,6 +26,10 @@ defmodule Mce.I18n.Units do
     end
   end
 
+  def format_weight(%Decimal{} = kg, locale) do
+    format_weight(Decimal.to_float(kg), locale)
+  end
+
   def format_weight(nil, _locale), do: "-"
 
   @doc """
