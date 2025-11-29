@@ -6,10 +6,12 @@
 
 import { ApexChart } from "./apex_chart"
 import { AutoDismiss } from "./auto_dismiss"
+import { DaumPostcode } from "./daum_postcode"
 
 const Hooks = {
   ApexChart,
-  AutoDismiss
+  AutoDismiss,
+  DaumPostcode
 }
 
 export default Hooks
