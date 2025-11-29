@@ -7,7 +7,8 @@ defmodule Mce.Emissions do
   import Ecto.Query, warn: false
   alias Mce.Repo
 
-  alias Mce.Emissions.EmissionReport
+  alias Mce.Emissions.{EmissionReport, Calculator}
+  alias Mce.Farms
 
   @doc """
   Returns all emission reports for a farm.
@@ -78,5 +79,32 @@ defmodule Mce.Emissions do
       nil -> create_emission_report(attrs)
       existing -> update_emission_report(existing, attrs)
     end
+  end
+
+  @calculation_version "1.0.0"
+
+  @doc """
+  Calculate emissions for a farm and save the report.
+
+  Loads all livestock data, runs the IPCC Tier 2 calculations,
+  and upserts the emission report for the given year.
+
+  Returns {:ok, emission_report} or {:error, changeset}.
+  """
+  def calculate_and_save_report(farm_id, year) do
+    farm = Farms.get_farm_with_livestock!(farm_id)
+
+    results = Calculator.calculate_farm_emissions(farm)
+
+    upsert_emission_report(farm_id, year, %{
+      calculated_at: DateTime.utc_now(),
+      calculation_version: @calculation_version,
+      total_emissions: Decimal.from_float(results.total),
+      enteric_emissions: Decimal.from_float(results.enteric),
+      manure_ch4_emissions: Decimal.from_float(results.manure_ch4),
+      manure_n2o_emissions: Decimal.from_float(results.manure_n2o),
+      breakdown_by_group: results.by_group,
+      breakdown_by_source: results.by_source
+    })
   end
 end

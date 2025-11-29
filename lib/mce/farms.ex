@@ -26,6 +26,22 @@ defmodule Mce.Farms do
   def get_farm!(id), do: Repo.get!(Farm, id)
 
   @doc """
+  Gets a farm with all livestock data preloaded for emission calculations.
+
+  Preloads:
+  - livestock_groups
+    - feed_items
+    - manure_systems
+
+  Raises `Ecto.NoResultsError` if the Farm does not exist.
+  """
+  def get_farm_with_livestock!(id) do
+    Farm
+    |> Repo.get!(id)
+    |> Repo.preload(livestock_groups: [:feed_items, :manure_systems])
+  end
+
+  @doc """
   Gets a single farm for a specific user.
 
   Returns nil if the farm doesn't exist or doesn't belong to the user.
