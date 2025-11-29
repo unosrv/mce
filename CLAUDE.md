@@ -122,7 +122,7 @@ mix precommit                # Compile with warnings-as-errors, unlock unused de
 
 ## Uncertainty Map
 
-- Add a section at the end of your reponsed labeled “Uncertainty Map,” where you describe what you’re least confident about, what you may be oversimplifying, and what question or followups would change your opinion.
+- Add this section at the end of your response: label it "Uncertainty Map" and use it to describe what you are least confident about, what you may be oversimplifying, and what questions or follow-ups would change your opinion.
 
 @AGENTS.md
 
