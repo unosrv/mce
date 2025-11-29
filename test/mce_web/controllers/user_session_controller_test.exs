@@ -5,7 +5,11 @@ defmodule MceWeb.UserSessionControllerTest do
   alias Mce.Accounts
 
   setup do
-    %{unconfirmed_user: unconfirmed_user_fixture(), user: user_fixture()}
+    # Use passwordless fixture for magic link tests, regular fixture for password tests
+    %{
+      unconfirmed_user: unconfirmed_passwordless_user_fixture(),
+      user: user_fixture()
+    }
   end
 
   describe "GET /users/log-in" do

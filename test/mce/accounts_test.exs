@@ -69,21 +69,55 @@ defmodule Mce.AccountsTest do
 
     test "validates email uniqueness" do
       %{email: email} = user_fixture()
-      {:error, changeset} = Accounts.register_user(%{email: email})
+
+      {:error, changeset} =
+        Accounts.register_user(%{
+          email: email,
+          password: valid_user_password(),
+          nickname: unique_user_nickname()
+        })
+
       assert "has already been taken" in errors_on(changeset).email
 
       # Now try with the uppercased email too, to check that email case is ignored.
-      {:error, changeset} = Accounts.register_user(%{email: String.upcase(email)})
+      {:error, changeset} =
+        Accounts.register_user(%{
+          email: String.upcase(email),
+          password: valid_user_password(),
+          nickname: unique_user_nickname()
+        })
+
       assert "has already been taken" in errors_on(changeset).email
     end
 
-    test "registers users without password" do
+    test "registers users with password and nickname" do
       email = unique_user_email()
       {:ok, user} = Accounts.register_user(valid_user_attributes(email: email))
       assert user.email == email
-      assert is_nil(user.hashed_password)
+      assert user.hashed_password != nil
+      assert user.nickname != nil
       assert is_nil(user.confirmed_at)
       assert is_nil(user.password)
+    end
+
+    test "requires password for registration" do
+      {:error, changeset} =
+        Accounts.register_user(%{
+          email: unique_user_email(),
+          nickname: unique_user_nickname()
+        })
+
+      assert %{password: ["can't be blank"]} = errors_on(changeset)
+    end
+
+    test "requires nickname for registration" do
+      {:error, changeset} =
+        Accounts.register_user(%{
+          email: unique_user_email(),
+          password: valid_user_password()
+        })
+
+      assert %{nickname: ["can't be blank"]} = errors_on(changeset)
     end
   end
 
@@ -331,7 +365,8 @@ defmodule Mce.AccountsTest do
 
   describe "login_user_by_magic_link/1" do
     test "confirms user and expires tokens" do
-      user = unconfirmed_user_fixture()
+      # Use passwordless user fixture for magic link flow
+      user = unconfirmed_passwordless_user_fixture()
       refute user.confirmed_at
       {encoded_token, hashed_token} = generate_user_magic_link_token(user)
 
@@ -351,7 +386,8 @@ defmodule Mce.AccountsTest do
     end
 
     test "raises when unconfirmed user has password set" do
-      user = unconfirmed_user_fixture()
+      # Use passwordless fixture, then set password
+      user = unconfirmed_passwordless_user_fixture()
       {1, nil} = Repo.update_all(User, set: [hashed_password: "hashed"])
       {encoded_token, _hashed_token} = generate_user_magic_link_token(user)
 

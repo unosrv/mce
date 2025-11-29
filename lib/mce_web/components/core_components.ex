@@ -168,7 +168,14 @@ defmodule MceWeb.CoreComponents do
                 multiple pattern placeholder readonly required rows size step)
 
   def input(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
-    errors = if Phoenix.Component.used_input?(field), do: field.errors, else: []
+    # Show errors if:
+    # 1. Input was used (LiveView progressive validation), OR
+    # 2. Form has an action set (controller form with validation errors)
+    show_errors? =
+      Phoenix.Component.used_input?(field) or
+        has_form_action?(field.form)
+
+    errors = if show_errors?, do: field.errors, else: []
 
     assigns
     |> assign(field: nil, id: assigns.id || field.id)
@@ -584,6 +591,15 @@ defmodule MceWeb.CoreComponents do
     js
     |> JS.exec("close()", to: "##{id}")
   end
+
+  # Checks if a form has an action set on its changeset source.
+  # Returns true if the form's source is a changeset with an action set,
+  # indicating validation has been performed (e.g., after form submission).
+  defp has_form_action?(%Phoenix.HTML.Form{source: %Ecto.Changeset{action: action}})
+       when action != nil,
+       do: true
+
+  defp has_form_action?(_form), do: false
 
   @doc """
   Translates an error message using gettext.

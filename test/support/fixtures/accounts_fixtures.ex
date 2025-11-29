@@ -21,11 +21,37 @@ defmodule Mce.AccountsFixtures do
     })
   end
 
+  @doc """
+  Attributes for creating a user without a password (for magic link tests).
+  """
+  def valid_passwordless_user_attributes(attrs \\ %{}) do
+    Enum.into(attrs, %{
+      email: unique_user_email(),
+      nickname: unique_user_nickname()
+    })
+  end
+
   def unconfirmed_user_fixture(attrs \\ %{}) do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
       |> Accounts.register_user()
+
+    user
+  end
+
+  @doc """
+  Creates an unconfirmed user without password (for magic link flow tests).
+  Uses direct Repo.insert to bypass password requirement.
+  """
+  def unconfirmed_passwordless_user_fixture(attrs \\ %{}) do
+    attrs = valid_passwordless_user_attributes(attrs)
+
+    {:ok, user} =
+      %Mce.Accounts.User{}
+      |> Ecto.Changeset.change(attrs)
+      |> Ecto.Changeset.validate_required([:email, :nickname])
+      |> Mce.Repo.insert()
 
     user
   end

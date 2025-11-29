@@ -62,7 +62,8 @@ defmodule MceWeb.UserSettingsControllerTest do
 
       response = html_response(old_password_conn, 200)
       assert response =~ "Settings"
-      assert response =~ "should be at least 12 character(s)"
+      # Default locale is Korean, so check for translated message
+      assert response =~ "최소 12자 이상이어야 합니다"
       assert response =~ "does not match password"
 
       assert get_session(old_password_conn, :user_token) == get_session(conn, :user_token)

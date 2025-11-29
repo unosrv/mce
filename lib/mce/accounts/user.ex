@@ -116,7 +116,7 @@ defmodule Mce.Accounts.User do
   """
   def registration_changeset(user, attrs) do
     user
-    |> email_changeset(attrs, validate_unique: false)
+    |> email_changeset(attrs, validate_unique: true)
     |> password_changeset(attrs, hash_password: true)
     |> cast(attrs, [:nickname])
     |> validate_nickname()
