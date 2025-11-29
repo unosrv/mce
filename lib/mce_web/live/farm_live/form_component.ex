@@ -489,19 +489,24 @@ defmodule MceWeb.FarmLive.FormComponent do
   end
 
   defp handle_logo_upload(socket, farm_params) do
-    case consume_uploaded_entries(socket, :logo, fn %{path: path}, entry ->
-           dest_filename = generate_filename(entry.client_name)
-           dest_path = Path.join(uploads_dir(), dest_filename)
-           File.cp!(path, dest_path)
-           {:ok, "/uploads/logos/#{dest_filename}"}
-         end) do
-      [logo_path] ->
-        # Delete old logo if exists
-        delete_old_logo(socket.assigns.farm.logo_path)
-        Map.put(farm_params, "logo_path", logo_path)
+    # Check if uploads are configured before trying to consume
+    if Map.has_key?(socket.assigns, :uploads) and Map.has_key?(socket.assigns.uploads, :logo) do
+      case consume_uploaded_entries(socket, :logo, fn %{path: path}, entry ->
+             dest_filename = generate_filename(entry.client_name)
+             dest_path = Path.join(uploads_dir(), dest_filename)
+             File.cp!(path, dest_path)
+             {:ok, "/uploads/logos/#{dest_filename}"}
+           end) do
+        [logo_path] ->
+          # Delete old logo if exists
+          delete_old_logo(socket.assigns.farm.logo_path)
+          Map.put(farm_params, "logo_path", logo_path)
 
-      [] ->
-        farm_params
+        [] ->
+          farm_params
+      end
+    else
+      farm_params
     end
   end
 
