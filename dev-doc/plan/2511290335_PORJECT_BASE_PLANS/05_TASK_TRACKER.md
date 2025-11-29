@@ -2,7 +2,7 @@
 
 **Document ID**: 2511290341_TASK_TRACKER
 **Created**: 29 November 2025, 03:41
-**Last Updated**: 29 November 2025, 20:56
+**Last Updated**: 29 November 2025, 23:30
 **Status**: Active
 
 ---
@@ -14,8 +14,8 @@
 | Phase 1: Foundation | 38 | 34 | 0 | 0 | 89% |
 | Phase 2: Core Features | 45 | 45 | 0 | 0 | 100% |
 | Phase 3: Dashboard & Polish | 34 | 29 | 0 | 0 | 85% |
-| Phase 4: Testing & Delivery | 20 | 5 | 0 | 0 | 25% |
-| **Total** | **137** | **113** | **0** | **0** | 82% |
+| Phase 4: Testing & Delivery | 20 | 13 | 0 | 0 | 65% |
+| **Total** | **137** | **121** | **0** | **0** | 88% |
 
 ---
 
@@ -245,16 +245,16 @@
 | 4.1.2 | Write calculation tests | ✅ DONE | 114 calculator tests |
 | 4.1.3 | Write LiveView integration tests | ✅ DONE | 20 tests pass |
 | 4.1.4 | Write form submission tests | ✅ DONE | 21 form tests pass |
-| 4.1.5 | Test i18n across locales | ☐ TODO | |
-| 4.1.6 | Test external APIs | ☐ TODO | |
+| 4.1.5 | Test i18n across locales | ✅ DONE | 22 tests: translations, plug, LiveLocale |
+| 4.1.6 | Test external APIs | ✅ DONE | 30 tests: Google Maps API + Korean Address |
 | 4.1.7 | Manual UI testing | ☐ TODO | |
 
 ### 4.2 Performance
 
 | ID | Task | Status | Notes |
 |----|------|--------|-------|
-| 4.2.1 | Profile database queries | ☐ TODO | |
-| 4.2.2 | Add missing indexes | ☐ TODO | |
+| 4.2.1 | Profile database queries | ✅ DONE | Analysed query patterns in contexts |
+| 4.2.2 | Add missing indexes | ✅ DONE | 5 indexes: farms, feed_presets, ipcc_factors |
 | 4.2.3 | Optimise LiveView streams | ☐ TODO | Streams in use |
 | 4.2.4 | Optimise asset loading | ☐ TODO | |
 | 4.2.5 | Test with realistic data | ☐ TODO | |
@@ -263,9 +263,9 @@
 
 | ID | Task | Status | Notes |
 |----|------|--------|-------|
-| 4.3.1 | Update README | ☐ TODO | |
-| 4.3.2 | Document environment variables | ☐ TODO | |
-| 4.3.3 | Document IPCC methodology | ☐ TODO | |
+| 4.3.1 | Update README | ✅ DONE | Project overview, features, env vars |
+| 4.3.2 | Document environment variables | ✅ DONE | In README + API config guide |
+| 4.3.3 | Document IPCC methodology | ✅ DONE | Existing IPCC Tier 2 doc |
 
 ### 4.4 Deployment
 
@@ -280,6 +280,30 @@
 ---
 
 ## Daily Log
+
+### 2025-11-29 (Evening Update - 23:30)
+
+**Completed**:
+- [4.1.5] i18n tests (22 tests): Gettext translations, SetLocale plug, LiveLocale hook
+- [4.1.6] External API tests (30 tests): Google Maps mock API + Korean address input component
+- [4.2.1] Profiled database queries, analysed context modules for query patterns
+- [4.2.2] Added performance indexes: farms.name, farms.updated_at, feed_presets composite, ipcc_factors composite
+- [4.3.1] Updated README with project overview, features, env vars, structure
+- [4.3.2] Environment variables documented in README + API configuration guide
+- [4.3.3] IPCC methodology already documented in research files
+- Enhanced Daum Postcode integration with additional fields (buildingCode, bcode, etc.)
+- All 214 tests passing
+
+**In Progress**:
+- None
+
+**Blocked**:
+- None
+
+**Notes**:
+- Phase 4 progress: 65% (13 of 20 tasks complete)
+- Overall project: 88% (121 of 137 tasks complete)
+- Remaining: Manual UI testing (4.1.7), LiveView stream optimisation (4.2.3-4.2.5), Deployment (4.4.x)
 
 ### 2025-11-29 (Evening Update - 20:56)
 
