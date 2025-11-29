@@ -5,9 +5,11 @@
  */
 
 import { ApexChart } from "./apex_chart"
+import { AutoDismiss } from "./auto_dismiss"
 
 const Hooks = {
-  ApexChart
+  ApexChart,
+  AutoDismiss
 }
 
 export default Hooks

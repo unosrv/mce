@@ -32,7 +32,7 @@ defmodule MceWeb.CoreComponents do
   alias Phoenix.LiveView.JS
 
   @doc """
-  Renders flash notices.
+  Renders flash notices with auto-dismiss.
 
   ## Examples
 
@@ -43,6 +43,7 @@ defmodule MceWeb.CoreComponents do
   attr :flash, :map, default: %{}, doc: "the map of flash messages to display"
   attr :title, :string, default: nil
   attr :kind, :atom, values: [:info, :error], doc: "used for styling and flash lookup"
+  attr :auto_dismiss, :integer, default: nil, doc: "auto-dismiss after milliseconds (nil to disable)"
   attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
 
   slot :inner_block, doc: "the optional inner block that renders the flash message"
@@ -50,17 +51,25 @@ defmodule MceWeb.CoreComponents do
   def flash(assigns) do
     assigns = assign_new(assigns, :id, fn -> "flash-#{assigns.kind}" end)
 
+    # Default auto-dismiss: 5s for info, nil (no auto-dismiss) for errors
+    assigns =
+      assign_new(assigns, :auto_dismiss, fn ->
+        if assigns.kind == :info, do: 5000, else: nil
+      end)
+
     ~H"""
     <div
       :if={msg = render_slot(@inner_block) || Phoenix.Flash.get(@flash, @kind)}
       id={@id}
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
+      phx-hook={@auto_dismiss && "AutoDismiss"}
+      data-auto-dismiss={@auto_dismiss}
       role="alert"
       class="toast toast-top toast-end z-50"
       {@rest}
     >
       <div class={[
-        "alert w-80 sm:w-96 max-w-80 sm:max-w-96 text-wrap",
+        "alert w-80 sm:w-96 max-w-80 sm:max-w-96 text-wrap shadow-lg",
         @kind == :info && "alert-info",
         @kind == :error && "alert-error"
       ]}>
@@ -80,26 +89,35 @@ defmodule MceWeb.CoreComponents do
   end
 
   @doc """
-  Renders a button with navigation support.
+  Renders a button with navigation support and loading states.
 
   ## Examples
 
       <.button>Send!</.button>
       <.button phx-click="go" variant="primary">Send!</.button>
       <.button navigate={~p"/"}>Home</.button>
+      <.button loading={@saving}>Save</.button>
   """
-  attr :rest, :global, include: ~w(href navigate patch method download name value disabled)
+  attr :rest, :global, include: ~w(href navigate patch method download name value disabled form)
   attr :class, :string
-  attr :variant, :string, values: ~w(primary)
+  attr :variant, :string, values: ~w(primary outline ghost)
+  attr :loading, :boolean, default: false, doc: "show loading spinner"
   slot :inner_block, required: true
 
   def button(%{rest: rest} = assigns) do
-    variants = %{"primary" => "btn-primary", nil => "btn-primary btn-soft"}
+    variants = %{
+      "primary" => "btn-primary",
+      "outline" => "btn-outline",
+      "ghost" => "btn-ghost",
+      nil => "btn-primary btn-soft"
+    }
 
     assigns =
-      assign_new(assigns, :class, fn ->
+      assigns
+      |> assign_new(:class, fn ->
         ["btn", Map.fetch!(variants, assigns[:variant])]
       end)
+      |> assign(:variant_class, Map.fetch!(variants, assigns[:variant]))
 
     if rest[:href] || rest[:navigate] || rest[:patch] do
       ~H"""
@@ -109,8 +127,22 @@ defmodule MceWeb.CoreComponents do
       """
     else
       ~H"""
-      <button class={@class} {@rest}>
-        {render_slot(@inner_block)}
+      <button
+        class={[
+          @class,
+          @loading && "opacity-70 pointer-events-none"
+        ]}
+        disabled={@loading || @rest[:disabled]}
+        {@rest}
+      >
+        <span
+          :if={@loading}
+          class="loading loading-spinner loading-sm"
+          aria-label={gettext("Loading")}
+        />
+        <span class={[@loading && "ml-2"]}>
+          {render_slot(@inner_block)}
+        </span>
       </button>
       """
     end

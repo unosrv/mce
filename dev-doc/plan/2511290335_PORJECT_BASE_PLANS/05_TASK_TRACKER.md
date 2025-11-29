@@ -225,12 +225,12 @@
 
 | ID | Task | Status | Notes |
 |----|------|--------|-------|
-| 3.5.1 | Review design consistency | ☐ TODO | |
-| 3.5.2 | Add loading states | ☐ TODO | |
-| 3.5.3 | Add toast notifications | ☐ TODO | Flash messages exist |
-| 3.5.4 | Improve error messages | ☐ TODO | |
+| 3.5.1 | Review design consistency | ✅ DONE | Patterns verified consistent |
+| 3.5.2 | Add loading states | ✅ DONE | Button loading prop, phx-disable-with |
+| 3.5.3 | Add toast notifications | ✅ DONE | AutoDismiss hook (5s info, manual error) |
+| 3.5.4 | Improve error messages | ✅ DONE | Error styling with icons |
 | 3.5.5 | Add empty states | ✅ DONE | Livestock empty state |
-| 3.5.6 | Test responsive layouts | ☐ TODO | |
+| 3.5.6 | Test responsive layouts | ✅ DONE | Playwright tests pass |
 | 3.5.7 | Add confirmation dialogs | ✅ DONE | data-confirm on delete |
 
 ---
