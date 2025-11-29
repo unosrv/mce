@@ -11,6 +11,7 @@
       </a>
     </div>
     <div class="navbar-end flex items-center gap-3">
+      <.language_switcher locale={@locale} />
       <Layouts.theme_toggle />
       <%= if @current_scope do %>
         <span class="text-sm text-base-content/70 hidden sm:inline">{@current_scope.user.email}</span>
