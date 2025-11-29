@@ -2,6 +2,7 @@ defmodule MceWeb.FarmLive.FormComponent do
   use MceWeb, :live_component
 
   alias Mce.Farms
+  alias Mce.Address
 
   @countries [
     {"KR", "🇰🇷", "Korea"},
@@ -63,57 +64,131 @@ defmodule MceWeb.FarmLive.FormComponent do
             </.error>
           </div>
 
-          <div :if={@selected_country == "KR"} class="space-y-4">
-            <.input
-              field={@form[:road_address]}
-              type="text"
-              label={gettext("Road Address")}
-              placeholder={gettext("Enter road-based address")}
-            />
-            <.input
-              field={@form[:jibun_address]}
-              type="text"
-              label={gettext("Jibun Address")}
-              placeholder={gettext("Enter parcel number address")}
-            />
-            <.input
-              field={@form[:building_name]}
-              type="text"
-              label={gettext("Building Name")}
-              placeholder={gettext("Building or complex name (optional)")}
-            />
-          </div>
+          <%!-- Address Search Section --%>
+          <div class="space-y-4">
+            <div class="form-control w-full">
+              <label class="label">
+                <span class="label-text">{gettext("Address Search")}</span>
+              </label>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="address-search"
+                  value={@address_query}
+                  placeholder={address_placeholder(@selected_country)}
+                  autocomplete="off"
+                  phx-debounce="300"
+                  phx-target={@myself}
+                  phx-keyup="address_search"
+                  phx-focus="show_suggestions"
+                  class={[
+                    "input input-bordered w-full pr-10",
+                    @address_loading && "animate-pulse"
+                  ]}
+                />
+                <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                  <.icon
+                    :if={@address_loading}
+                    name="hero-arrow-path"
+                    class="size-5 animate-spin text-base-content/50"
+                  />
+                  <.icon
+                    :if={!@address_loading}
+                    name="hero-magnifying-glass"
+                    class="size-5 text-base-content/50"
+                  />
+                </div>
+              </div>
 
-          <div :if={@selected_country != "KR"} class="space-y-4">
-            <.input
-              field={@form[:address_line1]}
-              type="text"
-              label={gettext("Address Line 1")}
-              placeholder={gettext("Street address")}
-            />
-            <.input
-              field={@form[:address_line2]}
-              type="text"
-              label={gettext("Address Line 2")}
-              placeholder={gettext("Apartment, suite, unit, etc. (optional)")}
-            />
-            <div class="grid grid-cols-2 gap-4">
+              <%!-- Suggestions Dropdown --%>
+              <div
+                :if={@show_suggestions && length(@address_results) > 0}
+                class="relative z-50"
+              >
+                <div class="absolute mt-1 w-full rounded-lg border border-base-300 bg-base-100 shadow-lg">
+                  <ul class="menu menu-compact max-h-60 overflow-y-auto p-2">
+                    <li :for={result <- @address_results}>
+                      <button
+                        type="button"
+                        phx-click="select_address"
+                        phx-value-id={result.id}
+                        phx-target={@myself}
+                        class="flex flex-col items-start gap-0.5 text-left"
+                      >
+                        <span class="font-medium">{result.display}</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                :if={
+                  @show_suggestions && length(@address_results) == 0 && @address_query != "" &&
+                    !@address_loading
+                }
+                class="relative z-50"
+              >
+                <div class="absolute mt-1 w-full rounded-lg border border-base-300 bg-base-100 p-4 text-center shadow-lg">
+                  <p class="text-base-content/60">{gettext("No addresses found")}</p>
+                </div>
+              </div>
+            </div>
+
+            <%!-- Korean Address Fields --%>
+            <div :if={@selected_country == "KR"} class="space-y-4">
               <.input
-                field={@form[:city]}
+                field={@form[:road_address]}
                 type="text"
-                label={gettext("City")}
+                label={gettext("Road Address")}
+                placeholder={gettext("Selected from search above")}
               />
               <.input
-                field={@form[:state_province]}
+                field={@form[:jibun_address]}
                 type="text"
-                label={gettext("State / Province")}
+                label={gettext("Jibun Address")}
+                placeholder={gettext("Auto-filled from search")}
+              />
+              <.input
+                field={@form[:building_name]}
+                type="text"
+                label={gettext("Building Name")}
+                placeholder={gettext("Building or complex name (optional)")}
               />
             </div>
-            <.input
-              field={@form[:postal_code]}
-              type="text"
-              label={gettext("Postal Code")}
-            />
+
+            <%!-- International Address Fields --%>
+            <div :if={@selected_country != "KR"} class="space-y-4">
+              <.input
+                field={@form[:address_line1]}
+                type="text"
+                label={gettext("Address Line 1")}
+                placeholder={gettext("Street address")}
+              />
+              <.input
+                field={@form[:address_line2]}
+                type="text"
+                label={gettext("Address Line 2")}
+                placeholder={gettext("Apartment, suite, unit, etc. (optional)")}
+              />
+              <div class="grid grid-cols-2 gap-4">
+                <.input
+                  field={@form[:city]}
+                  type="text"
+                  label={gettext("City")}
+                />
+                <.input
+                  field={@form[:state_province]}
+                  type="text"
+                  label={gettext("State / Province")}
+                />
+              </div>
+              <.input
+                field={@form[:postal_code]}
+                type="text"
+                label={gettext("Postal Code")}
+              />
+            </div>
           </div>
 
           <div class="divider">{gettext("Fiscal Year Settings")}</div>
@@ -153,6 +228,10 @@ defmodule MceWeb.FarmLive.FormComponent do
      |> assign(assigns)
      |> assign(:countries, @countries)
      |> assign(:selected_country, selected_country)
+     |> assign_new(:address_query, fn -> "" end)
+     |> assign_new(:address_results, fn -> [] end)
+     |> assign_new(:address_loading, fn -> false end)
+     |> assign_new(:show_suggestions, fn -> false end)
      |> assign_new(:form, fn ->
        to_form(Farms.change_farm(farm, %{country: selected_country}))
      end)}
@@ -168,7 +247,76 @@ defmodule MceWeb.FarmLive.FormComponent do
     {:noreply,
      socket
      |> assign(:selected_country, country)
-     |> assign(:form, form)}
+     |> assign(:form, form)
+     |> assign(:address_query, "")
+     |> assign(:address_results, [])
+     |> assign(:show_suggestions, false)}
+  end
+
+  @impl true
+  def handle_event("address_search", %{"value" => query}, socket) do
+    country = socket.assigns.selected_country
+
+    if String.length(query) >= 2 do
+      case Address.search(query, country) do
+        {:ok, results} ->
+          {:noreply,
+           socket
+           |> assign(:address_query, query)
+           |> assign(:address_results, results)
+           |> assign(:address_loading, false)
+           |> assign(:show_suggestions, true)}
+
+        {:error, _reason} ->
+          {:noreply,
+           socket
+           |> assign(:address_query, query)
+           |> assign(:address_results, [])
+           |> assign(:address_loading, false)
+           |> assign(:show_suggestions, true)}
+      end
+    else
+      {:noreply,
+       socket
+       |> assign(:address_query, query)
+       |> assign(:address_results, [])
+       |> assign(:show_suggestions, false)}
+    end
+  end
+
+  @impl true
+  def handle_event("show_suggestions", _params, socket) do
+    show = socket.assigns.address_query != "" && length(socket.assigns.address_results) > 0
+    {:noreply, assign(socket, :show_suggestions, show)}
+  end
+
+  @impl true
+  def handle_event("select_address", %{"id" => id}, socket) do
+    result = Enum.find(socket.assigns.address_results, &(&1.id == id))
+    country = socket.assigns.selected_country
+
+    if result do
+      case Address.get_details(result, country) do
+        {:ok, data} ->
+          form_params = build_address_params(data, country)
+
+          form =
+            socket.assigns.farm
+            |> Farms.change_farm(form_params)
+            |> to_form()
+
+          {:noreply,
+           socket
+           |> assign(:form, form)
+           |> assign(:address_query, result.display)
+           |> assign(:show_suggestions, false)}
+
+        {:error, _reason} ->
+          {:noreply, assign(socket, :show_suggestions, false)}
+      end
+    else
+      {:noreply, assign(socket, :show_suggestions, false)}
+    end
   end
 
   @impl true
@@ -235,5 +383,40 @@ defmodule MceWeb.FarmLive.FormComponent do
       {gettext("November"), 11},
       {gettext("December"), 12}
     ]
+  end
+
+  defp address_placeholder("KR"), do: gettext("Search by road name, building, or address")
+  defp address_placeholder("US"), do: gettext("Enter street address")
+  defp address_placeholder("BR"), do: gettext("Digite o endereco")
+  defp address_placeholder(_), do: gettext("Enter address")
+
+  defp build_address_params(data, "KR") do
+    %{
+      "country" => "KR",
+      "road_address" => data[:road_address] || "",
+      "jibun_address" => data[:jibun_address] || "",
+      "building_name" => data[:building_name] || "",
+      "postal_code" => data[:postal_code] || "",
+      "city" => data[:city] || "",
+      "state_province" => data[:state_province] || ""
+    }
+  end
+
+  defp build_address_params(data, country) when country in ["US", "BR"] do
+    %{
+      "country" => country,
+      "address_line1" => data[:address_line1] || "",
+      "address_line2" => data[:address_line2] || "",
+      "city" => data[:city] || "",
+      "state_province" => data[:state_province] || "",
+      "postal_code" => data[:postal_code] || "",
+      "latitude" => data[:latitude],
+      "longitude" => data[:longitude]
+    }
+  end
+
+  defp build_address_params(data, country) do
+    %{"country" => country}
+    |> Map.merge(Map.new(data, fn {k, v} -> {to_string(k), v} end))
   end
 end
