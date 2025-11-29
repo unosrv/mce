@@ -6,6 +6,8 @@ defmodule MceWeb.Live.Components.KoreanAddressInput do
   address search which provides a better UX for Korean addresses and requires
   no API key.
 
+  Service documentation: https://postcode.map.daum.net/guide
+
   ## Usage
 
       <.live_component
@@ -17,13 +19,31 @@ defmodule MceWeb.Live.Components.KoreanAddressInput do
   ## Address Data Structure
 
   The `on_select` callback receives a map with:
+
+  ### Core Address Fields
   - `road_address` - Road name address (도로명주소)
-  - `jibun_address` - Jibun address (지번주소)
-  - `postal_code` - Postal code (우편번호)
-  - `building_name` - Building name (건물명)
+  - `jibun_address` - Jibun/lot number address (지번주소)
+  - `postal_code` - 5-digit postal code (우편번호)
+
+  ### Location Hierarchy
   - `sido` - Province/City (시/도)
   - `sigungu` - District (시/군/구)
   - `bname` - Legal district name (법정동/리)
+  - `bcode` - Legal district code (법정동코드)
+
+  ### Building Information
+  - `building_name` - Building name (건물명)
+  - `building_code` - Building management code (건물관리번호)
+  - `apartment` - Boolean indicating apartment building
+
+  ### English Addresses
+  - `road_address_english` - Road address in English
+  - `jibun_address_english` - Jibun address in English
+
+  ### Metadata
+  - `address_type` - "R" (road) or "J" (jibun) - first result type
+  - `user_selected_type` - "R" or "J" - what the user actually selected
+  - `query` - Search query used
   """
 
   use MceWeb, :live_component
@@ -123,17 +143,23 @@ defmodule MceWeb.Live.Components.KoreanAddressInput do
   @impl true
   def handle_event("address-selected", params, socket) do
     # Transform JS camelCase to Elixir snake_case
+    # Includes all fields from Daum Postcode API
     address_data = %{
       road_address: params["roadAddress"] || "",
       jibun_address: params["jibunAddress"] || "",
       postal_code: params["postalCode"] || "",
       building_name: params["buildingName"] || "",
+      building_code: params["buildingCode"] || "",
       sido: params["sido"] || "",
       sigungu: params["sigungu"] || "",
       bname: params["bname"] || "",
+      bcode: params["bcode"] || "",
       road_address_english: params["roadAddressEnglish"] || "",
       jibun_address_english: params["jibunAddressEnglish"] || "",
-      apartment: params["apartment"] || false
+      address_type: params["addressType"] || "",
+      user_selected_type: params["userSelectedType"] || "",
+      apartment: params["apartment"] || false,
+      query: params["query"] || ""
     }
 
     # Format display value

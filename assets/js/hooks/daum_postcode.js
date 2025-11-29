@@ -79,26 +79,37 @@ export const DaumPostcode = {
       new window.daum.Postcode({
         oncomplete: (data) => {
           // Parse the response data
+          // Use autoRoadAddress/autoJibunAddress as fallback when user selects "Choose None"
           const addressData = {
             // Road address (도로명주소)
             roadAddress: data.roadAddress || data.autoRoadAddress || '',
             // Jibun address (지번주소)
             jibunAddress: data.jibunAddress || data.autoJibunAddress || '',
-            // Postal code (우편번호)
+            // Postal code (우편번호) - 5-digit format since August 2015
             postalCode: data.zonecode || '',
             // Building name (건물명)
             buildingName: data.buildingName || '',
+            // Building code (건물관리번호)
+            buildingCode: data.buildingCode || '',
             // Sido (시/도)
             sido: data.sido || '',
             // Sigungu (시/군/구)
             sigungu: data.sigungu || '',
             // Bname (법정동/리)
             bname: data.bname || '',
-            // English address
+            // Bcode (법정동코드)
+            bcode: data.bcode || '',
+            // English addresses
             roadAddressEnglish: data.roadAddressEnglish || '',
             jibunAddressEnglish: data.jibunAddressEnglish || '',
+            // Address type: 'R' (road) or 'J' (jibun)
+            addressType: data.addressType || '',
+            // User selected type: 'R' (road) or 'J' (jibun)
+            userSelectedType: data.userSelectedType || '',
             // Apartment flag
-            apartment: data.apartment === 'Y'
+            apartment: data.apartment === 'Y',
+            // Search query used
+            query: data.query || ''
           }
 
           // Format display address
