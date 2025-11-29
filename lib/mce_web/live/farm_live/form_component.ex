@@ -74,12 +74,13 @@ defmodule MceWeb.FarmLive.FormComponent do
                 <input
                   type="text"
                   id="address-search"
+                  name="address_search"
                   value={@address_query}
                   placeholder={address_placeholder(@selected_country)}
                   autocomplete="off"
                   phx-debounce="300"
                   phx-target={@myself}
-                  phx-keyup="address_search"
+                  phx-change="address_search"
                   phx-focus="show_suggestions"
                   class={[
                     "input input-bordered w-full pr-10",
@@ -254,7 +255,7 @@ defmodule MceWeb.FarmLive.FormComponent do
   end
 
   @impl true
-  def handle_event("address_search", %{"value" => query}, socket) do
+  def handle_event("address_search", %{"address_search" => query}, socket) do
     country = socket.assigns.selected_country
 
     if String.length(query) >= 2 do
