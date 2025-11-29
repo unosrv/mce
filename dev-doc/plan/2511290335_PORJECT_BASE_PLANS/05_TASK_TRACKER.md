@@ -2,7 +2,7 @@
 
 **Document ID**: 2511290341_TASK_TRACKER
 **Created**: 29 November 2025, 03:41
-**Last Updated**: 29 November 2025, 17:07
+**Last Updated**: 29 November 2025, 19:01
 **Status**: Active
 
 ---
@@ -13,9 +13,9 @@
 |-------|-------------|-----------|-------------|---------|----------|
 | Phase 1: Foundation | 38 | 34 | 0 | 0 | 89% |
 | Phase 2: Core Features | 45 | 45 | 0 | 0 | 100% |
-| Phase 3: Dashboard & Polish | 34 | 8 | 0 | 0 | 24% |
-| Phase 4: Testing & Delivery | 20 | 2 | 1 | 0 | 15% |
-| **Total** | **137** | **89** | **1** | **0** | **65%** |
+| Phase 3: Dashboard & Polish | 34 | 18 | 0 | 0 | 53% |
+| Phase 4: Testing & Delivery | 20 | 3 | 0 | 0 | 15% |
+| **Total** | **137** | **100** | **0** | **0** | **73%** |
 
 ---
 
@@ -25,7 +25,7 @@
 
 | Task ID | Description | Assignee | Status | Notes |
 |---------|-------------|----------|--------|-------|
-| 4.1.1 | Fix Accounts module test failures | - | 🔄 WIP | 5 test failures |
+| 3.5.1 | Review design consistency | - | ☐ TODO | Next priority |
 
 ### Blocked Tasks
 
@@ -190,11 +190,11 @@
 
 | ID | Task | Status | Notes |
 |----|------|--------|-------|
-| 3.2.1 | Create DashboardLive | ☐ TODO | |
-| 3.2.2 | Implement stats cards | ☐ TODO | stat_card component exists |
-| 3.2.3 | Implement trend chart | ☐ TODO | |
-| 3.2.4 | Implement emissions by type chart | ☐ TODO | |
-| 3.2.5 | Implement recent farms table | ☐ TODO | |
+| 3.2.1 | Create DashboardLive | ✅ DONE | lib/mce_web/live/dashboard_live/index.ex |
+| 3.2.2 | Implement stats cards | ✅ DONE | Total emissions, farms, livestock groups |
+| 3.2.3 | Implement trend chart | ☐ TODO | P2 - Future enhancement |
+| 3.2.4 | Implement emissions by type chart | ☐ TODO | P2 - Future enhancement |
+| 3.2.5 | Implement recent farms table | ✅ DONE | With empty state |
 | 3.2.6 | Add farm comparison view | ☐ TODO | P1 |
 
 ### 3.3 PDF Export
@@ -213,13 +213,13 @@
 
 | ID | Task | Status | Notes |
 |----|------|--------|-------|
-| 3.4.1 | Add Backpex dependency | ☐ TODO | |
-| 3.4.2 | Configure Users resource | ☐ TODO | |
-| 3.4.3 | Configure Farms resource | ☐ TODO | |
-| 3.4.4 | Configure LivestockGroups resource | ☐ TODO | |
-| 3.4.5 | Configure Feed Presets | ☐ TODO | |
-| 3.4.6 | Configure IPCC Factors | ☐ TODO | |
-| 3.4.7 | Add admin auth guard | ☐ TODO | |
+| 3.4.1 | Add Backpex dependency | ✅ DONE | {:backpex, "~> 0.13"} |
+| 3.4.2 | Configure Users resource | ✅ DONE | MceWeb.Admin.UserLive |
+| 3.4.3 | Configure Farms resource | ✅ DONE | MceWeb.Admin.FarmLive |
+| 3.4.4 | Configure LivestockGroups resource | ✅ DONE | MceWeb.Admin.LivestockGroupLive |
+| 3.4.5 | Configure Feed Presets | ☐ TODO | P2 - Future enhancement |
+| 3.4.6 | Configure IPCC Factors | ☐ TODO | P2 - Future enhancement |
+| 3.4.7 | Add admin auth guard | ✅ DONE | MceWeb.Plugs.AdminAuth |
 
 ### 3.5 UI/UX Refinement
 
@@ -241,7 +241,7 @@
 
 | ID | Task | Status | Notes |
 |----|------|--------|-------|
-| 4.1.1 | Write context unit tests | 🔄 WIP | Emissions tests done, Accounts failing |
+| 4.1.1 | Write context unit tests | ✅ DONE | 121 tests pass |
 | 4.1.2 | Write calculation tests | ✅ DONE | 114 calculator tests |
 | 4.1.3 | Write LiveView integration tests | ☐ TODO | |
 | 4.1.4 | Write form submission tests | ☐ TODO | |
@@ -281,7 +281,50 @@
 
 ## Daily Log
 
-### 2025-11-29
+### 2025-11-29 (Evening Update - 19:01)
+
+**Completed**:
+- [3.4.1] Added Backpex dependency (~> 0.13) to mix.exs
+- [3.4.2] Configured Users resource - MceWeb.Admin.UserLive with full CRUD
+- [3.4.3] Configured Farms resource - MceWeb.Admin.FarmLive with BelongsTo user
+- [3.4.4] Configured LivestockGroups resource - MceWeb.Admin.LivestockGroupLive with BelongsTo farm
+- [3.4.7] Added admin auth guard - MceWeb.Plugs.AdminAuth checking is_admin field
+- Added admin layout to layouts.ex using Backpex.HTML.Layout.app_shell
+- Added admin routes at /admin/users, /admin/farms, /admin/livestock-groups
+- Added create_changeset/3 and update_changeset/3 to User, Farm, LivestockGroup schemas
+
+**In Progress**:
+- None
+
+**Blocked**:
+- None
+
+**Notes**:
+- Backpex admin panel fully functional with sidebar navigation
+- Admin users can manage Users (edit only), Farms (full CRUD), LivestockGroups (full CRUD)
+- All 121 tests passing
+- Next priority: UI/UX refinement tasks (3.5.x)
+
+### 2025-11-29 (Evening Update - 18:51)
+
+**Completed**:
+- [4.1.1] Fixed Accounts module test failures - Korean locale for error messages
+- [3.2.1] Created DashboardLive module with responsive layout
+- [3.2.2] Implemented stats cards (Total Emissions, Active Farms, Livestock Groups)
+- [3.2.5] Implemented recent farms table with empty state
+
+**In Progress**:
+- [3.4.*] Backpex Admin Panel setup
+
+**Blocked**:
+- None
+
+**Notes**:
+- Dashboard tested across desktop, tablet, and mobile viewports
+- All 121 tests passing
+- Next priority: Backpex admin panel for data management
+
+### 2025-11-29 (Morning)
 
 **Completed**:
 - [2.3.*] IPCC Calculation Engine - All tasks complete
@@ -320,3 +363,4 @@
 | 2511290341 | Initial tracker creation | Claude |
 | 2511291124 | Added farm logo tasks (3.3.5, 3.3.6), updated task count to 137 | Claude |
 | 2511291707 | Major status update: Phase 1-2 complete, Phase 3-4 in progress | Claude |
+| 2511291901 | Backpex admin panel complete: 3.4.1-3.4.4, 3.4.7 done. Progress: 73% | Claude |

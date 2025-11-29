@@ -67,4 +67,18 @@ defmodule Mce.Livestock.LivestockGroup do
     )
     |> foreign_key_constraint(:farm_id)
   end
+
+  @doc """
+  A changeset for creating livestock groups from admin panel.
+  """
+  def create_changeset(livestock_group, attrs, _metadata \\ %{}) do
+    changeset(livestock_group, attrs)
+  end
+
+  @doc """
+  A changeset for updating livestock groups from admin panel.
+  """
+  def update_changeset(livestock_group, attrs, _metadata \\ %{}) do
+    changeset(livestock_group, attrs)
+  end
 end

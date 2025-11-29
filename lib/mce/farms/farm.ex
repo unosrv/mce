@@ -63,4 +63,18 @@ defmodule Mce.Farms.Farm do
     )
     |> foreign_key_constraint(:user_id)
   end
+
+  @doc """
+  A changeset for creating farms from admin panel.
+  """
+  def create_changeset(farm, attrs, _metadata \\ %{}) do
+    changeset(farm, attrs)
+  end
+
+  @doc """
+  A changeset for updating farms from admin panel.
+  """
+  def update_changeset(farm, attrs, _metadata \\ %{}) do
+    changeset(farm, attrs)
+  end
 end

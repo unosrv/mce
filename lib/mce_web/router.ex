@@ -2,6 +2,7 @@ defmodule MceWeb.Router do
   use MceWeb, :router
 
   import MceWeb.UserAuth
+  import Backpex.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -55,6 +56,28 @@ defmodule MceWeb.Router do
 
       live_dashboard "/dashboard", metrics: MceWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
+    end
+  end
+
+  ## Admin pipeline and routes
+
+  pipeline :admin do
+    plug MceWeb.Plugs.AdminAuth
+  end
+
+  scope "/admin", MceWeb.Admin do
+    pipe_through [:browser, :require_authenticated_user, :admin]
+
+    backpex_routes()
+
+    live_session :admin,
+      on_mount: [
+        {MceWeb.UserAuth, :mount_current_scope},
+        Backpex.InitAssigns
+      ] do
+      live_resources "/users", UserLive
+      live_resources "/farms", FarmLive
+      live_resources "/livestock-groups", LivestockGroupLive
     end
   end
 

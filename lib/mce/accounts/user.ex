@@ -137,6 +137,40 @@ defmodule Mce.Accounts.User do
   end
 
   @doc """
+  A changeset for creating users from admin panel.
+  """
+  def create_changeset(user, attrs, _metadata \\ %{}) do
+    user
+    |> cast(attrs, [:email, :nickname, :locale, :is_admin])
+    |> validate_required([:email, :nickname])
+    |> validate_format(:email, ~r/^[^@,;\s]+@[^@,;\s]+$/,
+      message: "must have the @ sign and no spaces"
+    )
+    |> validate_length(:email, max: 160)
+    |> validate_length(:nickname, min: 1, max: 100)
+    |> validate_inclusion(:locale, ~w(ko en pt_BR))
+    |> unsafe_validate_unique(:email, Mce.Repo)
+    |> unique_constraint(:email)
+  end
+
+  @doc """
+  A changeset for updating users from admin panel.
+  """
+  def update_changeset(user, attrs, _metadata \\ %{}) do
+    user
+    |> cast(attrs, [:email, :nickname, :locale, :is_admin, :confirmed_at])
+    |> validate_required([:email, :nickname])
+    |> validate_format(:email, ~r/^[^@,;\s]+@[^@,;\s]+$/,
+      message: "must have the @ sign and no spaces"
+    )
+    |> validate_length(:email, max: 160)
+    |> validate_length(:nickname, min: 1, max: 100)
+    |> validate_inclusion(:locale, ~w(ko en pt_BR))
+    |> unsafe_validate_unique(:email, Mce.Repo)
+    |> unique_constraint(:email)
+  end
+
+  @doc """
   Verifies the password.
 
   If there is no user or the user doesn't have a password, we call

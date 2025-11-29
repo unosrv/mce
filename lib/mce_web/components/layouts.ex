@@ -194,4 +194,68 @@ defmodule MceWeb.Layouts do
     </div>
     """
   end
+
+  @doc """
+  Admin layout for Backpex admin panel.
+  """
+  attr :flash, :map, required: true, doc: "the map of flash messages"
+  attr :fluid?, :boolean, default: true, doc: "if the content uses full width"
+  attr :current_url, :string, required: true, doc: "the current url"
+
+  slot :inner_block, required: true
+
+  def admin(assigns) do
+    ~H"""
+    <Backpex.HTML.Layout.app_shell fluid={@fluid?}>
+      <:topbar>
+        <Backpex.HTML.Layout.topbar_branding>
+          <.link href={~p"/admin/users"} class="flex items-center gap-2 text-primary">
+            <.icon name="hero-chart-bar" class="size-6" />
+            <span class="font-bold">MCE Admin</span>
+          </.link>
+        </Backpex.HTML.Layout.topbar_branding>
+
+        <Backpex.HTML.Layout.topbar_dropdown class="mr-2 md:mr-0">
+          <:label>
+            <div class="btn btn-square btn-ghost">
+              <Backpex.HTML.CoreComponents.icon name="hero-user" class="size-6" />
+            </div>
+          </:label>
+          <li>
+            <.link href={~p"/dashboard"} class="flex justify-between hover:bg-base-200">
+              <p>{gettext("Back to App")}</p>
+              <Backpex.HTML.CoreComponents.icon name="hero-home" class="size-5" />
+            </.link>
+          </li>
+          <li>
+            <.link
+              href={~p"/users/log-out"}
+              method="delete"
+              class="text-error flex justify-between hover:bg-base-200"
+            >
+              <p>{gettext("Log out")}</p>
+              <Backpex.HTML.CoreComponents.icon name="hero-arrow-right-on-rectangle" class="size-5" />
+            </.link>
+          </li>
+        </Backpex.HTML.Layout.topbar_dropdown>
+      </:topbar>
+      <:sidebar>
+        <Backpex.HTML.Layout.sidebar_item current_url={@current_url} navigate={~p"/admin/users"}>
+          <.icon name="hero-users" class="size-5" /> {gettext("Users")}
+        </Backpex.HTML.Layout.sidebar_item>
+        <Backpex.HTML.Layout.sidebar_item current_url={@current_url} navigate={~p"/admin/farms"}>
+          <.icon name="hero-building-office-2" class="size-5" /> {gettext("Farms")}
+        </Backpex.HTML.Layout.sidebar_item>
+        <Backpex.HTML.Layout.sidebar_item
+          current_url={@current_url}
+          navigate={~p"/admin/livestock-groups"}
+        >
+          <.icon name="hero-beaker" class="size-5" /> {gettext("Livestock Groups")}
+        </Backpex.HTML.Layout.sidebar_item>
+      </:sidebar>
+      <Backpex.HTML.Layout.flash_messages flash={@flash} />
+      {render_slot(@inner_block)}
+    </Backpex.HTML.Layout.app_shell>
+    """
+  end
 end
