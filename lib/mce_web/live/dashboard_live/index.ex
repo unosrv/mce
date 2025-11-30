@@ -169,7 +169,7 @@ defmodule MceWeb.DashboardLive.Index do
                 <tr :for={farm <- @recent_farms} id={"farm-#{farm.id}"} class="hover">
                   <td>
                     <div class="flex items-center gap-3">
-                      <span class="text-xl">{country_flag(farm.country)}</span>
+                      <img src={country_flag_src(farm.country)} alt="" class="size-6 rounded-sm" />
                       <div>
                         <div class="font-medium">{farm.name}</div>
                         <div class="text-sm text-base-content/60">
@@ -263,10 +263,10 @@ defmodule MceWeb.DashboardLive.Index do
     |> Decimal.to_string()
   end
 
-  defp country_flag("KR"), do: "🇰🇷"
-  defp country_flag("US"), do: "🇺🇸"
-  defp country_flag("BR"), do: "🇧🇷"
-  defp country_flag(_), do: "🌍"
+  defp country_flag_src("KR"), do: ~p"/images/flags/1x1/kr.svg"
+  defp country_flag_src("US"), do: ~p"/images/flags/1x1/us.svg"
+  defp country_flag_src("BR"), do: ~p"/images/flags/1x1/br.svg"
+  defp country_flag_src(_), do: ~p"/images/flags/1x1/kr.svg"
 
   defp country_name("KR"), do: gettext("Korea")
   defp country_name("US"), do: gettext("United States")

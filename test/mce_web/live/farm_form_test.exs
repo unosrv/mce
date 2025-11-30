@@ -115,17 +115,17 @@ defmodule MceWeb.FarmFormTest do
     test "shows Korea as default country option", %{conn: conn} do
       {:ok, _view, html} = live(conn, ~p"/farms/new")
 
-      # Korean flag should be visible
-      assert html =~ "🇰🇷"
+      # Korean flag image should be visible
+      assert html =~ "/images/flags/4x3/kr.svg"
     end
 
     test "shows all country options", %{conn: conn} do
       {:ok, _view, html} = live(conn, ~p"/farms/new")
 
-      # All country flags should be present
-      assert html =~ "🇰🇷"
-      assert html =~ "🇺🇸"
-      assert html =~ "🇧🇷"
+      # All country flag images should be present
+      assert html =~ "/images/flags/4x3/kr.svg"
+      assert html =~ "/images/flags/4x3/us.svg"
+      assert html =~ "/images/flags/4x3/br.svg"
     end
   end
 

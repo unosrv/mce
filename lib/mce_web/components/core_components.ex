@@ -568,7 +568,7 @@ defmodule MceWeb.CoreComponents do
     ~H"""
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-sm gap-1">
-        <span class="text-base">{locale_flag(@locale)}</span>
+        <img src={locale_flag_src(@locale)} alt="" class="size-5 rounded-sm" />
         <span class="hidden sm:inline">{locale_name(@locale)}</span>
         <.icon name="hero-chevron-down" class="size-3" />
       </div>
@@ -578,7 +578,7 @@ defmodule MceWeb.CoreComponents do
             href={"?locale=#{loc}"}
             class={[@locale == loc && "active"]}
           >
-            <span class="text-base">{locale_flag(loc)}</span>
+            <img src={locale_flag_src(loc)} alt="" class="size-5 rounded-sm" />
             {locale_name(loc)}
           </a>
         </li>
@@ -587,10 +587,10 @@ defmodule MceWeb.CoreComponents do
     """
   end
 
-  defp locale_flag("ko"), do: "🇰🇷"
-  defp locale_flag("en"), do: "🇺🇸"
-  defp locale_flag("pt_BR"), do: "🇧🇷"
-  defp locale_flag(_), do: "🌐"
+  defp locale_flag_src("ko"), do: "/images/flags/1x1/kr.svg"
+  defp locale_flag_src("en"), do: "/images/flags/1x1/us.svg"
+  defp locale_flag_src("pt_BR"), do: "/images/flags/1x1/br.svg"
+  defp locale_flag_src(_), do: "/images/flags/1x1/kr.svg"
 
   defp locale_name("ko"), do: "한국어"
   defp locale_name("en"), do: "English"

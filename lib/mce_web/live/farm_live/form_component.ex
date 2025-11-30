@@ -5,9 +5,9 @@ defmodule MceWeb.FarmLive.FormComponent do
   alias Mce.Address
 
   @countries [
-    {"KR", "🇰🇷", "Korea"},
-    {"US", "🇺🇸", "United States"},
-    {"BR", "🇧🇷", "Brazil"}
+    {"KR", "/images/flags/4x3/kr.svg", "Korea"},
+    {"US", "/images/flags/4x3/us.svg", "United States"},
+    {"BR", "/images/flags/4x3/br.svg", "Brazil"}
   ]
 
   @impl true
@@ -125,7 +125,7 @@ defmodule MceWeb.FarmLive.FormComponent do
             </label>
             <div class="flex gap-4">
               <label
-                :for={{code, flag, name} <- @countries}
+                :for={{code, flag_src, name} <- @countries}
                 class={[
                   "flex-1 cursor-pointer rounded-lg border-2 p-4 text-center transition-all",
                   "hover:border-primary/50",
@@ -145,7 +145,7 @@ defmodule MceWeb.FarmLive.FormComponent do
                   phx-target={@myself}
                   class="hidden"
                 />
-                <span class="text-3xl">{flag}</span>
+                <img src={flag_src} alt={name} class="w-12 h-9 mx-auto rounded" />
                 <p class="mt-2 font-medium">{name}</p>
               </label>
             </div>
