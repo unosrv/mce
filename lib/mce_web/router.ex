@@ -68,11 +68,15 @@ defmodule MceWeb.Router do
   scope "/admin", MceWeb.Admin do
     pipe_through [:browser, :require_authenticated_user, :admin]
 
+    # Redirect /admin to /admin/users
+    get "/", RedirectController, :index
+
     backpex_routes()
 
     live_session :admin,
       on_mount: [
         {MceWeb.UserAuth, :mount_current_scope},
+        {MceWeb.LiveLocale, :default},
         Backpex.InitAssigns
       ] do
       live_resources "/users", UserLive
