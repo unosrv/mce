@@ -68,7 +68,7 @@
         <h1 class="text-5xl font-bold leading-tight mb-6">
           {gettext("Methane Carbon")}
           <br />
-          <span class="text-primary">{gettext("Emissions Calculator")}</span>
+          <span class="text-primary">{gettext("Emissions Reporting Platform")}</span>
         </h1>
         <p class="text-xl text-base-content/70 mb-8 leading-relaxed">
           {gettext(
@@ -158,7 +158,7 @@
             <h3 class="card-title">{gettext("Farm Management")}</h3>
             <p class="text-base-content/60">
               {gettext(
-                "Register multiple farms across Korea, USA, and Brazil with address validation and map preview."
+                "Register multiple farms across Korea, USA, and Brazil. Track compliance and generate professional reports."
               )}
             </p>
           </div>
@@ -226,7 +226,9 @@
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold mb-4">{gettext("Supported Regions")}</h2>
         <p class="text-base-content/60 max-w-xl mx-auto">
-          {gettext("Localized support with region-specific IPCC factors and address validation")}
+          {gettext(
+            "Localized support with region-specific IPCC emission factors and compliance standards"
+          )}
         </p>
       </div>
       <div class="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
@@ -234,21 +236,27 @@
           <div class="card-body items-center text-center">
             <span class="text-5xl mb-2">🇰🇷</span>
             <h3 class="card-title">{gettext("Korea")}</h3>
-            <p class="text-sm text-base-content/60">{gettext("Juso API integration")}</p>
+            <p class="text-sm text-base-content/60">
+              {gettext("Hanwoo, Holstein emission factors")}
+            </p>
           </div>
         </div>
         <div class="card bg-base-100 shadow-md w-60">
           <div class="card-body items-center text-center">
             <span class="text-5xl mb-2">🇺🇸</span>
             <h3 class="card-title">{gettext("United States")}</h3>
-            <p class="text-sm text-base-content/60">{gettext("Google Maps integration")}</p>
+            <p class="text-sm text-base-content/60">
+              {gettext("Beef, dairy cattle emission factors")}
+            </p>
           </div>
         </div>
         <div class="card bg-base-100 shadow-md w-60">
           <div class="card-body items-center text-center">
             <span class="text-5xl mb-2">🇧🇷</span>
             <h3 class="card-title">{gettext("Brazil")}</h3>
-            <p class="text-sm text-base-content/60">{gettext("Google Maps integration")}</p>
+            <p class="text-sm text-base-content/60">
+              {gettext("Nelore, tropical climate factors")}
+            </p>
           </div>
         </div>
       </div>
@@ -283,7 +291,7 @@
         <h2 class="text-3xl font-bold mb-4">{gettext("Ready to calculate your emissions?")}</h2>
         <p class="text-primary-content/80 max-w-xl mx-auto mb-8">
           {gettext(
-            "Start tracking and reporting your livestock methane emissions today with our professional-grade calculator."
+            "Start tracking and reporting your livestock methane emissions today with our professional-grade platform."
           )}
         </p>
         <.link navigate={~p"/users/register"} class="btn btn-secondary btn-lg gap-2">
@@ -308,7 +316,7 @@
   <footer class="footer footer-center p-10 bg-base-200 text-base-content">
     <aside>
       <p class="font-bold text-lg">
-        MCE - {gettext("Methane Carbon Emissions Calculator")}
+        MCE - {gettext("Methane Carbon Emissions Reporting Platform")}
       </p>
       <p class="text-base-content/60">
         {gettext("IPCC 2019 Tier 2 Methodology")}

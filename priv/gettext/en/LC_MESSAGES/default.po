@@ -19,18 +19,18 @@ msgstr ""
 msgid "Actions"
 msgstr "Actions"
 
-#: lib/mce_web/components/layouts.ex:141
-#: lib/mce_web/components/layouts.ex:153
+#: lib/mce_web/components/layouts.ex:143
+#: lib/mce_web/components/layouts.ex:155
 #, elixir-autogen, elixir-format
 msgid "Attempting to reconnect"
 msgstr "Attempting to reconnect"
 
-#: lib/mce_web/components/layouts.ex:148
+#: lib/mce_web/components/layouts.ex:150
 #, elixir-autogen, elixir-format
 msgid "Something went wrong!"
 msgstr "Something went wrong!"
 
-#: lib/mce_web/components/layouts.ex:136
+#: lib/mce_web/components/layouts.ex:138
 #, elixir-autogen, elixir-format
 msgid "We can't find the internet"
 msgstr "We can't find the internet"
@@ -68,7 +68,7 @@ msgstr "Create account"
 msgid "Creating account..."
 msgstr "Creating account..."
 
-#: lib/mce_web/components/layouts.ex:192
+#: lib/mce_web/components/layouts.ex:194
 #, elixir-autogen, elixir-format
 msgid "Dark theme"
 msgstr "Dark theme"
@@ -81,7 +81,7 @@ msgstr "Dark theme"
 msgid "Email"
 msgstr "Email"
 
-#: lib/mce_web/components/layouts.ex:183
+#: lib/mce_web/components/layouts.ex:185
 #, elixir-autogen, elixir-format
 msgid "Light theme"
 msgstr "Light theme"
@@ -89,7 +89,7 @@ msgstr "Light theme"
 #: lib/mce_web/controllers/page_html/home.html.heex:40
 #: lib/mce_web/controllers/page_html/home.html.heex:124
 #: lib/mce_web/controllers/user_registration_html/new.html.heex:8
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:38
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:45
 #: lib/mce_web/controllers/user_session_html/new.html.heex:5
 #, elixir-autogen, elixir-format
 msgid "Log in"
@@ -112,7 +112,7 @@ msgstr "Password"
 msgid "Repeat password"
 msgstr "Repeat password"
 
-#: lib/mce_web/components/layouts.ex:174
+#: lib/mce_web/components/layouts.ex:176
 #, elixir-autogen, elixir-format
 msgid "System theme"
 msgstr "System theme"
@@ -193,7 +193,7 @@ msgstr "Address Line 2"
 msgid "Address Search"
 msgstr "Address Search"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:317
+#: lib/mce_web/controllers/page_html/home.html.heex:325
 #, elixir-autogen, elixir-format
 msgid "All rights reserved."
 msgstr "All rights reserved."
@@ -276,7 +276,7 @@ msgstr "Avg Weight"
 msgid "Back"
 msgstr "Back"
 
-#: lib/mce_web/components/layouts.ex:228
+#: lib/mce_web/components/layouts.ex:230
 #, elixir-autogen, elixir-format
 msgid "Back to App"
 msgstr "Back to App"
@@ -361,7 +361,7 @@ msgstr "Beef Cattle"
 msgid "Biogas Captured"
 msgstr "Biogas Captured"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:250
+#: lib/mce_web/controllers/page_html/home.html.heex:256
 #: lib/mce_web/live/dashboard_live/index.ex:268
 #: lib/mce_web/live/farm_live/index.ex:222
 #: lib/mce_web/live/farm_live/show.ex:373
@@ -458,7 +458,7 @@ msgstr "Country"
 msgid "Create Farm"
 msgstr "Create Farm"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:301
+#: lib/mce_web/controllers/page_html/home.html.heex:309
 #, elixir-autogen, elixir-format
 msgid "Create Free Account"
 msgstr "Create Free Account"
@@ -587,11 +587,6 @@ msgstr "Emission Report"
 #, elixir-autogen, elixir-format
 msgid "Emissions"
 msgstr "Emissions"
-
-#: lib/mce_web/controllers/page_html/home.html.heex:71
-#, elixir-autogen, elixir-format
-msgid "Emissions Calculator"
-msgstr "Emissions Calculator"
 
 #: lib/mce_web/components/emissions_components.ex:346
 #, elixir-autogen, elixir-format
@@ -763,8 +758,8 @@ msgstr "Farm not found"
 msgid "Farm updated successfully"
 msgstr "Farm updated successfully"
 
-#: lib/mce_web/components/layouts.ex:53
-#: lib/mce_web/components/layouts.ex:249
+#: lib/mce_web/components/layouts.ex:54
+#: lib/mce_web/components/layouts.ex:251
 #: lib/mce_web/controllers/page_html/home.html.heex:28
 #: lib/mce_web/live/farm_live/index.ex:13
 #: lib/mce_web/live/farm_live/index.ex:50
@@ -849,12 +844,6 @@ msgstr "Generated"
 msgid "Get Started"
 msgstr "Get Started"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:244
-#: lib/mce_web/controllers/page_html/home.html.heex:251
-#, elixir-autogen, elixir-format
-msgid "Google Maps integration"
-msgstr "Google Maps integration"
-
 #: lib/mce_web/live/livestock_live/wizard_live.ex:1015
 #, elixir-autogen, elixir-format
 msgid "Grazing (%)"
@@ -912,7 +901,7 @@ msgstr "Housing Information"
 msgid "Housing information saved"
 msgstr "Housing information saved"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:314
+#: lib/mce_web/controllers/page_html/home.html.heex:322
 #, elixir-autogen, elixir-format
 msgid "IPCC 2019 Tier 2 Methodology"
 msgstr "IPCC 2019 Tier 2 Methodology"
@@ -973,17 +962,12 @@ msgstr "Jun"
 msgid "June"
 msgstr "June"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:237
-#, elixir-autogen, elixir-format
-msgid "Juso API integration"
-msgstr "Juso API integration"
-
 #: lib/mce_web/controllers/page_html/home.html.heex:136
 #, elixir-autogen, elixir-format
 msgid "Key Features"
 msgstr "Key Features"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:236
+#: lib/mce_web/controllers/page_html/home.html.heex:238
 #: lib/mce_web/live/dashboard_live/index.ex:266
 #: lib/mce_web/live/farm_live/index.ex:220
 #: lib/mce_web/live/farm_live/show.ex:371
@@ -996,7 +980,7 @@ msgstr "Korea"
 msgid "Livestock Group Details"
 msgstr "Livestock Group Details"
 
-#: lib/mce_web/components/layouts.ex:255
+#: lib/mce_web/components/layouts.ex:257
 #: lib/mce_web/live/dashboard_live/index.ex:53
 #: lib/mce_web/live/dashboard_live/index.ex:158
 #: lib/mce_web/live/farm_live/show.ex:218
@@ -1024,18 +1008,13 @@ msgstr "Livestock group saved successfully"
 msgid "Loading"
 msgstr "Loading"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:229
-#, elixir-autogen, elixir-format
-msgid "Localized support with region-specific IPCC factors and address validation"
-msgstr "Localized support with region-specific IPCC factors and address validation"
-
 #: lib/mce_web/live/farm_live/form_component.ex:287
 #, elixir-autogen, elixir-format
 msgid "Location Preview"
 msgstr "Location Preview"
 
-#: lib/mce_web/components/layouts.ex:109
-#: lib/mce_web/components/layouts.ex:238
+#: lib/mce_web/components/layouts.ex:111
+#: lib/mce_web/components/layouts.ex:240
 #, elixir-autogen, elixir-format
 msgid "Log out"
 msgstr "Log out"
@@ -1136,11 +1115,6 @@ msgstr "Methane & Carbon Emissions"
 #, elixir-autogen, elixir-format
 msgid "Methane Carbon"
 msgstr "Methane Carbon"
-
-#: lib/mce_web/controllers/page_html/home.html.heex:311
-#, elixir-autogen, elixir-format
-msgid "Methane Carbon Emissions Calculator"
-msgstr "Methane Carbon Emissions Calculator"
 
 #: lib/mce_web/live/livestock_live/wizard_live.ex:727
 #, elixir-autogen, elixir-format
@@ -1341,7 +1315,7 @@ msgstr "Print / PDF"
 msgid "Professional livestock emissions reporting platform. Calculate enteric fermentation and manure management emissions following IPCC Tier 2 methodology."
 msgstr "Professional livestock emissions reporting platform. Calculate enteric fermentation and manure management emissions following IPCC Tier 2 methodology."
 
-#: lib/mce_web/controllers/page_html/home.html.heex:283
+#: lib/mce_web/controllers/page_html/home.html.heex:291
 #, elixir-autogen, elixir-format
 msgid "Ready to calculate your emissions?"
 msgstr "Ready to calculate your emissions?"
@@ -1360,11 +1334,6 @@ msgstr "Recent Farms"
 #, elixir-autogen, elixir-format
 msgid "Register"
 msgstr "Register"
-
-#: lib/mce_web/controllers/page_html/home.html.heex:160
-#, elixir-autogen, elixir-format
-msgid "Register multiple farms across Korea, USA, and Brazil with address validation and map preview."
-msgstr "Register multiple farms across Korea, USA, and Brazil with address validation and map preview."
 
 #: lib/mce_web/live/farm_live/form_component.ex:234
 #, elixir-autogen, elixir-format
@@ -1467,7 +1436,7 @@ msgstr "Sep"
 msgid "September"
 msgstr "September"
 
-#: lib/mce_web/components/layouts.ex:102
+#: lib/mce_web/components/layouts.ex:104
 #, elixir-autogen, elixir-format
 msgid "Settings"
 msgstr "Settings"
@@ -1486,11 +1455,6 @@ msgstr "Species"
 #, elixir-autogen, elixir-format
 msgid "Start Day"
 msgstr "Start Day"
-
-#: lib/mce_web/controllers/page_html/home.html.heex:285
-#, elixir-autogen, elixir-format
-msgid "Start tracking and reporting your livestock methane emissions today with our professional-grade calculator."
-msgstr "Start tracking and reporting your livestock methane emissions today with our professional-grade calculator."
 
 #: lib/mce_web/live/farm_live/show.ex:135
 #, elixir-autogen, elixir-format
@@ -1573,7 +1537,7 @@ msgstr "Total Emissions"
 msgid "Track dairy cattle, beef cattle, and swine with detailed feed composition and manure management data."
 msgstr "Track dairy cattle, beef cattle, and swine with detailed feed composition and manure management data."
 
-#: lib/mce_web/controllers/page_html/home.html.heex:243
+#: lib/mce_web/controllers/page_html/home.html.heex:247
 #: lib/mce_web/live/dashboard_live/index.ex:267
 #: lib/mce_web/live/farm_live/index.ex:221
 #: lib/mce_web/live/farm_live/show.ex:372
@@ -1591,7 +1555,7 @@ msgstr "Unknown"
 msgid "Upload error. Please try again."
 msgstr "Upload error. Please try again."
 
-#: lib/mce_web/components/layouts.ex:246
+#: lib/mce_web/components/layouts.ex:248
 #, elixir-autogen, elixir-format
 msgid "Users"
 msgstr "Users"
@@ -1686,7 +1650,7 @@ msgstr "t CO₂e Total"
 msgid "tonnes CO₂e"
 msgstr "tonnes CO₂e"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:264
+#: lib/mce_web/controllers/page_html/home.html.heex:272
 #, elixir-autogen, elixir-format
 msgid "Access your farms and start calculating livestock methane emissions with our professional-grade tools."
 msgstr ""
@@ -1722,7 +1686,7 @@ msgid "Email Address"
 msgstr ""
 
 #: lib/mce_web/controllers/page_html/home.html.heex:92
-#: lib/mce_web/controllers/page_html/home.html.heex:280
+#: lib/mce_web/controllers/page_html/home.html.heex:288
 #, elixir-autogen, elixir-format
 msgid "Go to My Farms"
 msgstr ""
@@ -1752,7 +1716,7 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: lib/mce_web/controllers/page_html/home.html.heex:262
+#: lib/mce_web/controllers/page_html/home.html.heex:270
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Ready to track your emissions?"
 msgstr "Ready to calculate your emissions?"
@@ -1797,7 +1761,7 @@ msgstr ""
 msgid "the mailbox page"
 msgstr ""
 
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:24
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "Confirm and log in only this time"
 msgstr ""
@@ -1808,29 +1772,29 @@ msgid "Confirm and stay logged in"
 msgstr ""
 
 #: lib/mce_web/controllers/user_session_html/confirm.html.heex:18
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:23
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:24
 #, elixir-autogen, elixir-format
 msgid "Confirming..."
 msgstr ""
 
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:47
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:54
 #, elixir-autogen, elixir-format
 msgid "Keep me logged in on this device"
 msgstr ""
 
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:50
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:60
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Log me in only this time"
 msgstr ""
 
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:37
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:44
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:49
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:42
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:51
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:57
 #, elixir-autogen, elixir-format
 msgid "Logging in..."
 msgstr ""
 
-#: lib/mce_web/controllers/user_session_html/confirm.html.heex:56
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:66
 #, elixir-autogen, elixir-format
 msgid "Tip: If you prefer passwords, you can enable them in the user settings."
 msgstr ""
@@ -1839,3 +1803,43 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "Welcome"
 msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:249
+#, elixir-autogen, elixir-format
+msgid "Beef, dairy cattle emission factors"
+msgstr "Beef, dairy cattle emission factors"
+
+#: lib/mce_web/controllers/page_html/home.html.heex:240
+#, elixir-autogen, elixir-format
+msgid "Hanwoo, Holstein emission factors"
+msgstr "Hanwoo, Holstein emission factors"
+
+#: lib/mce_web/controllers/page_html/home.html.heex:229
+#, elixir-autogen, elixir-format
+msgid "Localized support with region-specific IPCC emission factors and compliance standards"
+msgstr "Localized support with region-specific IPCC emission factors and compliance standards"
+
+#: lib/mce_web/controllers/page_html/home.html.heex:258
+#, elixir-autogen, elixir-format
+msgid "Nelore, tropical climate factors"
+msgstr "Nelore, tropical climate factors"
+
+#: lib/mce_web/controllers/page_html/home.html.heex:160
+#, elixir-autogen, elixir-format
+msgid "Register multiple farms across Korea, USA, and Brazil. Track compliance and generate professional reports."
+msgstr "Register multiple farms across Korea, USA, and Brazil. Track compliance and generate professional reports."
+
+#: lib/mce_web/controllers/page_html/home.html.heex:293
+#, elixir-autogen, elixir-format
+msgid "Start tracking and reporting your livestock methane emissions today with our professional-grade platform."
+msgstr "Start tracking and reporting your livestock methane emissions today with our professional-grade platform."
+
+#: lib/mce_web/controllers/page_html/home.html.heex:71
+#, elixir-autogen, elixir-format
+msgid "Emissions Reporting Platform"
+msgstr "Emissions Reporting Platform"
+
+#: lib/mce_web/controllers/page_html/home.html.heex:319
+#, elixir-autogen, elixir-format
+msgid "Methane Carbon Emissions Reporting Platform"
+msgstr "Methane Carbon Emissions Reporting Platform"
