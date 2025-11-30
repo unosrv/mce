@@ -356,6 +356,8 @@ defmodule MceWeb.CoreComponents do
       phx-mounted={@show && show_modal(@id)}
       phx-remove={hide_modal(@id)}
       data-cancel={JS.exec(@on_cancel, "phx-remove")}
+      data-showModal={JS.dispatch("modal:open")}
+      data-close={JS.dispatch("modal:close")}
     >
       <div id={"#{@id}-container"} class="modal-box max-w-xl relative">
         <button
@@ -620,12 +622,12 @@ defmodule MceWeb.CoreComponents do
 
   def show_modal(js \\ %JS{}, id) when is_binary(id) do
     js
-    |> JS.exec("showModal()", to: "##{id}")
+    |> JS.dispatch("modal:open", to: "##{id}")
   end
 
   def hide_modal(js \\ %JS{}, id) do
     js
-    |> JS.exec("close()", to: "##{id}")
+    |> JS.dispatch("modal:close", to: "##{id}")
   end
 
   # Checks if a form has an action set on its changeset source.

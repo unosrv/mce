@@ -19,6 +19,8 @@
 
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
+// Backpex form buttons DOM reorder (moves buttons outside card)
+import "./backpex_form_buttons"
 // Establish Phoenix Socket and LiveView configuration.
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
@@ -37,6 +39,23 @@ const liveSocket = new LiveSocket("/live", Socket, {
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
 window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
+
+// Modal event handlers for DaisyUI dialog elements
+// These handle the custom events dispatched by Phoenix JS.dispatch
+// Use capturing to ensure we catch events on the target element
+document.addEventListener("modal:open", (event) => {
+  const dialog = event.target.closest("dialog") || event.target
+  if (dialog instanceof HTMLDialogElement && !dialog.open) {
+    dialog.showModal()
+  }
+}, true)
+
+document.addEventListener("modal:close", (event) => {
+  const dialog = event.target.closest("dialog") || event.target
+  if (dialog instanceof HTMLDialogElement && dialog.open) {
+    dialog.close()
+  }
+}, true)
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
