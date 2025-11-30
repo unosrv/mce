@@ -24,9 +24,7 @@ import "./backpex_form_buttons";
 // Establish Phoenix Socket and LiveView configuration.
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
-// Commented out to avoid build order issues with Railpack/Nixpacks
-// See: dev-doc/guide/2512010443_DOKPLOY_BUILD_ORDER_CONFIGURATION.md
-// import { hooks as colocatedHooks } from "phoenix-colocated/mce";
+import { hooks as colocatedHooks } from "phoenix-colocated/mce";
 import topbar from "../vendor/topbar";
 import Hooks from "./hooks";
 
@@ -36,9 +34,7 @@ const csrfToken = document
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: { _csrf_token: csrfToken },
-  // Commented out - using only Hooks until build order is fixed
-  // hooks: { ...colocatedHooks, ...Hooks },
-  hooks: Hooks,
+  hooks: { ...colocatedHooks, ...Hooks },
 });
 
 // Show progress bar on live navigation and form submits
