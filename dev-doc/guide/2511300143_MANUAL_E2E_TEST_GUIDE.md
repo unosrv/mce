@@ -59,13 +59,14 @@ user = Accounts.get_user_by_email("admin@mce.local")
 Accounts.reset_user_password(user, %{password: "NewAdminPass123!"})
 ```
 
-### Option 3: Create Admin User via Seeds
+### Option 3: Create Admin User via Seeds (Recommended)
 ```bash
-# Check if seeds create admin user
-cat priv/repo/seeds.exs
-
-# Run seeds (if admin creation is included)
+# Run seeds to create default admin user
 mix run priv/repo/seeds.exs
+
+# Default admin credentials:
+# Email: admin@anysite.com
+# Password: AdminPassword123!
 ```
 
 ### Option 4: Create Admin via IEx Console
@@ -74,14 +75,17 @@ mix run priv/repo/seeds.exs
 iex -S mix
 
 # Create new admin user
-alias Mce.Accounts
+alias Mce.{Accounts, Repo}
 {:ok, user} = Accounts.register_user(%{
   email: "newadmin@mce.local",
-  password: "AdminPassword123!"
+  password: "AdminPassword123!",
+  nickname: "Admin"
 })
 
-# Make user an admin
-Mce.Repo.update!(Ecto.Changeset.change(user, %{role: "admin"}))
+# Make user an admin and confirm account
+user
+|> Ecto.Changeset.change(%{is_admin: true, confirmed_at: DateTime.utc_now(:second)})
+|> Repo.update!()
 ```
 
 ---
@@ -199,7 +203,7 @@ Mce.Repo.update!(Ecto.Changeset.change(user, %{role: "admin"}))
 
 **URL**: http://localhost:4000/admin
 
-**Requirements**: User must have `role: "admin"` in database
+**Requirements**: User must have `is_admin: true` in database
 
 ### Admin Flow 1: User Management
 
@@ -356,16 +360,18 @@ VS: 0.6 kg/day
 ## Troubleshooting
 
 ### Cannot Access Admin Panel
-1. Check user role in database:
+1. Check user admin status in database:
 ```elixir
 iex -S mix
 user = Mce.Accounts.get_user_by_email("your@email.com")
-user.role  # Should be "admin"
+user.is_admin  # Should be true
 ```
 
-2. Update user role if needed:
+2. Update user to admin if needed:
 ```elixir
-Mce.Repo.update!(Ecto.Changeset.change(user, %{role: "admin"}))
+user
+|> Ecto.Changeset.change(%{is_admin: true})
+|> Mce.Repo.update!()
 ```
 
 ### Magic Link Not Received
