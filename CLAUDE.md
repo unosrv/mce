@@ -73,6 +73,34 @@ mix precommit                # Compile with warnings-as-errors, unlock unused de
 - Check UI functionality after create or modify any UI related code.
 - [Important] Check the UI as aspect of aesthetics as well as functionality.
 
+### Login Page Structure (CRITICAL)
+
+The login page (`/users/log-in`) has **TWO separate login forms**. DO NOT mix them up:
+
+1. **Magic Link Login Form** (TOP section - email only)
+   - Form ID: `#login_form_magic`
+   - Email field: `#login_form_magic input[name="user[email]"]`
+   - Submit button: `#login_form_magic button[type="submit"]`
+
+2. **Password Login Form** (BOTTOM section - email + password)
+   - Form ID: `#login_form_password`
+   - Email field: `#login_form_password input[name="user[email]"]`
+   - Password field: `#login_form_password input[name="user[password]"]`
+   - Submit buttons: Two buttons (first = remember, second = one-time)
+
+**Playwright Login Code Pattern (ALWAYS use this):**
+```javascript
+// For password login - use EXACT form ID selectors
+await page.fill('#login_form_password input[name="user[email]"]', 'user@example.com');
+await page.fill('#login_form_password input[name="user[password]"]', 'password123');
+// Click the first button (Log in and stay logged in) - use >> nth=0
+await page.locator('#login_form_password button[type="submit"]').first().click();
+```
+
+**Test Credentials (from seeds.exs):**
+- Admin: `admin@anysite.kr` / `AdminPassword123!`
+- Test User: `jason@anysite.kr` / `jason12345678`
+
 ## Local Development Database
   - Database files: @/Users/jwpark/Library/Application Support/com.tinyapp.DBngin/Engines/postgresql/
   - Database binary: @/Users/Shared/DBngin/postgresql/17.0/

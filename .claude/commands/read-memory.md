@@ -1,39 +1,60 @@
 ---
-description: Read memory from @CLAUDE.md and Serena
+description: Read session context from memory to restore previous session state
 ---
 
-## Purpose
+## Read Memory Command
 
-Restore context about the current state of the project and ongoing tasks by reading project documentation and Serena memories.
+Read session context from `dev-doc/memory/` to efficiently restore context from a previous session.
 
-## What to Read
+**Memory File**: $ARGUMENTS (default: most recent file in `dev-doc/memory/`)
 
-1. **@CLAUDE.md**
-   - Project overview and guidelines
-   - Migration status and priorities
-   - Environment configuration requirements
-   - Code standards and conventions
+### Instructions
 
-2. **Serena Memories**
-   - Use `mcp__serena__list_memories` to see available memories
-   - Read relevant memories based on current task context:
-     - Migration progress snapshots (e.g., `medusa_migration_progress_*`)
-     - Current status updates (e.g., `*_status_2025-*`)
-     - Plan documents (e.g., `*_plan_*`)
-     - Backend refactoring progress
-     - Architecture decisions and documentation
+1. **Locate Memory File**
+   - If argument provided: Read the specified file from `dev-doc/memory/`
+   - If no argument: Find the most recent file in `dev-doc/memory/`
+     - List files: `ls -t dev-doc/memory/`
+     - Select the first (most recent) file
 
-## When to Use
+2. **Read Memory Document**
+   - Read the full contents of the memory file
+   - Parse the structured information
 
-- At the start of a new conversation or task
-- When resuming work after an interruption
-- When uncertain about project context or recent changes
-- Before making significant architectural decisions
-- When investigating existing implementations or patterns
+3. **Restore Context**
+   Present the restored context to the user, highlighting:
 
-## Process
+   - **Current Branch**: Verify it matches or note if different
+   - **Previous Tasks**: What was completed in the previous session
+   - **Uncommitted Changes**: Files that may still need attention
+   - **Technical Insights**: Important patterns or solutions discovered
+   - **Next Steps**: Recommended tasks to continue
 
-1. Read `@CLAUDE.md` for project-wide context
-2. List available Serena memories
-3. Identify and read 2-5 most relevant memories based on task
-4. Summarise key context before proceeding with work
+4. **Verify Current State**
+   After reading memory, run these commands to compare with current state:
+   - `git branch --show-current` - Check if still on the same branch
+   - `git status` - Compare uncommitted files with memory
+
+5. **Present Summary**
+   Provide a brief summary to the user:
+   ```
+   ## Session Context Restored
+
+   **Memory File**: [filename]
+   **Previous Session Date**: [date from memory]
+   **Current Branch**: [branch] (matches/differs from memory)
+
+   ### Key Context
+   - [Most important items from the previous session]
+
+   ### Pending Work
+   - [Uncommitted files or next steps]
+
+   ### Ready to Continue
+   [Brief statement about what the user can do next]
+   ```
+
+### Notes
+- Memory files follow the naming convention: `YYMMDDHHMM_SESSION_CONTEXT.md`
+- If the memory file references documentation, offer to read those files as well
+- Highlight any differences between the memory state and current repository state
+- If multiple memory files exist, the user can specify which one to read by passing the filename as an argument

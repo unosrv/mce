@@ -1,73 +1,71 @@
 ---
-description: Save current task status to Serena
+description: Save session context to memory for future sessions
 ---
 
-## Purpose
+## Save Memory Command
 
-Persist important context and progress to Serena memory so work can be resumed efficiently in future sessions.
+Save the current session context to `dev-doc/memory/` for efficient context restoration in future sessions.
 
-## What to Save
+### Instructions
 
-Create a timestamped memory with relevant information:
+1. **Generate Timestamp**
+   - Run: `date "+%y%m%d%H%M"`
+   - Use the EXACT output - never estimate or round
 
-1. **Task Summary**
-   - What was accomplished in this session
-   - Current state/status of the work
-   - Any blockers or issues encountered
+2. **Gather Session Context**
+   Collect the following information from the current session:
 
-2. **Next Steps**
-   - Specific action items to resume work
-   - Dependencies or prerequisites
-   - Priority order of remaining tasks
+   - **Current Branch**: Run `git branch --show-current`
+   - **Completed Tasks**: Review conversation for tasks that were finished
+   - **Uncommitted Changes**: Run `git status` to capture pending changes
+   - **Key Technical Insights**: Document important discoveries, patterns, or solutions
+   - **Files Modified**: List significant files that were created or changed
+   - **Relevant Commits**: Recent commits made during this session
+   - **Server Status**: Note if server is running and on which port
+   - **Next Steps**: Recommended follow-up tasks if applicable
 
-3. **Key Decisions**
-   - Architectural choices made
-   - Trade-offs considered
-   - Rationale for approach taken
+3. **Create Memory Document**
+   - **Directory**: `dev-doc/memory/`
+   - **File Name Format**: `YYMMDDHHMM_SESSION_CONTEXT.md`
 
-4. **Technical Context**
-   - Files modified or created
-   - Relevant configuration changes
-   - Integration points affected
+   - **Document Structure**:
+     ```markdown
+     # Session Context Memory - [Full date and time]
 
-## Memory Naming Convention
+     ## Current Branch
+     `[branch-name]`
 
-Use descriptive, timestamped names:
-- Use the date command to retrieve exact current timestamp: `date "+%y%m%d%H%M"`
-- Format: `YYMMDDHHMM_<descriptive_name>`
-- Example: `2510241530_medusa_cart_migration_complete`
-- Use concise but meaningful descriptions
+     ## Completed Tasks
 
-## When to Write
+     ### 1. [Task Name] (COMPLETED)
+     **Issue:** [Brief description of the problem]
+     **Solution Applied:** [What was done to fix it]
+     **Files Modified:** [List of files]
+     **Commit:** `[hash]` - "[message]" (if committed)
 
-- After completing a significant task or milestone
-- Before ending a long working session
-- When pausing complex work that will resume later
-- After discovering important project insights
-- When documenting architectural decisions
+     ## Remaining Uncommitted Files
+     [Output from git status showing modified/untracked files]
 
-## Best Practices
+     ## Key Technical Insights
+     [Important discoveries, patterns, gotchas, or solutions that would help future sessions]
 
-- Keep entries focused and scannable
-- Use bullet points for clarity
-- Include concrete file paths and line numbers where relevant
-- Cross-reference related memories or documentation
-- Avoid duplicating information already in `@CLAUDE.md`
+     ## Server Status
+     [Phoenix server port, running status, database connection notes]
 
-## After Saving Memory
+     ## Test Credentials (if relevant)
+     [Login credentials used during testing]
 
-**Always commit the memory to git** to preserve it permanently:
+     ## Next Steps (If Applicable)
+     1. [Recommended follow-up task]
+     2. [Another task]
+     ```
 
-1. **Save the memory** using Serena's write_memory tool
-2. **Commit the memory** using `/commit` command
-   - The memory will be saved to `.serena/memories/<memory_name>.md`
-   - Example commit message: `docs: Add <descriptive_name> memory`
+4. **Save Memory**
+   - Write the document to `dev-doc/memory/` with the generated filename
+   - Confirm the file location to the user
 
-**Workflow:**
-- Claude Code custom slash command: `/commit`
-
-**Why commit?**
-- Preserves memory across different machines/environments
-- Enables version control of project knowledge
-- Ensures memory survives local cache clearing
-- Creates audit trail of project decisions and progress
+### Notes
+- Memory documents are written in English (per project guidelines)
+- Focus on information that would help quickly resume work in a new session
+- Include code snippets for complex technical solutions
+- Reference relevant documentation files created during the session
