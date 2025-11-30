@@ -11,28 +11,31 @@
 msgid ""
 msgstr ""
 
-#: lib/mce_web/components/core_components.ex:342
+#: lib/mce_web/components/core_components.ex:476
+#: lib/mce_web/live/dashboard_live/index.ex:157
 #, elixir-autogen, elixir-format
 msgid "Actions"
 msgstr ""
 
-#: lib/mce_web/components/layouts.ex:93
-#: lib/mce_web/components/layouts.ex:105
+#: lib/mce_web/components/layouts.ex:139
+#: lib/mce_web/components/layouts.ex:151
 #, elixir-autogen, elixir-format
 msgid "Attempting to reconnect"
 msgstr ""
 
-#: lib/mce_web/components/layouts.ex:100
+#: lib/mce_web/components/layouts.ex:146
 #, elixir-autogen, elixir-format
 msgid "Something went wrong!"
 msgstr ""
 
-#: lib/mce_web/components/layouts.ex:88
+#: lib/mce_web/components/layouts.ex:134
 #, elixir-autogen, elixir-format
 msgid "We can't find the internet"
 msgstr ""
 
-#: lib/mce_web/components/core_components.ex:74
+#: lib/mce_web/components/core_components.ex:87
+#: lib/mce_web/components/core_components.ex:365
+#: lib/mce_web/components/core_components.ex:374
 #, elixir-autogen, elixir-format
 msgid "close"
 msgstr ""
@@ -63,7 +66,7 @@ msgstr ""
 msgid "Creating account..."
 msgstr ""
 
-#: lib/mce_web/components/layouts.ex:144
+#: lib/mce_web/components/layouts.ex:190
 #, elixir-autogen, elixir-format
 msgid "Dark theme"
 msgstr ""
@@ -73,11 +76,13 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: lib/mce_web/components/layouts.ex:135
+#: lib/mce_web/components/layouts.ex:181
 #, elixir-autogen, elixir-format
 msgid "Light theme"
 msgstr ""
 
+#: lib/mce_web/controllers/page_html/home.html.heex:26
+#: lib/mce_web/controllers/page_html/home.html.heex:71
 #: lib/mce_web/controllers/user_registration_html/new.html.heex:8
 #, elixir-autogen, elixir-format
 msgid "Log in"
@@ -98,7 +103,7 @@ msgstr ""
 msgid "Repeat password"
 msgstr ""
 
-#: lib/mce_web/components/layouts.ex:126
+#: lib/mce_web/components/layouts.ex:172
 #, elixir-autogen, elixir-format
 msgid "System theme"
 msgstr ""
@@ -106,4 +111,1569 @@ msgstr ""
 #: lib/mce_web/controllers/user_registration_html/new.html.heex:28
 #, elixir-autogen, elixir-format
 msgid "Your display name"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:134
+#, elixir-autogen, elixir-format
+msgid "Accurate CH₄ and N₂O emissions using IPCC 2019 refined methodology with country-specific factors."
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:46
+#, elixir-autogen, elixir-format
+msgid "Active Farms"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:117
+#: lib/mce_web/live/farm_live/index.ex:88
+#: lib/mce_web/live/farm_live/index.ex:107
+#, elixir-autogen, elixir-format
+msgid "Add Farm"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:950
+#, elixir-autogen, elixir-format
+msgid "Add Feed Item"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:225
+#, elixir-autogen, elixir-format
+msgid "Add Group"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:210
+#: lib/mce_web/live/farm_live/show.ex:244
+#, elixir-autogen, elixir-format
+msgid "Add Livestock Group"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1340
+#, elixir-autogen, elixir-format
+msgid "Add Manure System"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:239
+#, elixir-autogen, elixir-format
+msgid "Add livestock groups to start calculating emissions."
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:205
+#, elixir-autogen, elixir-format
+msgid "Add livestock groups to your farm to generate emissions reports."
+msgstr ""
+
+#: lib/mce_web/live/components/address_autocomplete.ex:119
+#: lib/mce_web/live/components/korean_address_input.ex:131
+#: lib/mce_web/live/farm_live/index.ex:200
+#: lib/mce_web/live/farm_live/show.ex:109
+#, elixir-autogen, elixir-format
+msgid "Address"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:256
+#, elixir-autogen, elixir-format
+msgid "Address Line 1"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:262
+#, elixir-autogen, elixir-format
+msgid "Address Line 2"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:161
+#, elixir-autogen, elixir-format
+msgid "Address Search"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:204
+#, elixir-autogen, elixir-format
+msgid "All rights reserved."
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:254
+#: lib/mce_web/components/emissions_components.ex:406
+#, elixir-autogen, elixir-format
+msgid "All values in tonnes CO₂ equivalent"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:263
+#, elixir-autogen, elixir-format
+msgid "Apartment, suite, unit, etc. (optional)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:245
+#, elixir-autogen, elixir-format
+msgid "Apr"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:568
+#: lib/mce_web/live/farm_live/show.ex:382
+#: lib/mce_web/live/livestock_live/wizard_live.ex:982
+#, elixir-autogen, elixir-format
+msgid "April"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:185
+#, elixir-autogen, elixir-format
+msgid "Are you sure you want to delete this farm? This action cannot be undone."
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:299
+#, elixir-autogen, elixir-format
+msgid "Are you sure you want to delete this livestock group?"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1121
+#, elixir-autogen, elixir-format
+msgid "Area per Animal (m²)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:249
+#, elixir-autogen, elixir-format
+msgid "Aug"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:572
+#: lib/mce_web/live/farm_live/show.ex:386
+#: lib/mce_web/live/livestock_live/wizard_live.ex:986
+#, elixir-autogen, elixir-format
+msgid "August"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:241
+#, elixir-autogen, elixir-format
+msgid "Auto-filled from search"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1143
+#, elixir-autogen, elixir-format
+msgid "Average Temperature (°C)"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:683
+#, elixir-autogen, elixir-format
+msgid "Average Weight (kg)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:312
+#, elixir-autogen, elixir-format
+msgid "Avg Weight"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:956
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1064
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1194
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1346
+#, elixir-autogen, elixir-format
+msgid "Back"
+msgstr ""
+
+#: lib/mce_web/components/layouts.ex:226
+#, elixir-autogen, elixir-format
+msgid "Back to App"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:96
+#, elixir-autogen, elixir-format
+msgid "Back to Dashboard"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:96
+#, elixir-autogen, elixir-format
+msgid "Back to Farm"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:83
+#, elixir-autogen, elixir-format
+msgid "Back to Farms"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1013
+#, elixir-autogen, elixir-format
+msgid "Barn (%)"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:595
+#, elixir-autogen, elixir-format
+msgid "Barn Info"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1091
+#, elixir-autogen, elixir-format
+msgid "Barn Information"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1100
+#, elixir-autogen, elixir-format
+msgid "Barn Type"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:353
+#, elixir-autogen, elixir-format
+msgid "Barn information saved"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:592
+#, elixir-autogen, elixir-format
+msgid "Basic Info"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:630
+#, elixir-autogen, elixir-format
+msgid "Basic Information"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:516
+#, elixir-autogen, elixir-format
+msgid "Basic information saved"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1167
+#, elixir-autogen, elixir-format
+msgid "Bedding"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1184
+#, elixir-autogen, elixir-format
+msgid "Bedding Change Frequency"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1174
+#, elixir-autogen, elixir-format
+msgid "Bedding Type"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:399
+#, elixir-autogen, elixir-format
+msgid "Beef Cattle"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1313
+#, elixir-autogen, elixir-format
+msgid "Biogas Captured"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:169
+#: lib/mce_web/live/dashboard_live/index.ex:265
+#: lib/mce_web/live/farm_live/index.ex:227
+#: lib/mce_web/live/farm_live/show.ex:373
+#, elixir-autogen, elixir-format
+msgid "Brazil"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:232
+#, elixir-autogen, elixir-format
+msgid "Breakdown by Source"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:246
+#, elixir-autogen, elixir-format
+msgid "Building Name"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:247
+#, elixir-autogen, elixir-format
+msgid "Building or complex name (optional)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:180
+#, elixir-autogen, elixir-format
+msgid "Calculate Emissions"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:192
+#, elixir-autogen, elixir-format
+msgid "Calculated"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:97
+#: lib/mce/reports/pdf_generator.ex:152
+#, elixir-autogen, elixir-format
+msgid "Calculated using IPCC Tier 2 methodology"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:772
+#, elixir-autogen, elixir-format
+msgid "Cancel"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:107
+#, elixir-autogen, elixir-format
+msgid "Charts will appear once you have emission reports for your farms."
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:269
+#, elixir-autogen, elixir-format
+msgid "City"
+msgstr ""
+
+#: lib/mce_web/live/components/korean_address_input.ex:132
+#, elixir-autogen, elixir-format
+msgid "Click to search for address"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:98
+#, elixir-autogen, elixir-format
+msgid "Click to upload or drag and drop"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:21
+#: lib/mce_web/live/compare_live/index.ex:103
+#: lib/mce_web/live/dashboard_live/index.ex:129
+#, elixir-autogen, elixir-format
+msgid "Compare Farms"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:381
+#, elixir-autogen, elixir-format
+msgid "Comparison Details"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:331
+#, elixir-autogen, elixir-format
+msgid "Continue"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1161
+#, elixir-autogen, elixir-format
+msgid "Cooling Type"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:154
+#: lib/mce_web/live/farm_live/form_component.ex:124
+#, elixir-autogen, elixir-format
+msgid "Country"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:129
+#, elixir-autogen, elixir-format
+msgid "Create Farm"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:189
+#, elixir-autogen, elixir-format
+msgid "Create Free Account"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:145
+#: lib/mce_web/live/farm_live/index.ex:102
+#, elixir-autogen, elixir-format
+msgid "Create your first farm to start tracking emissions."
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:914
+#, elixir-autogen, elixir-format
+msgid "Crude Protein (%)"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:853
+#, elixir-autogen, elixir-format
+msgid "Daily Amount (kg)"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:703
+#, elixir-autogen, elixir-format
+msgid "Daily Weight Gain (kg)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:398
+#, elixir-autogen, elixir-format
+msgid "Dairy Cattle"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:710
+#, elixir-autogen, elixir-format
+msgid "Dairy Parameters"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:17
+#: lib/mce_web/live/dashboard_live/index.ex:32
+#, elixir-autogen, elixir-format
+msgid "Dashboard"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:753
+#, elixir-autogen, elixir-format
+msgid "Days Pregnant"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:253
+#, elixir-autogen, elixir-format
+msgid "Dec"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:576
+#: lib/mce_web/live/farm_live/show.ex:390
+#: lib/mce_web/live/livestock_live/wizard_live.ex:990
+#, elixir-autogen, elixir-format
+msgid "December"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1223
+#, elixir-autogen, elixir-format
+msgid "Define manure management systems. Total percentages should sum to 100%."
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:191
+#: lib/mce_web/live/farm_live/show.ex:303
+#, elixir-autogen, elixir-format
+msgid "Delete"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:899
+#, elixir-autogen, elixir-format
+msgid "Digestibility (%)"
+msgstr ""
+
+#: lib/mce_web/live/components/address_autocomplete.ex:214
+#: lib/mce_web/live/farm_live/form_component.ex:582
+#, elixir-autogen, elixir-format
+msgid "Digite o endereco"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:269
+#, elixir-autogen, elixir-format
+msgid "Draft"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:483
+#, elixir-autogen, elixir-format
+msgid "Draft saved successfully"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:870
+#, elixir-autogen, elixir-format
+msgid "Dry Matter (%)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:177
+#: lib/mce_web/live/farm_live/show.ex:100
+#: lib/mce_web/live/farm_live/show.ex:290
+#, elixir-autogen, elixir-format
+msgid "Edit"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:334
+#, elixir-autogen, elixir-format
+msgid "Edit Details"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:33
+#: lib/mce_web/live/farm_live/show.ex:45
+#: lib/mce_web/live/farm_live/show.ex:354
+#, elixir-autogen, elixir-format
+msgid "Edit Farm"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:100
+#, elixir-autogen, elixir-format
+msgid "Edit Livestock Group"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:64
+#, elixir-autogen, elixir-format
+msgid "Emission Report"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:237
+#, elixir-autogen, elixir-format
+msgid "Emissions"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:50
+#, elixir-autogen, elixir-format
+msgid "Emissions Calculator"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:346
+#, elixir-autogen, elixir-format
+msgid "Emissions Comparison"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:197
+#: lib/mce_web/live/emissions_live/show.ex:22
+#: lib/mce_web/live/emissions_live/show.ex:104
+#: lib/mce_web/live/farm_live/show.ex:152
+#, elixir-autogen, elixir-format
+msgid "Emissions Report"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:68
+#, elixir-autogen, elixir-format
+msgid "Emissions Trend"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:176
+#, elixir-autogen, elixir-format
+msgid "Emissions by Group"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:102
+#, elixir-autogen, elixir-format
+msgid "Emissions by Source"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:87
+#, elixir-autogen, elixir-format
+msgid "Emissions by Type"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:52
+#, elixir-autogen, elixir-format
+msgid "Emissions report calculated successfully"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:72
+#, elixir-autogen, elixir-format
+msgid "Emissions report recalculated successfully"
+msgstr ""
+
+#: lib/mce_web/live/components/address_autocomplete.ex:215
+#: lib/mce_web/live/farm_live/form_component.ex:583
+#, elixir-autogen, elixir-format
+msgid "Enter address"
+msgstr ""
+
+#: lib/mce_web/live/components/address_autocomplete.ex:213
+#: lib/mce_web/live/farm_live/form_component.ex:581
+#, elixir-autogen, elixir-format
+msgid "Enter street address"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1002
+#, elixir-autogen, elixir-format
+msgid "Enter the percentage of time animals spend in each location for each month. Percentages must sum to 100% for each month."
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:140
+#: lib/mce_web/components/emissions_components.ex:143
+#: lib/mce_web/components/emissions_components.ex:219
+#: lib/mce_web/components/emissions_components.ex:312
+#: lib/mce_web/components/emissions_components.ex:388
+#: lib/mce_web/live/farm_live/show.ex:194
+#, elixir-autogen, elixir-format
+msgid "Enteric"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:81
+#: lib/mce_web/components/emissions_components.ex:84
+#: lib/mce_web/live/emissions_live/show.ex:137
+#, elixir-autogen, elixir-format
+msgid "Enteric Fermentation"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:487
+#, elixir-autogen, elixir-format
+msgid "Error saving draft"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:288
+#, elixir-autogen, elixir-format
+msgid "Error saving feed items"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:330
+#, elixir-autogen, elixir-format
+msgid "Error saving housing periods"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:447
+#, elixir-autogen, elixir-format
+msgid "Error saving manure systems"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:84
+#, elixir-autogen, elixir-format
+msgid "Everything you need to track and report livestock methane emissions"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1014
+#, elixir-autogen, elixir-format
+msgid "Exercise Yard (%)"
+msgstr ""
+
+#: lib/mce_web/controllers/report_controller.ex:31
+#: lib/mce_web/controllers/report_controller.ex:55
+#, elixir-autogen, elixir-format
+msgid "Failed to generate PDF: %{reason}"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:78
+#, elixir-autogen, elixir-format
+msgid "Failed to recalculate emissions"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:138
+#: lib/mce_web/components/emissions_components.ex:387
+#: lib/mce_web/live/livestock_live/wizard_live.ex:537
+#, elixir-autogen, elixir-format
+msgid "Farm"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:125
+#, elixir-autogen, elixir-format
+msgid "Farm Comparison Report"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:35
+#, elixir-autogen, elixir-format
+msgid "Farm Logo"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:97
+#, elixir-autogen, elixir-format
+msgid "Farm Management"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:30
+#, elixir-autogen, elixir-format
+msgid "Farm Name"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:502
+#, elixir-autogen, elixir-format
+msgid "Farm created successfully"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:65
+#, elixir-autogen, elixir-format
+msgid "Farm logo"
+msgstr ""
+
+#: lib/mce_web/controllers/report_controller.ex:24
+#: lib/mce_web/live/emissions_live/show.ex:32
+#: lib/mce_web/live/farm_live/index.ex:37
+#: lib/mce_web/live/farm_live/index.ex:70
+#: lib/mce_web/live/farm_live/show.ex:33
+#: lib/mce_web/live/livestock_live/wizard_live.ex:85
+#, elixir-autogen, elixir-format
+msgid "Farm not found"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:481
+#, elixir-autogen, elixir-format
+msgid "Farm updated successfully"
+msgstr ""
+
+#: lib/mce_web/components/layouts.ex:51
+#: lib/mce_web/components/layouts.ex:247
+#: lib/mce_web/live/farm_live/index.ex:13
+#: lib/mce_web/live/farm_live/index.ex:50
+#: lib/mce_web/live/farm_live/index.ex:82
+#, elixir-autogen, elixir-format
+msgid "Farms"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:243
+#, elixir-autogen, elixir-format
+msgid "Feb"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:566
+#: lib/mce_web/live/farm_live/show.ex:380
+#: lib/mce_web/live/livestock_live/wizard_live.ex:980
+#, elixir-autogen, elixir-format
+msgid "February"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:593
+#, elixir-autogen, elixir-format
+msgid "Feed"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:803
+#, elixir-autogen, elixir-format
+msgid "Feed Information"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:812
+#, elixir-autogen, elixir-format
+msgid "Feed Item"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:841
+#, elixir-autogen, elixir-format
+msgid "Feed Name"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:827
+#, elixir-autogen, elixir-format
+msgid "Feed Type"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:286
+#, elixir-autogen, elixir-format
+msgid "Feed information saved"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:555
+#, elixir-autogen, elixir-format
+msgid "File is too large. Maximum size is 2MB."
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:126
+#: lib/mce_web/live/emissions_live/show.ex:107
+#: lib/mce_web/live/farm_live/index.ex:204
+#: lib/mce_web/live/farm_live/show.ex:133
+#: lib/mce_web/live/farm_live/show.ex:154
+#, elixir-autogen, elixir-format
+msgid "Fiscal Year"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:300
+#, elixir-autogen, elixir-format
+msgid "Fiscal Year Settings"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:306
+#, elixir-autogen, elixir-format
+msgid "Fiscal Year Start Month"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:68
+#: lib/mce/reports/pdf_generator.ex:130
+#, elixir-autogen, elixir-format
+msgid "Generated"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:63
+#, elixir-autogen, elixir-format
+msgid "Get Started"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:163
+#: lib/mce_web/controllers/page_html/home.html.heex:170
+#, elixir-autogen, elixir-format
+msgid "Google Maps integration"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1015
+#, elixir-autogen, elixir-format
+msgid "Grazing (%)"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:762
+#, elixir-autogen, elixir-format
+msgid "Grazing Hours/Day"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:885
+#, elixir-autogen, elixir-format
+msgid "Gross Energy (MJ/kg)"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:217
+#: lib/mce_web/live/livestock_live/wizard_live.ex:639
+#, elixir-autogen, elixir-format
+msgid "Group Name"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1300
+#, elixir-autogen, elixir-format
+msgid "Has Anaerobic Digester"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1326
+#, elixir-autogen, elixir-format
+msgid "Has Separator"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:218
+#: lib/mce_web/live/livestock_live/wizard_live.ex:660
+#, elixir-autogen, elixir-format
+msgid "Head Count"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1152
+#, elixir-autogen, elixir-format
+msgid "Heating Type"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:594
+#, elixir-autogen, elixir-format
+msgid "Housing"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:998
+#, elixir-autogen, elixir-format
+msgid "Housing Information"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:327
+#, elixir-autogen, elixir-format
+msgid "Housing information saved"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:201
+#, elixir-autogen, elixir-format
+msgid "IPCC 2019 Tier 2 Methodology"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:132
+#, elixir-autogen, elixir-format
+msgid "IPCC Tier 2 Calculations"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:559
+#, elixir-autogen, elixir-format
+msgid "Invalid file type. Please upload PNG, JPG, GIF, or SVG."
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:242
+#, elixir-autogen, elixir-format
+msgid "Jan"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:565
+#: lib/mce_web/live/farm_live/show.ex:379
+#: lib/mce_web/live/livestock_live/wizard_live.ex:979
+#, elixir-autogen, elixir-format
+msgid "January"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:113
+#, elixir-autogen, elixir-format
+msgid "Jibun"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:240
+#, elixir-autogen, elixir-format
+msgid "Jibun Address"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:248
+#, elixir-autogen, elixir-format
+msgid "Jul"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:571
+#: lib/mce_web/live/farm_live/show.ex:385
+#: lib/mce_web/live/livestock_live/wizard_live.ex:985
+#, elixir-autogen, elixir-format
+msgid "July"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:247
+#, elixir-autogen, elixir-format
+msgid "Jun"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:570
+#: lib/mce_web/live/farm_live/show.ex:384
+#: lib/mce_web/live/livestock_live/wizard_live.ex:984
+#, elixir-autogen, elixir-format
+msgid "June"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:156
+#, elixir-autogen, elixir-format
+msgid "Juso API integration"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:82
+#, elixir-autogen, elixir-format
+msgid "Key Features"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:155
+#: lib/mce_web/live/dashboard_live/index.ex:263
+#: lib/mce_web/live/farm_live/index.ex:225
+#: lib/mce_web/live/farm_live/show.ex:371
+#, elixir-autogen, elixir-format
+msgid "Korea"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:211
+#, elixir-autogen, elixir-format
+msgid "Livestock Group Details"
+msgstr ""
+
+#: lib/mce_web/components/layouts.ex:253
+#: lib/mce_web/live/dashboard_live/index.ex:53
+#: lib/mce_web/live/dashboard_live/index.ex:155
+#: lib/mce_web/live/farm_live/show.ex:218
+#, elixir-autogen, elixir-format
+msgid "Livestock Groups"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:115
+#, elixir-autogen, elixir-format
+msgid "Livestock Tracking"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:72
+#, elixir-autogen, elixir-format
+msgid "Livestock group deleted successfully"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:444
+#, elixir-autogen, elixir-format
+msgid "Livestock group saved successfully"
+msgstr ""
+
+#: lib/mce_web/components/core_components.ex:145
+#, elixir-autogen, elixir-format
+msgid "Loading"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:148
+#, elixir-autogen, elixir-format
+msgid "Localized support with region-specific IPCC factors and address validation"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:287
+#, elixir-autogen, elixir-format
+msgid "Location Preview"
+msgstr ""
+
+#: lib/mce_web/components/layouts.ex:107
+#: lib/mce_web/components/layouts.ex:236
+#: lib/mce_web/controllers/page_html/home.html.heex:22
+#, elixir-autogen, elixir-format
+msgid "Log out"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:937
+#, elixir-autogen, elixir-format
+msgid "Main diet"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:220
+#, elixir-autogen, elixir-format
+msgid "Manage animals and their emissions data"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:19
+#, elixir-autogen, elixir-format
+msgid "Manage your farm information and settings."
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:596
+#, elixir-autogen, elixir-format
+msgid "Manure"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:85
+#: lib/mce/reports/pdf_generator.ex:141
+#: lib/mce_web/components/emissions_components.ex:85
+#: lib/mce_web/components/emissions_components.ex:147
+#: lib/mce_web/components/emissions_components.ex:220
+#: lib/mce_web/components/emissions_components.ex:316
+#: lib/mce_web/components/emissions_components.ex:389
+#: lib/mce_web/live/emissions_live/show.ex:144
+#: lib/mce_web/live/farm_live/show.ex:200
+#, elixir-autogen, elixir-format
+msgid "Manure CH₄"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1219
+#, elixir-autogen, elixir-format
+msgid "Manure Management"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:89
+#: lib/mce/reports/pdf_generator.ex:142
+#: lib/mce_web/components/emissions_components.ex:86
+#: lib/mce_web/components/emissions_components.ex:151
+#: lib/mce_web/components/emissions_components.ex:221
+#: lib/mce_web/components/emissions_components.ex:320
+#: lib/mce_web/components/emissions_components.ex:390
+#: lib/mce_web/live/emissions_live/show.ex:151
+#: lib/mce_web/live/farm_live/show.ex:206
+#, elixir-autogen, elixir-format
+msgid "Manure N₂O"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1232
+#, elixir-autogen, elixir-format
+msgid "Manure System"
+msgstr ""
+
+#: lib/mce_web/live/components/map_preview.ex:42
+#, elixir-autogen, elixir-format
+msgid "Map preview"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:244
+#, elixir-autogen, elixir-format
+msgid "Mar"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:567
+#: lib/mce_web/live/farm_live/show.ex:381
+#: lib/mce_web/live/livestock_live/wizard_live.ex:981
+#, elixir-autogen, elixir-format
+msgid "March"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:693
+#, elixir-autogen, elixir-format
+msgid "Mature Weight (kg)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:569
+#: lib/mce_web/live/farm_live/index.ex:246
+#: lib/mce_web/live/farm_live/show.ex:383
+#: lib/mce_web/live/livestock_live/wizard_live.ex:983
+#, elixir-autogen, elixir-format
+msgid "May"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:98
+#: lib/mce/reports/pdf_generator.ex:153
+#, elixir-autogen, elixir-format
+msgid "Methane & Carbon Emissions"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:48
+#, elixir-autogen, elixir-format
+msgid "Methane Carbon"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:198
+#, elixir-autogen, elixir-format
+msgid "Methane Carbon Emissions Calculator"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:727
+#, elixir-autogen, elixir-format
+msgid "Milk Fat Content (%)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:316
+#, elixir-autogen, elixir-format
+msgid "Milk Yield"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:717
+#, elixir-autogen, elixir-format
+msgid "Milk Yield (L/day)"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1012
+#, elixir-autogen, elixir-format
+msgid "Month"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:153
+#, elixir-autogen, elixir-format
+msgid "Name"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:44
+#, elixir-autogen, elixir-format
+msgid "New Farm"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:115
+#, elixir-autogen, elixir-format
+msgid "New Livestock Group"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1072
+#, elixir-autogen, elixir-format
+msgid "Next: Barn Info"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:785
+#, elixir-autogen, elixir-format
+msgid "Next: Feed"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:964
+#, elixir-autogen, elixir-format
+msgid "Next: Housing"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1202
+#, elixir-autogen, elixir-format
+msgid "Next: Manure"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:273
+#: lib/mce_web/live/farm_live/index.ex:235
+#, elixir-autogen, elixir-format
+msgid "No address"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:127
+#, elixir-autogen, elixir-format
+msgid "No address provided"
+msgstr ""
+
+#: lib/mce_web/live/components/address_autocomplete.ex:96
+#: lib/mce_web/live/farm_live/form_component.ex:224
+#, elixir-autogen, elixir-format
+msgid "No addresses found"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:184
+#, elixir-autogen, elixir-format
+msgid "No comparison yet"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:207
+#, elixir-autogen, elixir-format
+msgid "No emissions data"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:203
+#, elixir-autogen, elixir-format
+msgid "No emissions data available"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:105
+#, elixir-autogen, elixir-format
+msgid "No emissions data yet"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:125
+#, elixir-autogen, elixir-format
+msgid "No farms available"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:143
+#: lib/mce_web/live/farm_live/index.ex:100
+#, elixir-autogen, elixir-format
+msgid "No farms yet"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:177
+#, elixir-autogen, elixir-format
+msgid "No livestock groups to display"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:237
+#, elixir-autogen, elixir-format
+msgid "No livestock groups yet"
+msgstr ""
+
+#: lib/mce_web/live/components/map_preview.ex:71
+#, elixir-autogen, elixir-format
+msgid "No location set"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:176
+#, elixir-autogen, elixir-format
+msgid "No report calculated yet"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:252
+#, elixir-autogen, elixir-format
+msgid "Nov"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:575
+#: lib/mce_web/live/farm_live/show.ex:389
+#: lib/mce_web/live/livestock_live/wizard_live.ex:989
+#, elixir-autogen, elixir-format
+msgid "November"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:251
+#, elixir-autogen, elixir-format
+msgid "Oct"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:574
+#: lib/mce_web/live/farm_live/show.ex:388
+#: lib/mce_web/live/livestock_live/wizard_live.ex:988
+#, elixir-autogen, elixir-format
+msgid "October"
+msgstr ""
+
+#: lib/mce_web/live/components/map_preview.ex:59
+#, elixir-autogen, elixir-format
+msgid "Open Map"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:266
+#: lib/mce_web/live/farm_live/index.ex:228
+#: lib/mce_web/live/farm_live/show.ex:374
+#, elixir-autogen, elixir-format
+msgid "Other"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:101
+#, elixir-autogen, elixir-format
+msgid "PNG, JPG, GIF, SVG up to 2MB"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1262
+#, elixir-autogen, elixir-format
+msgid "Percentage (%)"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:494
+#, elixir-autogen, elixir-format
+msgid "Please complete the basic info step first to save as draft"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:280
+#, elixir-autogen, elixir-format
+msgid "Postal Code"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:735
+#, elixir-autogen, elixir-format
+msgid "Pregnancy & Grazing"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:742
+#, elixir-autogen, elixir-format
+msgid "Pregnant (%)"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:121
+#, elixir-autogen, elixir-format
+msgid "Print / PDF"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:53
+#, elixir-autogen, elixir-format
+msgid "Professional livestock emissions reporting platform. Calculate enteric fermentation and manure management emissions following IPCC Tier 2 methodology."
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:180
+#, elixir-autogen, elixir-format
+msgid "Ready to calculate your emissions?"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:117
+#, elixir-autogen, elixir-format
+msgid "Recalculate"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:138
+#, elixir-autogen, elixir-format
+msgid "Recent Farms"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:29
+#, elixir-autogen, elixir-format
+msgid "Register"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:99
+#, elixir-autogen, elixir-format
+msgid "Register multiple farms across Korea, USA, and Brazil with address validation and map preview."
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:234
+#, elixir-autogen, elixir-format
+msgid "Road Address"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:782
+#: lib/mce_web/live/livestock_live/wizard_live.ex:961
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1069
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1199
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1351
+#, elixir-autogen, elixir-format
+msgid "Save Draft"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:320
+#, elixir-autogen, elixir-format
+msgid "Save Farm"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1355
+#, elixir-autogen, elixir-format
+msgid "Save Livestock Group"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:319
+#, elixir-autogen, elixir-format
+msgid "Saving..."
+msgstr ""
+
+#: lib/mce_web/live/components/korean_address_input.ex:77
+#, elixir-autogen, elixir-format
+msgid "Search"
+msgstr ""
+
+#: lib/mce_web/live/components/address_autocomplete.ex:212
+#: lib/mce_web/live/farm_live/form_component.ex:580
+#, elixir-autogen, elixir-format
+msgid "Search by road name, building, or address"
+msgstr ""
+
+#: lib/mce_web/live/components/map_preview.ex:72
+#, elixir-autogen, elixir-format
+msgid "Search for an address to show map"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:186
+#, elixir-autogen, elixir-format
+msgid "Select 2 or more farms from the list to see their emissions compared."
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:106
+#, elixir-autogen, elixir-format
+msgid "Select 2-4 farms to compare their emissions"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:117
+#, elixir-autogen, elixir-format
+msgid "Select Farms"
+msgstr ""
+
+#: lib/mce_web/live/compare_live/index.ex:174
+#, elixir-autogen, elixir-format
+msgid "Select at least 2 farms to compare"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1185
+#, elixir-autogen, elixir-format
+msgid "Select frequency..."
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:650
+#, elixir-autogen, elixir-format
+msgid "Select species..."
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:833
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1101
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1175
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1253
+#, elixir-autogen, elixir-format
+msgid "Select type..."
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:235
+#, elixir-autogen, elixir-format
+msgid "Selected from search above"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:250
+#, elixir-autogen, elixir-format
+msgid "Sep"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:573
+#: lib/mce_web/live/farm_live/show.ex:387
+#: lib/mce_web/live/livestock_live/wizard_live.ex:987
+#, elixir-autogen, elixir-format
+msgid "September"
+msgstr ""
+
+#: lib/mce_web/components/layouts.ex:100
+#: lib/mce_web/controllers/page_html/home.html.heex:19
+#, elixir-autogen, elixir-format
+msgid "Settings"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:236
+#, elixir-autogen, elixir-format
+msgid "Source"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:649
+#, elixir-autogen, elixir-format
+msgid "Species"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:312
+#, elixir-autogen, elixir-format
+msgid "Start Day"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:182
+#, elixir-autogen, elixir-format
+msgid "Start tracking and reporting your livestock methane emissions today with our professional-grade calculator."
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:135
+#, elixir-autogen, elixir-format
+msgid "Starts"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:274
+#, elixir-autogen, elixir-format
+msgid "State / Province"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1278
+#, elixir-autogen, elixir-format
+msgid "Storage Duration (days)"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:257
+#, elixir-autogen, elixir-format
+msgid "Street address"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:670
+#, elixir-autogen, elixir-format
+msgid "Sub Category"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:73
+#, elixir-autogen, elixir-format
+msgid "Summary"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:146
+#, elixir-autogen, elixir-format
+msgid "Supported Regions"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:400
+#, elixir-autogen, elixir-format
+msgid "Swine"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1247
+#, elixir-autogen, elixir-format
+msgid "System Type"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1128
+#, elixir-autogen, elixir-format
+msgid "Temperature Control"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1135
+#, elixir-autogen, elixir-format
+msgid "Temperature Controlled"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:222
+#: lib/mce_web/components/emissions_components.ex:237
+#: lib/mce_web/components/emissions_components.ex:391
+#, elixir-autogen, elixir-format
+msgid "Total"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1111
+#, elixir-autogen, elixir-format
+msgid "Total Area (m²)"
+msgstr ""
+
+#: lib/mce/reports/pdf_generator.ex:77
+#: lib/mce/reports/pdf_generator.ex:139
+#: lib/mce_web/live/dashboard_live/index.ex:39
+#: lib/mce_web/live/dashboard_live/index.ex:156
+#: lib/mce_web/live/emissions_live/show.ex:130
+#, elixir-autogen, elixir-format
+msgid "Total Emissions"
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:117
+#, elixir-autogen, elixir-format
+msgid "Track dairy cattle, beef cattle, and swine with detailed feed composition and manure management data."
+msgstr ""
+
+#: lib/mce_web/controllers/page_html/home.html.heex:162
+#: lib/mce_web/live/dashboard_live/index.ex:264
+#: lib/mce_web/live/farm_live/index.ex:226
+#: lib/mce_web/live/farm_live/show.ex:372
+#, elixir-autogen, elixir-format
+msgid "United States"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:401
+#, elixir-autogen, elixir-format
+msgid "Unknown"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:561
+#, elixir-autogen, elixir-format
+msgid "Upload error. Please try again."
+msgstr ""
+
+#: lib/mce_web/components/layouts.ex:244
+#, elixir-autogen, elixir-format
+msgid "Users"
+msgstr ""
+
+#: lib/mce_web/live/emissions_live/show.ex:196
+#, elixir-autogen, elixir-format
+msgid "Version"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:190
+#, elixir-autogen, elixir-format
+msgid "View"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:123
+#, elixir-autogen, elixir-format
+msgid "View All Farms"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/index.ex:212
+#, elixir-autogen, elixir-format
+msgid "View Details"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:170
+#, elixir-autogen, elixir-format
+msgid "View Report"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:676
+#, elixir-autogen, elixir-format
+msgid "Weight Parameters"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/form_component.ex:556
+#, elixir-autogen, elixir-format
+msgid "You can only upload one file."
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:846
+#, elixir-autogen, elixir-format
+msgid "e.g., Corn silage"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:640
+#, elixir-autogen, elixir-format
+msgid "e.g., Dairy Herd A"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1162
+#, elixir-autogen, elixir-format
+msgid "e.g., Fans, Misters"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:1153
+#, elixir-autogen, elixir-format
+msgid "e.g., Gas, Electric"
+msgstr ""
+
+#: lib/mce_web/live/livestock_live/wizard_live.ex:671
+#, elixir-autogen, elixir-format
+msgid "e.g., Holstein, Angus"
+msgstr ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:48
+#, elixir-autogen, elixir-format
+msgid "farm"
+msgid_plural "farms"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/mce_web/live/dashboard_live/index.ex:55
+#, elixir-autogen, elixir-format
+msgid "group"
+msgid_plural "groups"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/mce_web/live/farm_live/show.ex:273
+#, elixir-autogen, elixir-format
+msgid "head"
+msgstr ""
+
+#: lib/mce_web/live/farm_live/show.ex:165
+#, elixir-autogen, elixir-format
+msgid "t CO₂e Total"
+msgstr ""
+
+#: lib/mce_web/components/emissions_components.ex:332
+#: lib/mce_web/live/dashboard_live/index.ex:76
+#, elixir-autogen, elixir-format
+msgid "tonnes CO₂e"
 msgstr ""

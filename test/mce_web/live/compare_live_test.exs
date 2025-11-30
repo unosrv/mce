@@ -18,7 +18,8 @@ defmodule MceWeb.CompareLiveTest do
     test "renders comparison page", %{conn: conn} do
       {:ok, _view, html} = live(conn, ~p"/compare")
 
-      assert html =~ "Compare" or html =~ "compare" or html =~ "Comparison"
+      # Check for English or Korean text
+      assert html =~ "Compare" or html =~ "compare" or html =~ "Comparison" or html =~ "비교"
     end
 
     test "lists farms for comparison when user has farms", %{conn: conn, user: user} do

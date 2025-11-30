@@ -18,8 +18,8 @@ defmodule MceWeb.DashboardLiveTest do
     test "renders dashboard page", %{conn: conn} do
       {:ok, _view, html} = live(conn, ~p"/dashboard")
 
-      # The page title should contain "Dashboard"
-      assert html =~ "Dashboard"
+      # The page title should contain "Dashboard" (English) or "대시보드" (Korean)
+      assert html =~ "Dashboard" or html =~ "대시보드"
     end
 
     test "shows stats section", %{conn: conn} do

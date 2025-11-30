@@ -3,9 +3,10 @@ defmodule MceWeb.Plugs.SetLocale do
   Plug to set the locale for the current request.
 
   Priority order:
-  1. Session locale (user preference)
-  2. Accept-Language header
-  3. Default locale (ko)
+  1. Query param locale (explicit user selection)
+  2. Session locale (user preference)
+  3. Accept-Language header
+  4. Default locale (ko)
   """
   import Plug.Conn
 
@@ -16,7 +17,8 @@ defmodule MceWeb.Plugs.SetLocale do
 
   def call(conn, _opts) do
     locale =
-      get_session(conn, :locale) ||
+      get_locale_from_params(conn) ||
+        get_session(conn, :locale) ||
         get_preferred_locale(conn) ||
         @default_locale
 
@@ -25,6 +27,19 @@ defmodule MceWeb.Plugs.SetLocale do
     conn
     |> put_session(:locale, locale)
     |> assign(:locale, locale)
+  end
+
+  defp get_locale_from_params(conn) do
+    case conn.params do
+      %Plug.Conn.Unfetched{} ->
+        nil
+
+      params ->
+        case params["locale"] do
+          locale when locale in @locales -> locale
+          _ -> nil
+        end
+    end
   end
 
   defp get_preferred_locale(conn) do

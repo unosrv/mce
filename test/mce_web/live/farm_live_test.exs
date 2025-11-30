@@ -25,8 +25,9 @@ defmodule MceWeb.FarmLiveTest do
     test "shows empty state when user has no farms", %{conn: conn} do
       {:ok, _view, html} = live(conn, ~p"/farms")
 
-      # Should show empty state message or add button
-      assert html =~ "Add" or html =~ "New" or html =~ "empty" or html =~ "No farms"
+      # Should show empty state message or add button (English or Korean)
+      assert html =~ "Add" or html =~ "New" or html =~ "empty" or html =~ "No farms" or
+               html =~ "추가" or html =~ "새" or html =~ "농장이 없습니다"
     end
 
     test "lists user's farms", %{conn: conn, user: user} do

@@ -115,7 +115,8 @@ mix precommit                # Compile with warnings-as-errors, unlock unused de
   - https://tailwindcss.com/docs/installation/using-vite
 
 ## Language
-  - Always keep in mind i18n support when writing texts: titles, labels, messages, etc.
+  - Always keep synchronise when writing texts: titles, labels, messages, etc.
+  - Always keep synchronise when refactor frontend UI.
   - The primary UI interface language of the project is Korean. The UI targe languages are Korean, English(US), and Portuguese(Brazil).
   - English is strictly used for development including code comments, commit messages, and documentation.
   - Clear and technically precise language is preferred.

@@ -59,7 +59,10 @@ defmodule MceWeb.DashboardLive.Index do
         </div>
 
         <%!-- Charts Section --%>
-        <div :if={has_chart_data?(@trend_data, @breakdown_data)} class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div
+          :if={has_chart_data?(@trend_data, @breakdown_data)}
+          class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3"
+        >
           <%!-- Emissions Trend Chart --%>
           <div class="card bg-base-100 shadow-lg lg:col-span-2">
             <div class="card-body">

@@ -35,8 +35,8 @@ defmodule MceWeb.I18nTest do
       assert gettext_in("ko", "Email") == "이메일"
       assert gettext_in("ko", "Password") == "비밀번호"
       assert gettext_in("ko", "Log in") == "로그인"
-      assert gettext_in("ko", "Dark theme") == "어두운 테마"
-      assert gettext_in("ko", "Light theme") == "밝은 테마"
+      assert gettext_in("ko", "Dark theme") == "다크 테마"
+      assert gettext_in("ko", "Light theme") == "라이트 테마"
     end
 
     test "Korean locale returns Korean error messages" do
@@ -76,10 +76,10 @@ defmodule MceWeb.I18nTest do
       assert dgettext_in("en", "errors", "is invalid") == "is invalid"
     end
 
-    test "Portuguese locale falls back to msgid (source text)" do
-      # Empty msgstr means fallback to msgid
-      assert gettext_in("pt_BR", "Actions") == "Actions"
-      assert gettext_in("pt_BR", "Email") == "Email"
+    test "Portuguese locale returns Portuguese translations" do
+      # Portuguese locale has complete translations
+      assert gettext_in("pt_BR", "Actions") == "Ações"
+      assert gettext_in("pt_BR", "Email") == "E-mail"
     end
 
     test "unknown locale falls back to default locale" do
