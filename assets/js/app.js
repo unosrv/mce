@@ -24,9 +24,9 @@ import "./backpex_form_buttons";
 // Establish Phoenix Socket and LiveView configuration.
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
-// commented out to avoid build errors
-// See dev-doc/report/2512010421_DOKPLOY_DEPLOYMENT_FIX.md
-// import {hooks as colocatedHooks} from "phoenix-colocated/mce"
+// Commented out to avoid build order issues with Railpack/Nixpacks
+// See: dev-doc/guide/2512010443_DOKPLOY_BUILD_ORDER_CONFIGURATION.md
+// import { hooks as colocatedHooks } from "phoenix-colocated/mce";
 import topbar from "../vendor/topbar";
 import Hooks from "./hooks";
 
@@ -36,9 +36,8 @@ const csrfToken = document
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: { _csrf_token: csrfToken },
-  // commented out to avoid build errors
-  // See dev-doc/report/2512010421_DOKPLOY_DEPLOYMENT_FIX.md
-  // hooks: {...colocatedHooks, ...Hooks},
+  // Commented out - using only Hooks until build order is fixed
+  // hooks: { ...colocatedHooks, ...Hooks },
   hooks: Hooks,
 });
 
