@@ -353,11 +353,11 @@ defmodule MceWeb.Layouts do
 
   def dashboard_layout(assigns) do
     ~H"""
-    <div class="drawer lg:drawer-open">
+    <div class="drawer lg:drawer-open h-screen overflow-hidden">
       <input id="dashboard-drawer" type="checkbox" class="drawer-toggle" />
 
       <%!-- Main Content Area --%>
-      <div class="drawer-content flex flex-col min-w-0">
+      <div class="drawer-content flex flex-col min-w-0 h-full overflow-hidden">
         <%!-- Dashboard Header --%>
         <header class="navbar bg-base-100/80 backdrop-blur-sm border-b border-base-300 sticky top-0 z-40 px-4">
           <div class="flex-none lg:hidden">
@@ -384,9 +384,11 @@ defmodule MceWeb.Layouts do
         </header>
 
         <%!-- Page Content --%>
-        <main class="flex-1 bg-base-200/50 overflow-x-auto">
+        <main class="flex-1 min-h-0 bg-base-200/50 overflow-auto">
           {render_slot(@inner_block)}
         </main>
+
+        <.flash_group flash={@flash} />
       </div>
 
       <%!-- Sidebar --%>
@@ -448,8 +450,6 @@ defmodule MceWeb.Layouts do
         </div>
       </div>
     </div>
-
-    <.flash_group flash={@flash} />
     """
   end
 

@@ -80,21 +80,22 @@ The login page (`/users/log-in`) has **TWO separate login forms**. DO NOT mix th
 1. **Magic Link Login Form** (TOP section - email only)
    - Form ID: `#login_form_magic`
    - Email field: `#login_form_magic input[name="user[email]"]`
-   - Submit button: `#login_form_magic button[type="submit"]`
+   - Submit button: `#login_form_magic button` (no type attribute set)
 
 2. **Password Login Form** (BOTTOM section - email + password)
    - Form ID: `#login_form_password`
    - Email field: `#login_form_password input[name="user[email]"]`
    - Password field: `#login_form_password input[name="user[password]"]`
-   - Submit buttons: Two buttons (first = remember, second = one-time)
+   - Submit buttons: Two `<button>` elements (first = remember, second = one-time)
+   - **Note:** Buttons do NOT have `type="submit"` attribute (Phoenix `<.button>` component default)
 
 **Playwright Login Code Pattern (ALWAYS use this):**
 ```javascript
 // For password login - use EXACT form ID selectors
 await page.fill('#login_form_password input[name="user[email]"]', 'user@example.com');
 await page.fill('#login_form_password input[name="user[password]"]', 'password123');
-// Click the first button (Log in and stay logged in) - use >> nth=0
-await page.locator('#login_form_password button[type="submit"]').first().click();
+// Click the first button (Log in and stay logged in) - DO NOT use [type="submit"]
+await page.locator('#login_form_password button').first().click();
 ```
 
 **Test Credentials (from seeds.exs):**
