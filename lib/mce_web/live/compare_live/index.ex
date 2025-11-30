@@ -21,7 +21,8 @@ defmodule MceWeb.CompareLive.Index do
      |> assign(:page_title, gettext("Compare Farms"))
      |> assign(:farms, farms)
      |> assign(:selected_ids, MapSet.new())
-     |> assign(:comparison_data, [])}
+     |> assign(:comparison_data, [])
+     |> assign(:current_url, "/compare")}
   end
 
   @impl true
@@ -87,7 +88,12 @@ defmodule MceWeb.CompareLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.dashboard_layout
+      flash={@flash}
+      current_scope={@current_scope}
+      current_url={@current_url}
+      locale={@locale}
+    >
       <div class="container mx-auto px-4 py-6">
         <%!-- Header --%>
         <div class="mb-6">
@@ -197,7 +203,7 @@ defmodule MceWeb.CompareLive.Index do
           </div>
         </div>
       </div>
-    </Layouts.app>
+    </Layouts.dashboard_layout>
     """
   end
 

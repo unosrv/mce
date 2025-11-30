@@ -18,23 +18,28 @@ defmodule MceWeb.DashboardLive.Index do
      |> assign(:stats, stats)
      |> assign(:recent_farms, recent_farms)
      |> assign(:trend_data, trend_data)
-     |> assign(:breakdown_data, breakdown_data)}
+     |> assign(:breakdown_data, breakdown_data)
+     |> assign(:current_url, "/dashboard")}
+  end
+
+  @impl true
+  def handle_params(_params, uri, socket) do
+    current_url = URI.parse(uri).path
+    {:noreply, assign(socket, :current_url, current_url)}
   end
 
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.dashboard_layout
+      flash={@flash}
+      current_scope={@current_scope}
+      current_url={@current_url}
+      locale={@locale}
+    >
       <div class="container mx-auto px-4 py-6">
-        <.header>
-          <div class="flex items-center gap-2">
-            <.icon name="hero-chart-bar" class="size-8 text-primary" />
-            <span>{gettext("Dashboard")}</span>
-          </div>
-        </.header>
-
         <%!-- Stats Row --%>
-        <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <.stat_card
             title={gettext("Total Emissions")}
             value={format_emissions(@stats.total_emissions)}
@@ -209,7 +214,7 @@ defmodule MceWeb.DashboardLive.Index do
           </div>
         </div>
       </div>
-    </Layouts.app>
+    </Layouts.dashboard_layout>
     """
   end
 

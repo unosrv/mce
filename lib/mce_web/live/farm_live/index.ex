@@ -12,6 +12,7 @@ defmodule MceWeb.FarmLive.Index do
      socket
      |> assign(:page_title, gettext("Farms"))
      |> assign(:farms_empty?, Enum.empty?(farms))
+     |> assign(:current_url, "/farms")
      |> stream(:farms, farms)
      |> allow_upload(:logo,
        accept: ~w(.jpg .jpeg .png .gif .svg),
@@ -60,6 +61,11 @@ defmodule MceWeb.FarmLive.Index do
   end
 
   @impl true
+  def handle_event("edit", %{"id" => id}, socket) do
+    {:noreply, push_patch(socket, to: ~p"/farms/#{id}/edit")}
+  end
+
+  @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     farm = Farms.get_farm_for_user(id, socket.assigns.current_scope.user.id)
 
@@ -74,7 +80,12 @@ defmodule MceWeb.FarmLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.dashboard_layout
+      flash={@flash}
+      current_scope={@current_scope}
+      current_url={@current_url}
+      locale={@locale}
+    >
       <div class="container mx-auto px-4 py-6">
         <%!-- Add Farm button (top right) --%>
         <div class="flex justify-end mb-6">
@@ -113,7 +124,6 @@ defmodule MceWeb.FarmLive.Index do
               :for={{id, farm} <- @streams.farms}
               id={id}
               farm={farm}
-              on_edit={~p"/farms/#{farm}/edit"}
               on_delete={JS.push("delete", value: %{id: farm.id})}
             />
           </div>
@@ -137,13 +147,12 @@ defmodule MceWeb.FarmLive.Index do
           patch={~p"/farms"}
         />
       </.modal>
-    </Layouts.app>
+    </Layouts.dashboard_layout>
     """
   end
 
   attr :id, :string, required: true
   attr :farm, Farm, required: true
-  attr :on_edit, :string, required: true
   attr :on_delete, :any, required: true
 
   defp farm_card(assigns) do
@@ -162,15 +171,12 @@ defmodule MceWeb.FarmLive.Index do
             <div tabindex="0" role="button" class="btn btn-ghost btn-sm btn-square">
               <.icon name="hero-ellipsis-vertical" class="size-5" />
             </div>
-            <ul
-              tabindex="0"
-              class="dropdown-content menu bg-base-100 rounded-box z-50 w-40 p-2 shadow-lg"
-            >
+            <ul class="dropdown-content menu bg-base-100 rounded-box z-[100] w-40 p-2 shadow-lg">
               <li>
-                <.link patch={@on_edit} class="gap-2">
+                <button type="button" phx-click="edit" phx-value-id={@farm.id} class="gap-2">
                   <.icon name="hero-pencil" class="size-4" />
                   {gettext("Edit")}
-                </.link>
+                </button>
               </li>
               <li>
                 <button

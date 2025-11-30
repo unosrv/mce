@@ -45,13 +45,13 @@ defmodule MceWeb.Layouts do
             <.icon name="hero-chart-bar" class="size-8 text-primary" />
             <span class="text-lg font-bold text-primary">MCE</span>
           </a>
-          <nav :if={@current_scope} class="hidden md:flex">
+          <nav :if={@current_scope} class="hidden md:flex gap-4">
             <.link
-              navigate={~p"/farms"}
+              navigate={~p"/dashboard"}
               class="flex items-center gap-2 px-2 py-1 text-base-content/70 hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors"
             >
-              <.icon name="hero-building-office-2" class="size-4" />
-              {gettext("Farms")}
+              <.icon name="hero-chart-bar" class="size-4" />
+              {gettext("Dashboard")}
             </.link>
           </nav>
         </div>
@@ -97,6 +97,12 @@ defmodule MceWeb.Layouts do
       <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow-lg">
         <li class="menu-title">
           <span class="text-xs font-normal text-base-content/60">{@user.email}</span>
+        </li>
+        <li :if={@user.is_admin}>
+          <.link href={~p"/admin"} class="gap-2 text-primary">
+            <.icon name="hero-cog-8-tooth" class="size-4" />
+            {gettext("Admin")}
+          </.link>
         </li>
         <li>
           <.link href={~p"/users/settings"} class="gap-2">
@@ -205,61 +211,253 @@ defmodule MceWeb.Layouts do
   attr :flash, :map, required: true, doc: "the map of flash messages"
   attr :fluid?, :boolean, default: true, doc: "if the content uses full width"
   attr :current_url, :string, required: true, doc: "the current url"
+  attr :current_scope, :map, default: nil, doc: "the current scope with user info"
+  attr :locale, :string, default: "ko", doc: "the current locale"
 
   slot :inner_block, required: true
 
   def admin(assigns) do
     ~H"""
-    <Backpex.HTML.Layout.app_shell fluid={@fluid?}>
-      <:topbar>
-        <Backpex.HTML.Layout.topbar_branding>
+    <div class="min-h-screen bg-base-200">
+      <%!-- Admin Header --%>
+      <header class="navbar bg-base-100 border-b border-base-300 fixed top-0 z-50 px-4">
+        <div class="flex-1 gap-4">
           <.link href={~p"/admin/users"} class="flex items-center gap-2 text-primary">
-            <.icon name="hero-chart-bar" class="size-6" />
-            <span class="font-bold">MCE Admin</span>
+            <.icon name="hero-cog-8-tooth" class="size-7" />
+            <span class="text-lg font-bold">{gettext("Admin")}</span>
           </.link>
-        </Backpex.HTML.Layout.topbar_branding>
+        </div>
 
-        <Backpex.HTML.Layout.topbar_dropdown class="mr-2 md:mr-0">
-          <:label>
-            <div class="btn btn-square btn-ghost">
-              <Backpex.HTML.CoreComponents.icon name="hero-user" class="size-6" />
-            </div>
-          </:label>
-          <li>
-            <.link href={~p"/dashboard"} class="flex justify-between hover:bg-base-200">
-              <p>{gettext("Back to App")}</p>
-              <Backpex.HTML.CoreComponents.icon name="hero-home" class="size-5" />
-            </.link>
-          </li>
-          <li>
-            <.link
-              href={~p"/users/log-out"}
-              method="delete"
-              class="text-error flex justify-between hover:bg-base-200"
-            >
-              <p>{gettext("Log out")}</p>
-              <Backpex.HTML.CoreComponents.icon name="hero-arrow-right-on-rectangle" class="size-5" />
-            </.link>
-          </li>
-        </Backpex.HTML.Layout.topbar_dropdown>
-      </:topbar>
-      <:sidebar>
-        <Backpex.HTML.Layout.sidebar_item current_url={@current_url} navigate={~p"/admin/users"}>
-          <.icon name="hero-users" class="size-5" /> {gettext("Users")}
-        </Backpex.HTML.Layout.sidebar_item>
-        <Backpex.HTML.Layout.sidebar_item current_url={@current_url} navigate={~p"/admin/farms"}>
-          <.icon name="hero-building-office-2" class="size-5" /> {gettext("Farms")}
-        </Backpex.HTML.Layout.sidebar_item>
-        <Backpex.HTML.Layout.sidebar_item
-          current_url={@current_url}
-          navigate={~p"/admin/livestock-groups"}
-        >
-          <.icon name="hero-beaker" class="size-5" /> {gettext("Livestock Groups")}
-        </Backpex.HTML.Layout.sidebar_item>
-      </:sidebar>
-      <Backpex.HTML.Layout.flash_messages flash={@flash} />
-      {render_slot(@inner_block)}
-    </Backpex.HTML.Layout.app_shell>
+        <div class="flex-none">
+          <ul class="flex flex-row px-1 space-x-2 items-center">
+            <li>
+              <.link
+                href={~p"/dashboard"}
+                class="btn btn-ghost btn-sm gap-2"
+              >
+                <.icon name="hero-arrow-left" class="size-4" />
+                {gettext("Back to App")}
+              </.link>
+            </li>
+            <li>
+              <.language_switcher locale={@locale} />
+            </li>
+            <li>
+              <.theme_toggle />
+            </li>
+            <li :if={@current_scope}>
+              <.user_menu user={@current_scope.user} />
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <div class="flex pt-16">
+        <%!-- Sidebar --%>
+        <aside class="w-64 bg-base-100 border-r border-base-300 fixed left-0 top-16 bottom-0 overflow-y-auto hidden md:block">
+          <nav class="p-4">
+            <ul class="menu menu-lg gap-1">
+              <li>
+                <.link
+                  navigate={~p"/admin/users"}
+                  class={[
+                    "flex items-center gap-3",
+                    active_admin_link?(@current_url, "/admin/users") && "bg-primary/10 text-primary"
+                  ]}
+                >
+                  <.icon name="hero-users" class="size-5" />
+                  {gettext("Users")}
+                </.link>
+              </li>
+              <li>
+                <.link
+                  navigate={~p"/admin/farms"}
+                  class={[
+                    "flex items-center gap-3",
+                    active_admin_link?(@current_url, "/admin/farms") && "bg-primary/10 text-primary"
+                  ]}
+                >
+                  <.icon name="hero-building-office-2" class="size-5" />
+                  {gettext("Farms")}
+                </.link>
+              </li>
+              <li>
+                <.link
+                  navigate={~p"/admin/livestock-groups"}
+                  class={[
+                    "flex items-center gap-3",
+                    active_admin_link?(@current_url, "/admin/livestock-groups") &&
+                      "bg-primary/10 text-primary"
+                  ]}
+                >
+                  <.icon name="hero-beaker" class="size-5" />
+                  {gettext("Livestock Groups")}
+                </.link>
+              </li>
+              <li>
+                <.link
+                  navigate={~p"/admin/feed-presets"}
+                  class={[
+                    "flex items-center gap-3",
+                    active_admin_link?(@current_url, "/admin/feed-presets") &&
+                      "bg-primary/10 text-primary"
+                  ]}
+                >
+                  <.icon name="hero-clipboard-document-list" class="size-5" />
+                  {gettext("Feed Presets")}
+                </.link>
+              </li>
+              <li>
+                <.link
+                  navigate={~p"/admin/ipcc-factors"}
+                  class={[
+                    "flex items-center gap-3",
+                    active_admin_link?(@current_url, "/admin/ipcc-factors") &&
+                      "bg-primary/10 text-primary"
+                  ]}
+                >
+                  <.icon name="hero-document-chart-bar" class="size-5" />
+                  {gettext("IPCC Factors")}
+                </.link>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+
+        <%!-- Main Content --%>
+        <main class="flex-1 md:ml-64 p-6 min-h-[calc(100vh-4rem)] min-w-0 overflow-x-auto">
+          <Backpex.HTML.Layout.flash_messages flash={@flash} />
+          <div class="max-w-full overflow-x-auto">
+            {render_slot(@inner_block)}
+          </div>
+        </main>
+      </div>
+    </div>
     """
+  end
+
+  defp active_admin_link?(current_url, path) do
+    String.starts_with?(current_url, path)
+  end
+
+  @doc """
+  Dashboard layout with responsive collapsible drawer sidebar.
+  Uses DaisyUI's is-drawer-close and is-drawer-open pattern.
+  """
+  attr :flash, :map, required: true, doc: "the map of flash messages"
+  attr :current_scope, :map, required: true, doc: "the current scope"
+  attr :locale, :string, default: "ko", doc: "the current locale"
+  attr :current_url, :string, default: "/dashboard", doc: "the current URL path"
+
+  slot :inner_block, required: true
+
+  def dashboard_layout(assigns) do
+    ~H"""
+    <div class="drawer lg:drawer-open">
+      <input id="dashboard-drawer" type="checkbox" class="drawer-toggle" />
+
+      <%!-- Main Content Area --%>
+      <div class="drawer-content flex flex-col min-w-0">
+        <%!-- Dashboard Header --%>
+        <header class="navbar bg-base-100/80 backdrop-blur-sm border-b border-base-300 sticky top-0 z-40 px-4">
+          <div class="flex-none lg:hidden">
+            <label for="dashboard-drawer" class="btn btn-square btn-ghost">
+              <.icon name="hero-bars-3" class="size-6" />
+            </label>
+          </div>
+          <div class="flex-1 gap-4">
+            <%!-- Empty - brand is in sidebar header --%>
+          </div>
+          <div class="flex-none">
+            <ul class="flex flex-row px-1 space-x-2 items-center">
+              <li>
+                <.language_switcher locale={@locale} />
+              </li>
+              <li>
+                <.theme_toggle />
+              </li>
+              <li>
+                <.user_menu user={@current_scope.user} />
+              </li>
+            </ul>
+          </div>
+        </header>
+
+        <%!-- Page Content --%>
+        <main class="flex-1 bg-base-200/50 overflow-x-auto">
+          {render_slot(@inner_block)}
+        </main>
+      </div>
+
+      <%!-- Sidebar --%>
+      <div class="drawer-side z-50 is-drawer-close:overflow-visible">
+        <label for="dashboard-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="flex min-h-full flex-col bg-base-100 border-r border-base-300 is-drawer-close:w-16 is-drawer-open:w-64 transition-[width] duration-200">
+          <%!-- Sidebar Header - Brand only --%>
+          <div class="flex h-16 items-center justify-center border-b border-base-300 px-4">
+            <.link href="/" class="flex items-center gap-2">
+              <.icon name="hero-chart-bar" class="size-7 text-primary" />
+              <span class="text-lg font-bold text-primary is-drawer-close:hidden">MCE</span>
+            </.link>
+          </div>
+
+          <%!-- Navigation Menu --%>
+          <nav class="flex-1 p-2">
+            <ul class="menu gap-1">
+              <li>
+                <.link
+                  navigate={~p"/dashboard"}
+                  class={[
+                    "flex items-center gap-3 is-drawer-close:justify-center is-drawer-close:tooltip is-drawer-close:tooltip-right",
+                    active_dashboard_link?(@current_url, "/dashboard") && "bg-primary/10 text-primary"
+                  ]}
+                  data-tip={gettext("Overview")}
+                >
+                  <.icon name="hero-home" class="size-5 shrink-0" />
+                  <span class="is-drawer-close:hidden">{gettext("Overview")}</span>
+                </.link>
+              </li>
+              <li>
+                <.link
+                  navigate={~p"/farms"}
+                  class={[
+                    "flex items-center gap-3 is-drawer-close:justify-center is-drawer-close:tooltip is-drawer-close:tooltip-right",
+                    active_dashboard_link?(@current_url, "/farms") && "bg-primary/10 text-primary"
+                  ]}
+                  data-tip={gettext("Farms")}
+                >
+                  <.icon name="hero-building-office-2" class="size-5 shrink-0" />
+                  <span class="is-drawer-close:hidden">{gettext("Farms")}</span>
+                </.link>
+              </li>
+              <li>
+                <.link
+                  navigate={~p"/compare"}
+                  class={[
+                    "flex items-center gap-3 is-drawer-close:justify-center is-drawer-close:tooltip is-drawer-close:tooltip-right",
+                    active_dashboard_link?(@current_url, "/compare") && "bg-primary/10 text-primary"
+                  ]}
+                  data-tip={gettext("Compare Farms")}
+                >
+                  <.icon name="hero-scale" class="size-5 shrink-0" />
+                  <span class="is-drawer-close:hidden">{gettext("Compare Farms")}</span>
+                </.link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <.flash_group flash={@flash} />
+    """
+  end
+
+  defp active_dashboard_link?(current_url, "/dashboard") do
+    current_url == "/dashboard" or current_url == "/"
+  end
+
+  defp active_dashboard_link?(current_url, path) do
+    String.starts_with?(current_url, path)
   end
 end

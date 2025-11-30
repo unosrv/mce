@@ -18,6 +18,7 @@ defmodule MceWeb.FarmLive.Show do
        socket
        |> assign(:page_title, farm.name)
        |> assign(:farm, farm)
+       |> assign(:current_url, "/farms")
        |> assign(:livestock_empty?, Enum.empty?(livestock_groups))
        |> assign(:emission_report, emission_report)
        |> assign(:report_year, current_year)
@@ -75,7 +76,12 @@ defmodule MceWeb.FarmLive.Show do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.dashboard_layout
+      flash={@flash}
+      current_scope={@current_scope}
+      current_url={@current_url}
+      locale={@locale}
+    >
       <div class="container mx-auto px-4 py-6">
         <div class="mb-6">
           <.link navigate={~p"/farms"} class="btn btn-ghost btn-sm gap-2">
@@ -279,7 +285,7 @@ defmodule MceWeb.FarmLive.Show do
                       </div>
                       <ul
                         tabindex="0"
-                        class="dropdown-content menu bg-base-100 rounded-box z-50 w-40 p-2 shadow-lg"
+                        class="dropdown-content menu bg-base-100 rounded-box z-[100] w-40 p-2 shadow-lg"
                       >
                         <li>
                           <.link
@@ -359,7 +365,7 @@ defmodule MceWeb.FarmLive.Show do
           patch={~p"/farms/#{@farm}"}
         />
       </.modal>
-    </Layouts.app>
+    </Layouts.dashboard_layout>
     """
   end
 

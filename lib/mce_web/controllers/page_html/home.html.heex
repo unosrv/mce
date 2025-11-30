@@ -21,11 +21,11 @@
       <%= if @current_scope do %>
         <nav class="hidden md:flex">
           <.link
-            navigate={~p"/farms"}
+            navigate={~p"/dashboard"}
             class="flex items-center gap-2 px-2 py-1 text-base-content/70 hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors"
           >
-            <.icon name="hero-building-office-2" class="size-4" />
-            {gettext("Farms")}
+            <.icon name="hero-chart-bar" class="size-4" />
+            {gettext("Dashboard")}
           </.link>
         </nav>
       <% end %>

@@ -76,6 +76,7 @@ defmodule MceWeb.LivestockLive.WizardLive do
         |> assign(:bedding_types, @bedding_types)
         |> assign(:bedding_frequencies, @bedding_frequencies)
         |> assign(:manure_system_types, @manure_system_types)
+        |> assign(:current_url, "/farms")
         |> load_or_init_livestock_group(params)
 
       {:ok, socket}
@@ -523,7 +524,12 @@ defmodule MceWeb.LivestockLive.WizardLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.dashboard_layout
+      flash={@flash}
+      current_scope={@current_scope}
+      current_url={@current_url}
+      locale={@locale}
+    >
       <div class="container mx-auto px-4 py-6 max-w-4xl">
         <.header>
           <div class="flex items-center gap-2">
@@ -578,7 +584,7 @@ defmodule MceWeb.LivestockLive.WizardLive do
           </div>
         </div>
       </div>
-    </Layouts.app>
+    </Layouts.dashboard_layout>
     """
   end
 

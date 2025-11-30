@@ -25,6 +25,7 @@ defmodule MceWeb.EmissionsLive.Show do
        |> assign(:report_year, current_year)
        |> assign(:calculated_now?, calculated_now?)
        |> assign(:calculating?, false)
+       |> assign(:current_url, "/farms")
        |> maybe_show_calculation_flash(calculated_now?)}
     else
       {:ok,
@@ -87,7 +88,12 @@ defmodule MceWeb.EmissionsLive.Show do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} current_scope={@current_scope}>
+    <Layouts.dashboard_layout
+      flash={@flash}
+      current_scope={@current_scope}
+      current_url={@current_url}
+      locale={@locale}
+    >
       <div class="container mx-auto px-4 py-6 print:p-0">
         <%!-- Header --%>
         <div class="mb-6 print:hidden">
@@ -220,7 +226,7 @@ defmodule MceWeb.EmissionsLive.Show do
           window.print();
         });
       </script>
-    </Layouts.app>
+    </Layouts.dashboard_layout>
     """
   end
 
