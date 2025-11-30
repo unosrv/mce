@@ -99,10 +99,587 @@
 /* Use the data attribute for dark mode  */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* ============================================
+   Global Focus Style Override
+   Apply consistent focus ring style (matching Edit View inputs)
+   Reference: https://daisyui.com/docs/customize/
+   ============================================ */
+
+/* Remove double outline on all DaisyUI form elements */
+.input:focus,
+.input:focus-visible,
+.input:focus-within,
+.select:focus,
+.select:focus-visible,
+.textarea:focus,
+.textarea:focus-visible,
+.checkbox:focus,
+.checkbox:focus-visible,
+.radio:focus,
+.radio:focus-visible,
+.toggle:focus,
+.toggle:focus-visible,
+.btn:focus,
+.btn:focus-visible {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+
+/* Apply inset focus style for all inputs - inset shadows cannot be clipped by overflow */
+.input:focus,
+.input:focus-visible,
+.input.w-full:focus,
+.input.w-full:focus-visible,
+.select:focus,
+.select:focus-visible,
+.textarea:focus,
+.textarea:focus-visible,
+[class*="input"]:focus,
+[class*="input"]:focus-visible {
+  box-shadow: inset 0 0 0 2px oklch(45% 0.14 145 / 0.25) !important; /* Inset ring (cannot be clipped) */
+  border-color: oklch(45% 0.14 145 / 0.5) !important; /* Green-tinted border on focus */
+}
+
+/* Buttons keep their existing focus ring via inset shadow */
+.btn:focus,
+.btn:focus-visible {
+  box-shadow: inset 0 0 0 2px oklch(45% 0.14 145 / 0.25) !important; /* Inset ring */
+}
+
+/* Native HTML elements - remove browser default outline and apply consistent inset focus */
+input:focus,
+input:focus-visible,
+select:focus,
+select:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+  outline: none !important;
+  box-shadow: inset 0 0 0 2px oklch(45% 0.14 145 / 0.25) !important; /* Inset ring (cannot be clipped) */
+  border-color: oklch(45% 0.14 145 / 0.5) !important; /* Green-tinted border on focus */
+}
+
+button:focus,
+button:focus-visible {
+  outline: none !important;
+}
+
 /* Make LiveView wrapper divs transparent for layout */
 [data-phx-session], [data-phx-teleported-src] { display: contents }
 
 /* This file is for your main application CSS */
+
+/* ============================================
+   Backpex Admin Panel Customizations
+   ============================================ */
+
+/* Hide Backpex default drawer toggle checkbox */
+#backpex-app-shell > .drawer-toggle {
+  display: none !important;
+}
+
+/* Hide Backpex default footer branding */
+#backpex-app-shell footer .text-base-content {
+  display: none !important;
+}
+
+/* Hide entire Backpex app shell structure when using custom layout */
+#backpex-app-shell {
+  all: unset;
+  display: block;
+}
+
+#backpex-app-shell > .drawer-content {
+  all: unset;
+  display: block;
+}
+
+#backpex-app-shell > .drawer-content > .bg-base-200 {
+  display: none !important;
+}
+
+#backpex-app-shell > .drawer-content > .menu {
+  display: none !important;
+}
+
+#backpex-app-shell > .drawer-side {
+  display: none !important;
+}
+
+#backpex-app-shell > .drawer-content > div:last-child {
+  all: unset;
+  display: block;
+}
+
+#backpex-app-shell > .drawer-content > div:last-child > header {
+  display: none !important;
+}
+
+#backpex-app-shell > .drawer-content > div:last-child > main {
+  all: unset;
+  display: block;
+}
+
+#backpex-app-shell > .drawer-content > div:last-child > main > div {
+  all: unset;
+  display: block;
+}
+
+#backpex-app-shell footer {
+  display: none !important;
+}
+
+/* Backpex table improvements */
+#backpex-app-shell table {
+  @apply border-separate border-spacing-0;
+}
+
+#backpex-app-shell table thead th {
+  @apply bg-base-200 text-base-content/80 font-semibold text-sm uppercase tracking-wider;
+}
+
+#backpex-app-shell table tbody tr {
+  @apply hover:bg-base-200/50 transition-colors;
+}
+
+#backpex-app-shell table tbody td {
+  @apply py-3 px-4 border-b border-base-200;
+}
+
+/* ============================================
+   Pagination Improvements
+   ============================================ */
+/* Add proper gap between "Items X to Y (Z total)" and the page size dropdown
+   The pagination area structure is:
+   <div class="flex items-center">
+     <span>Items X to Y (Z total)</span>
+     <select>...</select>
+   </div>
+*/
+
+/* Target the flex container that holds pagination info and per-page selector */
+#backpex-app-shell .mt-4.flex.flex-wrap.items-center.justify-between > div.flex.items-center {
+  gap: 1.5rem !important;
+}
+
+/* Also target any flex container within the pagination area */
+#backpex-app-shell div.flex.items-center:has(> span:first-child):has(> select) {
+  gap: 1.5rem !important;
+}
+
+/* Fallback: add margin to pagination info span */
+#backpex-app-shell .mt-4 > div.flex.items-center > span:first-child {
+  margin-right: 1.5rem !important;
+}
+
+/* ============================================
+   Resource Header Alignment
+   ============================================ */
+/* Align title, delete button, and search bar horizontally */
+#backpex-app-shell > div:first-child {
+  @apply flex flex-wrap items-center justify-between gap-4 mb-6;
+}
+
+/* Title styling */
+#backpex-app-shell h1 {
+  @apply text-2xl font-bold text-base-content mb-0;
+}
+
+/* Search input styling */
+#backpex-app-shell input[type="search"],
+#backpex-app-shell input[placeholder*="Search"] {
+  @apply input input-sm w-full max-w-xs bg-base-100 border border-base-300;
+}
+
+/* Action buttons styling */
+#backpex-app-shell .btn {
+  @apply transition-all duration-200;
+}
+
+/* ============================================
+   Show/View Mode Card Styling (Eye Icon / Show page)
+   ============================================ */
+/*
+   Backpex show view structure (each field is its own dl):
+   <div class="flex flex-col sm:divide-base-200 sm:divide-y">
+     <div>
+       <dl class="flex flex-col items-stretch space-y-2 px-6 py-4 sm:flex-row sm:space-y-0 sm:py-3">
+         <dt class="hyphens-auto break-words pr-2 sm:w-1/4">Label</dt>
+         <dd class="w-full sm:w-3/4">Value</dd>
+       </dl>
+     </div>
+   </div>
+
+   The problem: Tailwind's sm:flex-row sets display:flex at sm breakpoint
+   Solution: Override with display:grid at the same media query level
+*/
+
+/* Override for ALL screen sizes - base styles
+   Target dl elements with flex classes inside card-body (no #backpex-app-shell dependency)
+   Note: Show page doesn't have #backpex-app-shell, only edit/index pages do */
+.card-body dl.flex.flex-col.items-stretch,
+.card-body dl.flex.flex-col[class*="sm:flex-row"],
+.card .card-body dl.flex {
+  display: grid !important;
+  grid-template-columns: minmax(160px, 25%) 1fr !important;
+  flex-direction: unset !important;
+  align-items: stretch !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
+}
+
+/* Override at sm breakpoint to counter Tailwind's sm:flex-row */
+@media (min-width: 640px) {
+  .card-body dl.flex.flex-col.items-stretch,
+  .card-body dl.flex.flex-col[class*="sm:flex-row"],
+  .card .card-body dl.flex,
+  dl.flex.flex-col[class*="sm:flex-row"] {
+    display: grid !important;
+    grid-template-columns: minmax(160px, 25%) 1fr !important;
+    flex-direction: unset !important;
+  }
+
+  /* Override dt width at sm breakpoint */
+  .card-body dl.flex dt,
+  .card .card-body dl dt,
+  dl.flex.flex-col[class*="sm:flex-row"] dt {
+    width: auto !important;
+  }
+
+  /* Override dd width at sm breakpoint */
+  .card-body dl.flex dd,
+  .card .card-body dl dd,
+  dl.flex.flex-col[class*="sm:flex-row"] dd {
+    width: auto !important;
+  }
+}
+
+/* Reset the space-y classes */
+.card-body dl.space-y-2,
+.card dl.space-y-2 {
+  --tw-space-y-reverse: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Style dt (label) as table cell */
+.card-body dl.flex dt,
+.card .card-body dl dt,
+.card dl.flex dt {
+  width: auto !important;
+  padding: 0.75rem 1rem !important;
+  background-color: oklch(95% 0.002 260 / 0.6) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  color: oklch(20% 0.01 260 / 0.7) !important;
+  border-bottom: 1px solid oklch(92% 0.004 260) !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+
+/* Style dd (value) as table cell */
+.card-body dl.flex dd,
+.card .card-body dl dd,
+.card dl.flex dd {
+  width: auto !important;
+  padding: 0.75rem 1rem !important;
+  background-color: oklch(98% 0 0) !important;
+  border-bottom: 1px solid oklch(92% 0.004 260) !important;
+  display: flex !important;
+  align-items: center !important;
+  word-break: break-word !important;
+  margin: 0 !important;
+}
+
+/* Container for all field divs - remove divide styling conflicts */
+.card-body > .flex.flex-col,
+.card-body > div > .flex.flex-col {
+  gap: 0 !important;
+}
+
+/* Each field container div */
+.card-body > .flex.flex-col > div,
+.card-body > div > .flex.flex-col > div {
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Remove last row bottom border */
+.card-body > .flex.flex-col > div:last-child dl dt,
+.card-body > .flex.flex-col > div:last-child dl dd,
+.card-body > div > .flex.flex-col > div:last-child dl dt,
+.card-body > div > .flex.flex-col > div:last-child dl dd {
+  border-bottom: none !important;
+}
+
+/* Alternating row colors for better readability */
+.card-body > .flex.flex-col > div:nth-child(odd) dl dt,
+.card-body > div > .flex.flex-col > div:nth-child(odd) dl dt {
+  background-color: oklch(95% 0.002 260 / 0.8) !important;
+}
+
+.card-body > .flex.flex-col > div:nth-child(odd) dl dd,
+.card-body > div > .flex.flex-col > div:nth-child(odd) dl dd {
+  background-color: oklch(98% 0 0 / 0.5) !important;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .card-body dl.flex dt,
+[data-theme="dark"] .card .card-body dl dt,
+[data-theme="dark"] .card dl.flex dt {
+  background-color: oklch(15% 0.008 260 / 0.6) !important;
+  color: oklch(95% 0.02 250 / 0.7) !important;
+  border-bottom-color: oklch(20% 0.01 260) !important;
+}
+
+[data-theme="dark"] .card-body dl.flex dd,
+[data-theme="dark"] .card .card-body dl dd,
+[data-theme="dark"] .card dl.flex dd {
+  background-color: oklch(20% 0.01 260) !important;
+  border-bottom-color: oklch(20% 0.01 260) !important;
+}
+
+/* Modal dialog styling improvements */
+dialog.modal .modal-box .card-body dl {
+  max-height: 60vh !important;
+  overflow-y: auto !important;
+}
+
+/* ============================================
+   Form Panel Styling (Edit Mode)
+   ============================================ */
+/*
+   Edit form uses the same field_container structure as show view:
+   <div class="card bg-base-100 mt-4 shadow-sm">
+     <div class="card-body p-0">
+       <div class="flex flex-col sm:divide-base-200 sm:divide-y">
+         <div>
+           <dl class="flex flex-col items-stretch space-y-2 px-6 py-4 sm:flex-row sm:space-y-0 sm:py-3">
+             <dt>Label</dt>
+             <dd><input...></dd>
+           </dl>
+         </div>
+       </div>
+     </div>
+   </div>
+*/
+
+/* The card container - use generic selectors (no #backpex-app-shell dependency) */
+form .card.bg-base-100 {
+  border: 1px solid oklch(92% 0.004 260) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
+  overflow: hidden !important;
+}
+
+/* Card body - remove padding */
+form .card-body.p-0 {
+  padding: 0 !important;
+}
+
+/* Form inputs - modern clean style, full width */
+form .card-body input:not([type="checkbox"]):not([type="radio"]),
+form .card-body select,
+form .card-body textarea {
+  background-color: oklch(98% 0 0) !important;
+  border: 1px solid oklch(88% 0.004 260) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+  width: 100% !important;
+  /* No max-width - use full available space */
+}
+
+form .card-body input:focus,
+form .card-body select:focus,
+form .card-body textarea:focus {
+  outline: none !important;
+  border-color: oklch(45% 0.14 145) !important;
+  box-shadow: 0 0 0 3px oklch(45% 0.14 145 / 0.15) !important;
+}
+
+/* Form labels in edit mode - styled differently from show mode */
+form .card-body dl dt {
+  background-color: transparent !important;
+  border-bottom: none !important;
+  font-weight: 500 !important;
+  color: oklch(20% 0.01 260 / 0.8) !important;
+}
+
+form .card-body dl dd {
+  background-color: transparent !important;
+  border-bottom: 1px solid oklch(95% 0.002 260) !important;
+  padding-bottom: 1rem !important;
+}
+
+/* Make fieldset inside dd expand to fill available width */
+form .card-body dl dd .fieldset,
+form .card-body dl dd > div {
+  width: 100% !important;
+  display: block !important;
+}
+
+/* Make labels and inputs fill their container */
+form .card-body dl dd .fieldset label,
+form .card-body dl dd label {
+  width: 100% !important;
+  display: block !important;
+}
+
+/* Last field - no border */
+form .card-body > .flex.flex-col > div:last-child dl dd {
+  border-bottom: none !important;
+}
+
+/* Form action buttons container */
+#backpex-app-shell form .card-body + div,
+#backpex-app-shell form > div:last-child {
+  padding: 1rem !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 0.75rem !important;
+  border-top: 1px solid oklch(92% 0.004 260) !important;
+  background-color: oklch(97% 0.001 260) !important;
+}
+
+/* Dark mode for edit form */
+[data-theme="dark"] #backpex-app-shell form input:not([type="checkbox"]):not([type="radio"]),
+[data-theme="dark"] #backpex-app-shell form select,
+[data-theme="dark"] #backpex-app-shell form textarea {
+  background-color: oklch(20% 0.01 260) !important;
+  border-color: oklch(30% 0.01 260) !important;
+  color: oklch(95% 0.02 250) !important;
+}
+
+[data-theme="dark"] #backpex-app-shell form .card-body dl dt {
+  color: oklch(95% 0.02 250 / 0.7) !important;
+}
+
+[data-theme="dark"] #backpex-app-shell form .card-body dl dd {
+  border-bottom-color: oklch(25% 0.008 260) !important;
+}
+
+/* ============================================
+   Eco-friendly Green Accent Theme
+   ============================================ */
+#backpex-app-shell .btn-primary {
+  @apply bg-primary hover:bg-primary/90 border-primary;
+}
+
+/* Success/Action indicators */
+#backpex-app-shell .badge-success {
+  @apply bg-success/20 text-success border-success/30;
+}
+
+/* Table row hover effect */
+#backpex-app-shell table tbody tr:hover {
+  @apply bg-primary/5;
+}
+
+/* Selected row styling */
+#backpex-app-shell table tbody tr.selected,
+#backpex-app-shell table tbody tr:has(input:checked) {
+  @apply bg-primary/10;
+}
+
+/* ============================================
+   End Backpex Customizations
+   ============================================ */
+
+/* ============================================
+   Index/List Page Header Layout
+   Makes title, buttons, and search bar horizontal
+   Layout: | Title |------[New][Delete] [Search] |
+   ============================================ */
+
+/* Create a wrapper grid for the index page header */
+main .max-w-full.overflow-x-auto {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  grid-template-rows: auto auto !important;
+  gap: 0.5rem 1rem !important;
+  align-items: center !important;
+}
+
+/* Title stays in first column */
+main .max-w-full.overflow-x-auto > h1 {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Buttons container - moves to second column, right-aligned */
+main .max-w-full.overflow-x-auto > div.mb-4.flex.space-x-2 {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  justify-self: end !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+/* Search form container - also in second column, right-aligned */
+main .max-w-full.overflow-x-auto > div.mb-4.flex.flex-wrap.gap-4 {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  justify-self: end !important;
+  margin-bottom: 0 !important;
+  margin-left: 1rem !important;
+}
+
+/* Create a flex container for buttons + search to sit together */
+main .max-w-full.overflow-x-auto > div.mb-4.flex.space-x-2,
+main .max-w-full.overflow-x-auto > div.mb-4.flex.flex-wrap.gap-4 {
+  position: relative !important;
+}
+
+/* Table container spans full width */
+main .max-w-full.overflow-x-auto > div:last-child {
+  grid-column: 1 / -1 !important;
+  grid-row: 2 !important;
+}
+
+/* Alternative approach: wrap buttons and search together with JS,
+   but for pure CSS we'll make them share the same grid area */
+main .max-w-full.overflow-x-auto {
+  grid-template-columns: auto 1fr auto !important;
+}
+
+main .max-w-full.overflow-x-auto > div.mb-4.flex.space-x-2 {
+  grid-column: 2 !important;
+}
+
+main .max-w-full.overflow-x-auto > div.mb-4.flex.flex-wrap.gap-4 {
+  grid-column: 3 !important;
+  margin-left: 0 !important;
+}
+
+/* Pagination area - add gap between items count and page size dropdown */
+/* The text div has pr-2 but that's too small. Target the specific container. */
+.text-base-content.pr-2.text-sm {
+  padding-right: 1rem !important;
+}
+
+/* Edit form buttons - moved outside card via JavaScript (backpex_form_buttons.js) */
+/* Style the form actions container after it's been moved outside the card */
+.form-actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+  margin-top: 1rem;
+  background: transparent;
+}
+
+/* Backpex card styling - ensure p-0 utility overrides DaisyUI's card-body default padding */
+/* This makes Show page cards match Edit page cards (no internal padding) */
+.card .card-body.p-0 {
+  padding: 0 !important;
+}
 
 /* Print Styles for Emissions Report */
 @media print {
