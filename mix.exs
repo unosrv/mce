@@ -69,7 +69,9 @@ defmodule Mce.MixProject do
       {:bandit, "~> 1.5"},
       {:backpex, "~> 0.13"},
       # PDF generation
-      {:chromic_pdf, "~> 1.17"}
+      {:chromic_pdf, "~> 1.17"},
+      # Random nickname generation
+      {:unique_names_generator, "~> 0.2"}
     ]
   end
 

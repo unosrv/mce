@@ -110,14 +110,16 @@ defmodule Mce.AccountsTest do
       assert %{password: ["can't be blank"]} = errors_on(changeset)
     end
 
-    test "requires nickname for registration" do
-      {:error, changeset} =
+    test "auto-generates nickname when not provided" do
+      {:ok, user} =
         Accounts.register_user(%{
           email: unique_user_email(),
           password: valid_user_password()
         })
 
-      assert %{nickname: ["can't be blank"]} = errors_on(changeset)
+      # Auto-generated nickname should follow adjective_noun format
+      assert user.nickname != nil
+      assert String.contains?(user.nickname, "_")
     end
   end
 

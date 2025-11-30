@@ -6,7 +6,7 @@ defmodule Mce.Accounts do
   import Ecto.Query, warn: false
   alias Mce.Repo
 
-  alias Mce.Accounts.{User, UserToken, UserNotifier}
+  alias Mce.Accounts.{NicknameGenerator, User, UserToken, UserNotifier}
 
   ## Database getters
 
@@ -65,19 +65,43 @@ defmodule Mce.Accounts do
   @doc """
   Registers a user with email, password, and nickname.
 
+  If no nickname is provided, a random unique nickname is generated
+  in the format "adjective_noun" (e.g., "happy_lion", "blue_tiger").
+
   ## Examples
 
       iex> register_user(%{email: "user@example.com", password: "password", nickname: "nickname"})
       {:ok, %User{}}
+
+      iex> register_user(%{email: "user@example.com", password: "password"})
+      {:ok, %User{nickname: "happy_lion"}}
 
       iex> register_user(%{email: "bad_email"})
       {:error, %Ecto.Changeset{}}
 
   """
   def register_user(attrs) do
+    attrs = maybe_generate_nickname(attrs)
+
     %User{}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
+  end
+
+  defp maybe_generate_nickname(attrs) when is_map(attrs) do
+    nickname = attrs[:nickname] || attrs["nickname"]
+
+    if is_nil(nickname) or nickname == "" do
+      generated = NicknameGenerator.generate_unique()
+      # Handle both atom and string keys
+      if Enum.any?(Map.keys(attrs), &is_atom/1) do
+        Map.put(attrs, :nickname, generated)
+      else
+        Map.put(attrs, "nickname", generated)
+      end
+    else
+      attrs
+    end
   end
 
   @doc """
