@@ -12,23 +12,23 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: lib/mce_web/components/core_components.ex:476
-#: lib/mce_web/live/dashboard_live/index.ex:157
+#: lib/mce_web/live/dashboard_live/index.ex:160
 #, elixir-autogen, elixir-format
 msgid "Actions"
 msgstr "작업"
 
-#: lib/mce_web/components/layouts.ex:139
-#: lib/mce_web/components/layouts.ex:151
+#: lib/mce_web/components/layouts.ex:141
+#: lib/mce_web/components/layouts.ex:153
 #, elixir-autogen, elixir-format
 msgid "Attempting to reconnect"
 msgstr "재연결 시도 중"
 
-#: lib/mce_web/components/layouts.ex:146
+#: lib/mce_web/components/layouts.ex:148
 #, elixir-autogen, elixir-format
 msgid "Something went wrong!"
 msgstr "문제가 발생했습니다!"
 
-#: lib/mce_web/components/layouts.ex:134
+#: lib/mce_web/components/layouts.ex:136
 #, elixir-autogen, elixir-format
 msgid "We can't find the internet"
 msgstr "인터넷에 연결할 수 없습니다"
@@ -66,24 +66,29 @@ msgstr "계정 만들기"
 msgid "Creating account..."
 msgstr "계정 생성 중..."
 
-#: lib/mce_web/components/layouts.ex:190
+#: lib/mce_web/components/layouts.ex:192
 #, elixir-autogen, elixir-format
 msgid "Dark theme"
 msgstr "다크 테마"
 
 #: lib/mce_web/controllers/user_registration_html/new.html.heex:17
+#: lib/mce_web/controllers/user_session_html/new.html.heex:35
+#: lib/mce_web/controllers/user_session_html/new.html.heex:52
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:24
 #, elixir-autogen, elixir-format
 msgid "Email"
 msgstr "이메일"
 
-#: lib/mce_web/components/layouts.ex:181
+#: lib/mce_web/components/layouts.ex:183
 #, elixir-autogen, elixir-format
 msgid "Light theme"
 msgstr "라이트 테마"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:26
-#: lib/mce_web/controllers/page_html/home.html.heex:71
+#: lib/mce_web/controllers/page_html/home.html.heex:40
+#: lib/mce_web/controllers/page_html/home.html.heex:124
 #: lib/mce_web/controllers/user_registration_html/new.html.heex:8
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:38
+#: lib/mce_web/controllers/user_session_html/new.html.heex:5
 #, elixir-autogen, elixir-format
 msgid "Log in"
 msgstr "로그인"
@@ -94,6 +99,8 @@ msgid "Nickname"
 msgstr "닉네임"
 
 #: lib/mce_web/controllers/user_registration_html/new.html.heex:35
+#: lib/mce_web/controllers/user_session_html/new.html.heex:59
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "Password"
 msgstr "비밀번호"
@@ -103,7 +110,7 @@ msgstr "비밀번호"
 msgid "Repeat password"
 msgstr "비밀번호 재입력"
 
-#: lib/mce_web/components/layouts.ex:172
+#: lib/mce_web/components/layouts.ex:174
 #, elixir-autogen, elixir-format
 msgid "System theme"
 msgstr "시스템 테마"
@@ -113,7 +120,7 @@ msgstr "시스템 테마"
 msgid "Your display name"
 msgstr "표시 이름"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:134
+#: lib/mce_web/controllers/page_html/home.html.heex:213
 #, elixir-autogen, elixir-format
 msgid "Accurate CH₄ and N₂O emissions using IPCC 2019 refined methodology with country-specific factors."
 msgstr "국가별 계수를 적용한 IPCC 2019 개선 방법론을 사용한 정확한 CH₄ 및 N₂O 배출량 계산"
@@ -123,9 +130,9 @@ msgstr "국가별 계수를 적용한 IPCC 2019 개선 방법론을 사용한 �
 msgid "Active Farms"
 msgstr "활성 농장"
 
-#: lib/mce_web/live/dashboard_live/index.ex:117
-#: lib/mce_web/live/farm_live/index.ex:88
-#: lib/mce_web/live/farm_live/index.ex:107
+#: lib/mce_web/live/dashboard_live/index.ex:120
+#: lib/mce_web/live/farm_live/index.ex:84
+#: lib/mce_web/live/farm_live/index.ex:102
 #, elixir-autogen, elixir-format
 msgid "Add Farm"
 msgstr "농장 추가"
@@ -163,7 +170,7 @@ msgstr "배출량 보고서를 생성하려면 농장에 가축 그룹을 추가
 
 #: lib/mce_web/live/components/address_autocomplete.ex:119
 #: lib/mce_web/live/components/korean_address_input.ex:131
-#: lib/mce_web/live/farm_live/index.ex:200
+#: lib/mce_web/live/farm_live/index.ex:195
 #: lib/mce_web/live/farm_live/show.ex:109
 #, elixir-autogen, elixir-format
 msgid "Address"
@@ -184,7 +191,7 @@ msgstr "주소 2"
 msgid "Address Search"
 msgstr "주소 검색"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:204
+#: lib/mce_web/controllers/page_html/home.html.heex:317
 #, elixir-autogen, elixir-format
 msgid "All rights reserved."
 msgstr "모든 권리 보유"
@@ -200,7 +207,7 @@ msgstr "모든 값은 CO₂ 환산톤 단위"
 msgid "Apartment, suite, unit, etc. (optional)"
 msgstr "아파트, 동/호수 등 (선택사항)"
 
-#: lib/mce_web/live/farm_live/index.ex:245
+#: lib/mce_web/live/farm_live/index.ex:240
 #, elixir-autogen, elixir-format
 msgid "Apr"
 msgstr "4월"
@@ -212,7 +219,7 @@ msgstr "4월"
 msgid "April"
 msgstr "4월"
 
-#: lib/mce_web/live/farm_live/index.ex:185
+#: lib/mce_web/live/farm_live/index.ex:180
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this farm? This action cannot be undone."
 msgstr "이 농장을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
@@ -227,7 +234,7 @@ msgstr "이 가축 그룹을 삭제하시겠습니까?"
 msgid "Area per Animal (m²)"
 msgstr "동물당 면적 (m²)"
 
-#: lib/mce_web/live/farm_live/index.ex:249
+#: lib/mce_web/live/farm_live/index.ex:244
 #, elixir-autogen, elixir-format
 msgid "Aug"
 msgstr "8월"
@@ -267,7 +274,7 @@ msgstr "평균 체중"
 msgid "Back"
 msgstr "뒤로"
 
-#: lib/mce_web/components/layouts.ex:226
+#: lib/mce_web/components/layouts.ex:228
 #, elixir-autogen, elixir-format
 msgid "Back to App"
 msgstr "앱으로 돌아가기"
@@ -352,9 +359,9 @@ msgstr "육우"
 msgid "Biogas Captured"
 msgstr "바이오가스 포집"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:169
-#: lib/mce_web/live/dashboard_live/index.ex:265
-#: lib/mce_web/live/farm_live/index.ex:227
+#: lib/mce_web/controllers/page_html/home.html.heex:250
+#: lib/mce_web/live/dashboard_live/index.ex:268
+#: lib/mce_web/live/farm_live/index.ex:222
 #: lib/mce_web/live/farm_live/show.ex:373
 #, elixir-autogen, elixir-format
 msgid "Brazil"
@@ -396,7 +403,7 @@ msgstr "IPCC Tier 2 방법론을 사용하여 계산"
 msgid "Cancel"
 msgstr "취소"
 
-#: lib/mce_web/live/dashboard_live/index.ex:107
+#: lib/mce_web/live/dashboard_live/index.ex:110
 #, elixir-autogen, elixir-format
 msgid "Charts will appear once you have emission reports for your farms."
 msgstr "농장의 배출량 보고서가 생성되면 차트가 표시됩니다."
@@ -418,7 +425,7 @@ msgstr "클릭하여 업로드하거나 드래그 앤 드롭"
 
 #: lib/mce_web/live/compare_live/index.ex:21
 #: lib/mce_web/live/compare_live/index.ex:103
-#: lib/mce_web/live/dashboard_live/index.ex:129
+#: lib/mce_web/live/dashboard_live/index.ex:132
 #, elixir-autogen, elixir-format
 msgid "Compare Farms"
 msgstr "농장 비교"
@@ -438,7 +445,7 @@ msgstr "계속"
 msgid "Cooling Type"
 msgstr "냉방 유형"
 
-#: lib/mce_web/live/dashboard_live/index.ex:154
+#: lib/mce_web/live/dashboard_live/index.ex:157
 #: lib/mce_web/live/farm_live/form_component.ex:124
 #, elixir-autogen, elixir-format
 msgid "Country"
@@ -449,13 +456,13 @@ msgstr "국가"
 msgid "Create Farm"
 msgstr "농장 만들기"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:189
+#: lib/mce_web/controllers/page_html/home.html.heex:301
 #, elixir-autogen, elixir-format
 msgid "Create Free Account"
 msgstr "무료 계정 만들기"
 
-#: lib/mce_web/live/dashboard_live/index.ex:145
-#: lib/mce_web/live/farm_live/index.ex:102
+#: lib/mce_web/live/dashboard_live/index.ex:148
+#: lib/mce_web/live/farm_live/index.ex:97
 #, elixir-autogen, elixir-format
 msgid "Create your first farm to start tracking emissions."
 msgstr "배출량 추적을 시작하려면 첫 번째 농장을 만드세요."
@@ -496,7 +503,7 @@ msgstr "대시보드"
 msgid "Days Pregnant"
 msgstr "임신 일수"
 
-#: lib/mce_web/live/farm_live/index.ex:253
+#: lib/mce_web/live/farm_live/index.ex:248
 #, elixir-autogen, elixir-format
 msgid "Dec"
 msgstr "12월"
@@ -513,7 +520,7 @@ msgstr "12월"
 msgid "Define manure management systems. Total percentages should sum to 100%."
 msgstr "분뇨 처리 시스템을 정의하세요. 전체 비율의 합은 100%가 되어야 합니다."
 
-#: lib/mce_web/live/farm_live/index.ex:191
+#: lib/mce_web/live/farm_live/index.ex:186
 #: lib/mce_web/live/farm_live/show.ex:303
 #, elixir-autogen, elixir-format
 msgid "Delete"
@@ -545,7 +552,7 @@ msgstr "임시저장되었습니다"
 msgid "Dry Matter (%)"
 msgstr "건물함량 (%)"
 
-#: lib/mce_web/live/farm_live/index.ex:177
+#: lib/mce_web/live/farm_live/index.ex:172
 #: lib/mce_web/live/farm_live/show.ex:100
 #: lib/mce_web/live/farm_live/show.ex:290
 #, elixir-autogen, elixir-format
@@ -579,7 +586,7 @@ msgstr "배출량 보고서"
 msgid "Emissions"
 msgstr "배출량"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:50
+#: lib/mce_web/controllers/page_html/home.html.heex:71
 #, elixir-autogen, elixir-format
 msgid "Emissions Calculator"
 msgstr "배출량 계산기"
@@ -589,7 +596,7 @@ msgstr "배출량 계산기"
 msgid "Emissions Comparison"
 msgstr "배출량 비교"
 
-#: lib/mce_web/live/dashboard_live/index.ex:197
+#: lib/mce_web/live/dashboard_live/index.ex:200
 #: lib/mce_web/live/emissions_live/show.ex:22
 #: lib/mce_web/live/emissions_live/show.ex:104
 #: lib/mce_web/live/farm_live/show.ex:152
@@ -597,7 +604,7 @@ msgstr "배출량 비교"
 msgid "Emissions Report"
 msgstr "배출량 보고서"
 
-#: lib/mce_web/live/dashboard_live/index.ex:68
+#: lib/mce_web/live/dashboard_live/index.ex:71
 #, elixir-autogen, elixir-format
 msgid "Emissions Trend"
 msgstr "배출량 추이"
@@ -612,7 +619,7 @@ msgstr "그룹별 배출량"
 msgid "Emissions by Source"
 msgstr "배출원별 배출량"
 
-#: lib/mce_web/live/dashboard_live/index.ex:87
+#: lib/mce_web/live/dashboard_live/index.ex:90
 #, elixir-autogen, elixir-format
 msgid "Emissions by Type"
 msgstr "유형별 배출량"
@@ -681,7 +688,7 @@ msgstr "사육 기간 저장 중 오류가 발생했습니다"
 msgid "Error saving manure systems"
 msgstr "분뇨 처리 시스템 저장 중 오류가 발생했습니다"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:84
+#: lib/mce_web/controllers/page_html/home.html.heex:138
 #, elixir-autogen, elixir-format
 msgid "Everything you need to track and report livestock methane emissions"
 msgstr "가축 메탄 배출량을 추적하고 보고하는 데 필요한 모든 것"
@@ -719,7 +726,7 @@ msgstr "농장 비교 보고서"
 msgid "Farm Logo"
 msgstr "농장 로고"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:97
+#: lib/mce_web/controllers/page_html/home.html.heex:158
 #, elixir-autogen, elixir-format
 msgid "Farm Management"
 msgstr "농장 관리"
@@ -754,16 +761,16 @@ msgstr "농장을 찾을 수 없습니다"
 msgid "Farm updated successfully"
 msgstr "농장이 성공적으로 업데이트되었습니다"
 
-#: lib/mce_web/components/layouts.ex:51
-#: lib/mce_web/components/layouts.ex:247
+#: lib/mce_web/components/layouts.ex:53
+#: lib/mce_web/components/layouts.ex:249
+#: lib/mce_web/controllers/page_html/home.html.heex:28
 #: lib/mce_web/live/farm_live/index.ex:13
 #: lib/mce_web/live/farm_live/index.ex:50
-#: lib/mce_web/live/farm_live/index.ex:82
 #, elixir-autogen, elixir-format
 msgid "Farms"
 msgstr "농장"
 
-#: lib/mce_web/live/farm_live/index.ex:243
+#: lib/mce_web/live/farm_live/index.ex:238
 #, elixir-autogen, elixir-format
 msgid "Feb"
 msgstr "2월"
@@ -812,7 +819,7 @@ msgstr "파일이 너무 큽니다. 최대 크기는 2MB입니다."
 
 #: lib/mce/reports/pdf_generator.ex:126
 #: lib/mce_web/live/emissions_live/show.ex:107
-#: lib/mce_web/live/farm_live/index.ex:204
+#: lib/mce_web/live/farm_live/index.ex:199
 #: lib/mce_web/live/farm_live/show.ex:133
 #: lib/mce_web/live/farm_live/show.ex:154
 #, elixir-autogen, elixir-format
@@ -835,13 +842,13 @@ msgstr "회계연도 시작 월"
 msgid "Generated"
 msgstr "생성 일시"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:63
+#: lib/mce_web/controllers/page_html/home.html.heex:109
 #, elixir-autogen, elixir-format
 msgid "Get Started"
 msgstr "시작하기"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:163
-#: lib/mce_web/controllers/page_html/home.html.heex:170
+#: lib/mce_web/controllers/page_html/home.html.heex:244
+#: lib/mce_web/controllers/page_html/home.html.heex:251
 #, elixir-autogen, elixir-format
 msgid "Google Maps integration"
 msgstr "Google Maps 연동"
@@ -903,12 +910,12 @@ msgstr "사육시설 정보"
 msgid "Housing information saved"
 msgstr "사육시설 정보가 저장되었습니다"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:201
+#: lib/mce_web/controllers/page_html/home.html.heex:314
 #, elixir-autogen, elixir-format
 msgid "IPCC 2019 Tier 2 Methodology"
 msgstr "IPCC 2019 Tier 2 방법론"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:132
+#: lib/mce_web/controllers/page_html/home.html.heex:211
 #, elixir-autogen, elixir-format
 msgid "IPCC Tier 2 Calculations"
 msgstr "IPCC Tier 2 계산"
@@ -918,7 +925,7 @@ msgstr "IPCC Tier 2 계산"
 msgid "Invalid file type. Please upload PNG, JPG, GIF, or SVG."
 msgstr "잘못된 파일 형식입니다. PNG, JPG, GIF 또는 SVG 파일을 업로드하세요."
 
-#: lib/mce_web/live/farm_live/index.ex:242
+#: lib/mce_web/live/farm_live/index.ex:237
 #, elixir-autogen, elixir-format
 msgid "Jan"
 msgstr "1월"
@@ -940,7 +947,7 @@ msgstr "지번"
 msgid "Jibun Address"
 msgstr "지번 주소"
 
-#: lib/mce_web/live/farm_live/index.ex:248
+#: lib/mce_web/live/farm_live/index.ex:243
 #, elixir-autogen, elixir-format
 msgid "Jul"
 msgstr "7월"
@@ -952,7 +959,7 @@ msgstr "7월"
 msgid "July"
 msgstr "7월"
 
-#: lib/mce_web/live/farm_live/index.ex:247
+#: lib/mce_web/live/farm_live/index.ex:242
 #, elixir-autogen, elixir-format
 msgid "Jun"
 msgstr "6월"
@@ -964,19 +971,19 @@ msgstr "6월"
 msgid "June"
 msgstr "6월"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:156
+#: lib/mce_web/controllers/page_html/home.html.heex:237
 #, elixir-autogen, elixir-format
 msgid "Juso API integration"
 msgstr "주소 API 연동"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:82
+#: lib/mce_web/controllers/page_html/home.html.heex:136
 #, elixir-autogen, elixir-format
 msgid "Key Features"
 msgstr "주요 기능"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:155
-#: lib/mce_web/live/dashboard_live/index.ex:263
-#: lib/mce_web/live/farm_live/index.ex:225
+#: lib/mce_web/controllers/page_html/home.html.heex:236
+#: lib/mce_web/live/dashboard_live/index.ex:266
+#: lib/mce_web/live/farm_live/index.ex:220
 #: lib/mce_web/live/farm_live/show.ex:371
 #, elixir-autogen, elixir-format
 msgid "Korea"
@@ -987,15 +994,15 @@ msgstr "대한민국"
 msgid "Livestock Group Details"
 msgstr "가축 그룹 상세"
 
-#: lib/mce_web/components/layouts.ex:253
+#: lib/mce_web/components/layouts.ex:255
 #: lib/mce_web/live/dashboard_live/index.ex:53
-#: lib/mce_web/live/dashboard_live/index.ex:155
+#: lib/mce_web/live/dashboard_live/index.ex:158
 #: lib/mce_web/live/farm_live/show.ex:218
 #, elixir-autogen, elixir-format
 msgid "Livestock Groups"
 msgstr "가축 그룹"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:115
+#: lib/mce_web/controllers/page_html/home.html.heex:185
 #, elixir-autogen, elixir-format
 msgid "Livestock Tracking"
 msgstr "가축 추적"
@@ -1015,7 +1022,7 @@ msgstr "가축 그룹이 성공적으로 저장되었습니다"
 msgid "Loading"
 msgstr "로딩 중"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:148
+#: lib/mce_web/controllers/page_html/home.html.heex:229
 #, elixir-autogen, elixir-format
 msgid "Localized support with region-specific IPCC factors and address validation"
 msgstr "지역별 IPCC 계수 및 주소 검증을 지원하는 현지화"
@@ -1025,9 +1032,8 @@ msgstr "지역별 IPCC 계수 및 주소 검증을 지원하는 현지화"
 msgid "Location Preview"
 msgstr "위치 미리보기"
 
-#: lib/mce_web/components/layouts.ex:107
-#: lib/mce_web/components/layouts.ex:236
-#: lib/mce_web/controllers/page_html/home.html.heex:22
+#: lib/mce_web/components/layouts.ex:109
+#: lib/mce_web/components/layouts.ex:238
 #, elixir-autogen, elixir-format
 msgid "Log out"
 msgstr "로그아웃"
@@ -1093,7 +1099,7 @@ msgstr "분뇨 처리 시스템"
 msgid "Map preview"
 msgstr "지도 미리보기"
 
-#: lib/mce_web/live/farm_live/index.ex:244
+#: lib/mce_web/live/farm_live/index.ex:239
 #, elixir-autogen, elixir-format
 msgid "Mar"
 msgstr "3월"
@@ -1111,7 +1117,7 @@ msgid "Mature Weight (kg)"
 msgstr "성체 체중 (kg)"
 
 #: lib/mce_web/live/farm_live/form_component.ex:569
-#: lib/mce_web/live/farm_live/index.ex:246
+#: lib/mce_web/live/farm_live/index.ex:241
 #: lib/mce_web/live/farm_live/show.ex:383
 #: lib/mce_web/live/livestock_live/wizard_live.ex:983
 #, elixir-autogen, elixir-format
@@ -1124,12 +1130,12 @@ msgstr "5월"
 msgid "Methane & Carbon Emissions"
 msgstr "메탄 및 탄소 배출량"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:48
+#: lib/mce_web/controllers/page_html/home.html.heex:69
 #, elixir-autogen, elixir-format
 msgid "Methane Carbon"
 msgstr "메탄 탄소"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:198
+#: lib/mce_web/controllers/page_html/home.html.heex:311
 #, elixir-autogen, elixir-format
 msgid "Methane Carbon Emissions Calculator"
 msgstr "메탄 탄소 배출량 계산기"
@@ -1154,7 +1160,7 @@ msgstr "일일 유량 (L/일)"
 msgid "Month"
 msgstr "월"
 
-#: lib/mce_web/live/dashboard_live/index.ex:153
+#: lib/mce_web/live/dashboard_live/index.ex:156
 #, elixir-autogen, elixir-format
 msgid "Name"
 msgstr "이름"
@@ -1189,8 +1195,8 @@ msgstr "다음: 사육시설"
 msgid "Next: Manure"
 msgstr "다음: 분뇨"
 
-#: lib/mce_web/live/dashboard_live/index.ex:273
-#: lib/mce_web/live/farm_live/index.ex:235
+#: lib/mce_web/live/dashboard_live/index.ex:276
+#: lib/mce_web/live/farm_live/index.ex:230
 #, elixir-autogen, elixir-format
 msgid "No address"
 msgstr "주소 없음"
@@ -1221,7 +1227,7 @@ msgstr "배출량 데이터 없음"
 msgid "No emissions data available"
 msgstr "이용 가능한 배출량 데이터 없음"
 
-#: lib/mce_web/live/dashboard_live/index.ex:105
+#: lib/mce_web/live/dashboard_live/index.ex:108
 #, elixir-autogen, elixir-format
 msgid "No emissions data yet"
 msgstr "아직 배출량 데이터 없음"
@@ -1231,8 +1237,8 @@ msgstr "아직 배출량 데이터 없음"
 msgid "No farms available"
 msgstr "이용 가능한 농장 없음"
 
-#: lib/mce_web/live/dashboard_live/index.ex:143
-#: lib/mce_web/live/farm_live/index.ex:100
+#: lib/mce_web/live/dashboard_live/index.ex:146
+#: lib/mce_web/live/farm_live/index.ex:95
 #, elixir-autogen, elixir-format
 msgid "No farms yet"
 msgstr "아직 농장 없음"
@@ -1257,7 +1263,7 @@ msgstr "위치가 설정되지 않음"
 msgid "No report calculated yet"
 msgstr "아직 보고서가 계산되지 않음"
 
-#: lib/mce_web/live/farm_live/index.ex:252
+#: lib/mce_web/live/farm_live/index.ex:247
 #, elixir-autogen, elixir-format
 msgid "Nov"
 msgstr "11월"
@@ -1269,7 +1275,7 @@ msgstr "11월"
 msgid "November"
 msgstr "11월"
 
-#: lib/mce_web/live/farm_live/index.ex:251
+#: lib/mce_web/live/farm_live/index.ex:246
 #, elixir-autogen, elixir-format
 msgid "Oct"
 msgstr "10월"
@@ -1286,8 +1292,8 @@ msgstr "10월"
 msgid "Open Map"
 msgstr "지도 열기"
 
-#: lib/mce_web/live/dashboard_live/index.ex:266
-#: lib/mce_web/live/farm_live/index.ex:228
+#: lib/mce_web/live/dashboard_live/index.ex:269
+#: lib/mce_web/live/farm_live/index.ex:223
 #: lib/mce_web/live/farm_live/show.ex:374
 #, elixir-autogen, elixir-format
 msgid "Other"
@@ -1328,12 +1334,12 @@ msgstr "임신율 (%)"
 msgid "Print / PDF"
 msgstr "인쇄 / PDF"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:53
+#: lib/mce_web/controllers/page_html/home.html.heex:74
 #, elixir-autogen, elixir-format
 msgid "Professional livestock emissions reporting platform. Calculate enteric fermentation and manure management emissions following IPCC Tier 2 methodology."
 msgstr "전문 가축 배출량 보고 플랫폼. IPCC Tier 2 방법론에 따라 장내발효 및 분뇨 관리 배출량을 계산합니다."
 
-#: lib/mce_web/controllers/page_html/home.html.heex:180
+#: lib/mce_web/controllers/page_html/home.html.heex:283
 #, elixir-autogen, elixir-format
 msgid "Ready to calculate your emissions?"
 msgstr "배출량을 계산할 준비가 되셨나요?"
@@ -1343,17 +1349,17 @@ msgstr "배출량을 계산할 준비가 되셨나요?"
 msgid "Recalculate"
 msgstr "재계산"
 
-#: lib/mce_web/live/dashboard_live/index.ex:138
+#: lib/mce_web/live/dashboard_live/index.ex:141
 #, elixir-autogen, elixir-format
 msgid "Recent Farms"
 msgstr "최근 농장"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:29
+#: lib/mce_web/controllers/page_html/home.html.heex:43
 #, elixir-autogen, elixir-format
 msgid "Register"
 msgstr "회원가입"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:99
+#: lib/mce_web/controllers/page_html/home.html.heex:160
 #, elixir-autogen, elixir-format
 msgid "Register multiple farms across Korea, USA, and Brazil with address validation and map preview."
 msgstr "주소 검증 및 지도 미리보기를 통해 한국, 미국, 브라질에 걸쳐 여러 농장을 등록하세요."
@@ -1382,6 +1388,7 @@ msgstr "농장 저장"
 msgid "Save Livestock Group"
 msgstr "가축 그룹 저장"
 
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:66
 #: lib/mce_web/live/farm_live/form_component.ex:319
 #, elixir-autogen, elixir-format
 msgid "Saving..."
@@ -1446,7 +1453,7 @@ msgstr "유형 선택..."
 msgid "Selected from search above"
 msgstr "위 검색에서 선택됨"
 
-#: lib/mce_web/live/farm_live/index.ex:250
+#: lib/mce_web/live/farm_live/index.ex:245
 #, elixir-autogen, elixir-format
 msgid "Sep"
 msgstr "9월"
@@ -1458,8 +1465,7 @@ msgstr "9월"
 msgid "September"
 msgstr "9월"
 
-#: lib/mce_web/components/layouts.ex:100
-#: lib/mce_web/controllers/page_html/home.html.heex:19
+#: lib/mce_web/components/layouts.ex:102
 #, elixir-autogen, elixir-format
 msgid "Settings"
 msgstr "설정"
@@ -1479,7 +1485,7 @@ msgstr "축종"
 msgid "Start Day"
 msgstr "시작 일"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:182
+#: lib/mce_web/controllers/page_html/home.html.heex:285
 #, elixir-autogen, elixir-format
 msgid "Start tracking and reporting your livestock methane emissions today with our professional-grade calculator."
 msgstr "전문가급 계산기로 지금 바로 가축 메탄 배출량 추적 및 보고를 시작하세요."
@@ -1514,7 +1520,7 @@ msgstr "세부 분류"
 msgid "Summary"
 msgstr "요약"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:146
+#: lib/mce_web/controllers/page_html/home.html.heex:227
 #, elixir-autogen, elixir-format
 msgid "Supported Regions"
 msgstr "지원 지역"
@@ -1554,20 +1560,20 @@ msgstr "총 면적 (m²)"
 #: lib/mce/reports/pdf_generator.ex:77
 #: lib/mce/reports/pdf_generator.ex:139
 #: lib/mce_web/live/dashboard_live/index.ex:39
-#: lib/mce_web/live/dashboard_live/index.ex:156
+#: lib/mce_web/live/dashboard_live/index.ex:159
 #: lib/mce_web/live/emissions_live/show.ex:130
 #, elixir-autogen, elixir-format
 msgid "Total Emissions"
 msgstr "총 배출량"
 
-#: lib/mce_web/controllers/page_html/home.html.heex:117
+#: lib/mce_web/controllers/page_html/home.html.heex:187
 #, elixir-autogen, elixir-format
 msgid "Track dairy cattle, beef cattle, and swine with detailed feed composition and manure management data."
 msgstr "상세한 사료 조성 및 분뇨 관리 데이터로 젖소, 육우, 돼지를 추적하세요."
 
-#: lib/mce_web/controllers/page_html/home.html.heex:162
-#: lib/mce_web/live/dashboard_live/index.ex:264
-#: lib/mce_web/live/farm_live/index.ex:226
+#: lib/mce_web/controllers/page_html/home.html.heex:243
+#: lib/mce_web/live/dashboard_live/index.ex:267
+#: lib/mce_web/live/farm_live/index.ex:221
 #: lib/mce_web/live/farm_live/show.ex:372
 #, elixir-autogen, elixir-format
 msgid "United States"
@@ -1583,7 +1589,7 @@ msgstr "알 수 없음"
 msgid "Upload error. Please try again."
 msgstr "업로드 오류. 다시 시도하세요."
 
-#: lib/mce_web/components/layouts.ex:244
+#: lib/mce_web/components/layouts.ex:246
 #, elixir-autogen, elixir-format
 msgid "Users"
 msgstr "사용자"
@@ -1593,17 +1599,17 @@ msgstr "사용자"
 msgid "Version"
 msgstr "버전"
 
-#: lib/mce_web/live/dashboard_live/index.ex:190
+#: lib/mce_web/live/dashboard_live/index.ex:193
 #, elixir-autogen, elixir-format
 msgid "View"
 msgstr "보기"
 
-#: lib/mce_web/live/dashboard_live/index.ex:123
+#: lib/mce_web/live/dashboard_live/index.ex:126
 #, elixir-autogen, elixir-format
 msgid "View All Farms"
 msgstr "모든 농장 보기"
 
-#: lib/mce_web/live/farm_live/index.ex:212
+#: lib/mce_web/live/farm_live/index.ex:207
 #, elixir-autogen, elixir-format
 msgid "View Details"
 msgstr "상세 보기"
@@ -1671,7 +1677,161 @@ msgid "t CO₂e Total"
 msgstr "총 CO₂e 톤"
 
 #: lib/mce_web/components/emissions_components.ex:332
-#: lib/mce_web/live/dashboard_live/index.ex:76
+#: lib/mce_web/live/dashboard_live/index.ex:79
 #, elixir-autogen, elixir-format
 msgid "tonnes CO₂e"
 msgstr "CO₂e 톤"
+
+#: lib/mce_web/controllers/page_html/home.html.heex:264
+#, elixir-autogen, elixir-format
+msgid "Access your farms and start calculating livestock methane emissions with our professional-grade tools."
+msgstr "농장에 접속하여 전문가급 도구로 가축 메탄 배출량 계산을 시작하세요."
+
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "Account Settings"
+msgstr "계정 설정"
+
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:30
+#, elixir-autogen, elixir-format
+msgid "Change Email"
+msgstr "이메일 변경"
+
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:29
+#, elixir-autogen, elixir-format
+msgid "Changing..."
+msgstr "변경 중..."
+
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:61
+#, elixir-autogen, elixir-format
+msgid "Confirm new password"
+msgstr "새 비밀번호 확인"
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:10
+#, elixir-autogen, elixir-format
+msgid "Don't have an account?"
+msgstr "계정이 없으신가요?"
+
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "Email Address"
+msgstr "이메일 주소"
+
+#: lib/mce_web/controllers/page_html/home.html.heex:92
+#: lib/mce_web/controllers/page_html/home.html.heex:280
+#, elixir-autogen, elixir-format
+msgid "Go to My Farms"
+msgstr "내 농장으로 이동"
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:63
+#, elixir-autogen, elixir-format
+msgid "Log in and stay logged in"
+msgstr "로그인 유지"
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:66
+#, elixir-autogen, elixir-format
+msgid "Log in only this time"
+msgstr "이번만 로그인"
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:41
+#, elixir-autogen, elixir-format
+msgid "Log in with email"
+msgstr "이메일로 로그인"
+
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:7
+#, elixir-autogen, elixir-format
+msgid "Manage your account email address and password settings"
+msgstr "계정 이메일 주소와 비밀번호 설정을 관리합니다"
+
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:54
+#, elixir-autogen, elixir-format
+msgid "New password"
+msgstr "새 비밀번호"
+
+#: lib/mce_web/controllers/page_html/home.html.heex:262
+#, elixir-autogen, elixir-format
+msgid "Ready to track your emissions?"
+msgstr "배출량 추적 준비가 되셨나요?"
+
+#: lib/mce_web/controllers/user_settings_html/edit.html.heex:67
+#, elixir-autogen, elixir-format
+msgid "Save Password"
+msgstr "비밀번호 저장"
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:14
+#, elixir-autogen, elixir-format
+msgid "Sign up"
+msgstr "회원가입"
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "To see sent emails, visit"
+msgstr "발송된 이메일을 확인하려면"
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "You are running the local mail adapter."
+msgstr "로컬 메일 어댑터를 사용 중입니다."
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:8
+#, elixir-autogen, elixir-format
+msgid "You need to reauthenticate to perform sensitive actions on your account."
+msgstr "계정의 민감한 작업을 수행하려면 재인증이 필요합니다."
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:14
+#, elixir-autogen, elixir-format
+msgid "for an account now."
+msgstr "지금 계정을 만드세요."
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:45
+#, elixir-autogen, elixir-format
+msgid "or"
+msgstr "또는"
+
+#: lib/mce_web/controllers/user_session_html/new.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "the mailbox page"
+msgstr "메일함 페이지"
+
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:24
+#, elixir-autogen, elixir-format
+msgid "Confirm and log in only this time"
+msgstr "확인하고 이번만 로그인"
+
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "Confirm and stay logged in"
+msgstr "확인하고 로그인 유지"
+
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:18
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "Confirming..."
+msgstr "확인 중..."
+
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:47
+#, elixir-autogen, elixir-format
+msgid "Keep me logged in on this device"
+msgstr "이 기기에서 로그인 유지"
+
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:50
+#, elixir-autogen, elixir-format
+msgid "Log me in only this time"
+msgstr "이번만 로그인"
+
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:37
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:44
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:49
+#, elixir-autogen, elixir-format
+msgid "Logging in..."
+msgstr "로그인 중..."
+
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:56
+#, elixir-autogen, elixir-format
+msgid "Tip: If you prefer passwords, you can enable them in the user settings."
+msgstr "팁: 비밀번호를 선호하시면 사용자 설정에서 활성화할 수 있습니다."
+
+#: lib/mce_web/controllers/user_session_html/confirm.html.heex:4
+#, elixir-autogen, elixir-format
+msgid "Welcome"
+msgstr "환영합니다"

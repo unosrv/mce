@@ -69,7 +69,7 @@ defmodule MceWeb.CoreComponents do
       phx-hook={@auto_dismiss && "AutoDismiss"}
       data-auto-dismiss={@auto_dismiss}
       role="alert"
-      class="toast toast-top toast-end z-50"
+      class="toast toast-top toast-end z-[100]"
       {@rest}
     >
       <div class={[

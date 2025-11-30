@@ -37,41 +37,45 @@ defmodule MceWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <header class="navbar bg-base-100 shadow-sm px-4 sm:px-6 lg:px-8">
-      <div class="flex-1">
-        <a href="/" class="flex items-center gap-2">
-          <.icon name="hero-chart-bar" class="size-8 text-primary" />
-          <span class="text-lg font-bold text-primary">MCE</span>
-        </a>
-        <nav :if={@current_scope} class="ml-8 hidden md:flex">
-          <ul class="menu menu-horizontal px-1">
+    <div class="flex flex-col min-h-screen">
+      <header class="navbar bg-base-100/80 backdrop-blur-sm shadow-sm sticky top-0 z-50 px-4 sm:px-6 lg:px-8">
+        <%!-- Brand & Navigation (left-aligned) --%>
+        <div class="navbar-start gap-6">
+          <a href="/" class="flex items-center gap-2">
+            <.icon name="hero-chart-bar" class="size-8 text-primary" />
+            <span class="text-lg font-bold text-primary">MCE</span>
+          </a>
+          <nav :if={@current_scope} class="hidden md:flex">
+            <.link
+              navigate={~p"/farms"}
+              class="flex items-center gap-2 px-2 py-1 text-base-content/70 hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors"
+            >
+              <.icon name="hero-building-office-2" class="size-4" />
+              {gettext("Farms")}
+            </.link>
+          </nav>
+        </div>
+
+        <%!-- Settings & User (right) --%>
+        <div class="navbar-end">
+          <ul class="flex flex-row px-1 space-x-2 items-center">
             <li>
-              <.link navigate={~p"/farms"} class="gap-2">
-                <.icon name="hero-building-office-2" class="size-4" />
-                {gettext("Farms")}
-              </.link>
+              <.language_switcher locale={@locale} />
+            </li>
+            <li>
+              <.theme_toggle />
+            </li>
+            <li :if={@current_scope}>
+              <.user_menu user={@current_scope.user} />
             </li>
           </ul>
-        </nav>
-      </div>
-      <div class="flex-none">
-        <ul class="flex flex-row px-1 space-x-2 items-center">
-          <li>
-            <.language_switcher locale={@locale} />
-          </li>
-          <li>
-            <.theme_toggle />
-          </li>
-          <li :if={@current_scope}>
-            <.user_menu user={@current_scope.user} />
-          </li>
-        </ul>
-      </div>
-    </header>
+        </div>
+      </header>
 
-    <main class="min-h-screen bg-base-200/50">
-      {render_slot(@inner_block)}
-    </main>
+      <main class="flex-1 bg-base-200/50">
+        {render_slot(@inner_block)}
+      </main>
+    </div>
 
     <.flash_group flash={@flash} />
     """

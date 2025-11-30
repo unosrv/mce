@@ -10,7 +10,8 @@ defmodule MceWeb.UserSettingsControllerTest do
     test "renders settings page", %{conn: conn} do
       conn = get(conn, ~p"/users/settings")
       response = html_response(conn, 200)
-      assert response =~ "Settings"
+      # Default locale is Korean
+      assert response =~ "계정 설정"
     end
 
     test "redirects if user is not logged in" do
@@ -61,8 +62,8 @@ defmodule MceWeb.UserSettingsControllerTest do
         })
 
       response = html_response(old_password_conn, 200)
-      assert response =~ "Settings"
-      # Default locale is Korean, so check for translated message
+      # Default locale is Korean
+      assert response =~ "계정 설정"
       assert response =~ "최소 12자 이상이어야 합니다"
       assert response =~ "does not match password"
 
@@ -95,7 +96,8 @@ defmodule MceWeb.UserSettingsControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "Settings"
+      # Default locale is Korean
+      assert response =~ "계정 설정"
       assert response =~ "must have the @ sign and no spaces"
     end
   end

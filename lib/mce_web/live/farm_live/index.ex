@@ -76,22 +76,17 @@ defmodule MceWeb.FarmLive.Index do
     ~H"""
     <Layouts.app flash={@flash} current_scope={@current_scope}>
       <div class="container mx-auto px-4 py-6">
-        <.header>
-          <div class="flex items-center gap-2">
-            <.icon name="hero-building-office-2" class="size-8 text-primary" />
-            <span>{gettext("Farms")}</span>
-          </div>
-          <:actions>
-            <.link patch={~p"/farms/new"}>
-              <.button class="btn-primary gap-2">
-                <.icon name="hero-plus" class="size-5" />
-                {gettext("Add Farm")}
-              </.button>
-            </.link>
-          </:actions>
-        </.header>
+        <%!-- Add Farm button (top right) --%>
+        <div class="flex justify-end mb-6">
+          <.link patch={~p"/farms/new"}>
+            <.button class="btn-primary gap-2">
+              <.icon name="hero-plus" class="size-5" />
+              {gettext("Add Farm")}
+            </.button>
+          </.link>
+        </div>
 
-        <div class="mt-8">
+        <div>
           <div
             :if={@farms_empty?}
             class="card bg-base-200 p-8 text-center"

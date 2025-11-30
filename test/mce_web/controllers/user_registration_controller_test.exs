@@ -7,7 +7,8 @@ defmodule MceWeb.UserRegistrationControllerTest do
     test "renders registration page", %{conn: conn} do
       conn = get(conn, ~p"/users/register")
       response = html_response(conn, 200)
-      assert response =~ "Register"
+      # Check for registration form element instead of translated text
+      assert response =~ ~s(action="/users/register")
       assert response =~ ~p"/users/log-in"
       assert response =~ ~p"/users/register"
     end
@@ -43,7 +44,8 @@ defmodule MceWeb.UserRegistrationControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "Register"
+      # Check for registration form element instead of translated text
+      assert response =~ ~s(action="/users/register")
       assert response =~ "must have the @ sign and no spaces"
     end
   end

@@ -16,9 +16,10 @@ defmodule MceWeb.UserSessionControllerTest do
     test "renders login page", %{conn: conn} do
       conn = get(conn, ~p"/users/log-in")
       response = html_response(conn, 200)
-      assert response =~ "Log in"
+      # Default locale is Korean
+      assert response =~ "로그인"
       assert response =~ ~p"/users/register"
-      assert response =~ "Log in with email"
+      assert response =~ "이메일로 로그인"
     end
 
     test "renders login page with email filled in (sudo mode)", %{conn: conn, user: user} do
@@ -28,9 +29,10 @@ defmodule MceWeb.UserSessionControllerTest do
         |> get(~p"/users/log-in")
         |> html_response(200)
 
-      assert html =~ "You need to reauthenticate"
+      # Default locale is Korean
+      assert html =~ "재인증이 필요합니다"
       refute html =~ "Register"
-      assert html =~ "Log in with email"
+      assert html =~ "이메일로 로그인"
 
       assert html =~
                ~s(<input type="email" name="user[email]" id="login_form_magic_email" value="#{user.email}")
@@ -39,9 +41,10 @@ defmodule MceWeb.UserSessionControllerTest do
     test "renders login page (email + password)", %{conn: conn} do
       conn = get(conn, ~p"/users/log-in?mode=password")
       response = html_response(conn, 200)
-      assert response =~ "Log in"
+      # Default locale is Korean
+      assert response =~ "로그인"
       assert response =~ ~p"/users/register"
-      assert response =~ "Log in with email"
+      assert response =~ "이메일로 로그인"
     end
   end
 
@@ -53,7 +56,8 @@ defmodule MceWeb.UserSessionControllerTest do
         end)
 
       conn = get(conn, ~p"/users/log-in/#{token}")
-      assert html_response(conn, 200) =~ "Confirm and stay logged in"
+      # Default locale is Korean
+      assert html_response(conn, 200) =~ "확인하고 로그인 유지"
     end
 
     test "renders login page for confirmed user", %{conn: conn, user: user} do
@@ -65,7 +69,8 @@ defmodule MceWeb.UserSessionControllerTest do
       conn = get(conn, ~p"/users/log-in/#{token}")
       html = html_response(conn, 200)
       refute html =~ "Confirm my account"
-      assert html =~ "Log in"
+      # Check for login form element instead of translated text
+      assert html =~ ~s(id="login_form")
     end
 
     test "raises error for invalid token", %{conn: conn} do
@@ -137,7 +142,8 @@ defmodule MceWeb.UserSessionControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "Log in"
+      # Default locale is Korean
+      assert response =~ "로그인"
       assert response =~ "Invalid email or password"
     end
   end

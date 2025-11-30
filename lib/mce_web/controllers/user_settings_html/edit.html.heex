@@ -1,40 +1,74 @@
 <Layouts.app flash={@flash} current_scope={@current_scope}>
-  <div class="text-center">
-    <.header>
-      Account Settings
-      <:subtitle>Manage your account email address and password settings</:subtitle>
-    </.header>
+  <div class="container mx-auto px-4 py-6 max-w-2xl">
+    <div class="text-center mb-8">
+      <.header>
+        {gettext("Account Settings")}
+        <:subtitle>
+          {gettext("Manage your account email address and password settings")}
+        </:subtitle>
+      </.header>
+    </div>
+
+    <%!-- Email Settings Card --%>
+    <div class="card bg-base-100 shadow-lg mb-6">
+      <div class="card-body">
+        <h3 class="card-title text-lg mb-4">
+          <.icon name="hero-envelope" class="size-5" />
+          {gettext("Email Address")}
+        </h3>
+        <.form :let={f} for={@email_changeset} action={~p"/users/settings"} id="update_email">
+          <input type="hidden" name="action" value="update_email" />
+          <.input
+            field={f[:email]}
+            type="email"
+            label={gettext("Email")}
+            autocomplete="email"
+            required
+          />
+          <div class="card-actions justify-end mt-4">
+            <.button variant="primary" phx-disable-with={gettext("Changing...")}>
+              {gettext("Change Email")}
+            </.button>
+          </div>
+        </.form>
+      </div>
+    </div>
+
+    <%!-- Password Settings Card --%>
+    <div class="card bg-base-100 shadow-lg">
+      <div class="card-body">
+        <h3 class="card-title text-lg mb-4">
+          <.icon name="hero-key" class="size-5" />
+          {gettext("Password")}
+        </h3>
+        <.form
+          :let={f}
+          for={@password_changeset}
+          action={~p"/users/settings"}
+          id="update_password"
+        >
+          <input type="hidden" name="action" value="update_password" />
+          <.input
+            field={f[:password]}
+            type="password"
+            label={gettext("New password")}
+            autocomplete="new-password"
+            required
+          />
+          <.input
+            field={f[:password_confirmation]}
+            type="password"
+            label={gettext("Confirm new password")}
+            autocomplete="new-password"
+            required
+          />
+          <div class="card-actions justify-end mt-4">
+            <.button variant="primary" phx-disable-with={gettext("Saving...")}>
+              {gettext("Save Password")}
+            </.button>
+          </div>
+        </.form>
+      </div>
+    </div>
   </div>
-
-  <.form :let={f} for={@email_changeset} action={~p"/users/settings"} id="update_email">
-    <input type="hidden" name="action" value="update_email" />
-
-    <.input field={f[:email]} type="email" label="Email" autocomplete="email" required />
-
-    <.button variant="primary" phx-disable-with="Changing...">Change Email</.button>
-  </.form>
-
-  <div class="divider" />
-
-  <.form :let={f} for={@password_changeset} action={~p"/users/settings"} id="update_password">
-    <input type="hidden" name="action" value="update_password" />
-
-    <.input
-      field={f[:password]}
-      type="password"
-      label="New password"
-      autocomplete="new-password"
-      required
-    />
-    <.input
-      field={f[:password_confirmation]}
-      type="password"
-      label="Confirm new password"
-      autocomplete="new-password"
-      required
-    />
-    <.button variant="primary" phx-disable-with="Changing...">
-      Save Password
-    </.button>
-  </.form>
 </Layouts.app>

@@ -55,7 +55,7 @@ iex -S mix
 
 # Reset admin password
 alias Mce.Accounts
-user = Accounts.get_user_by_email("admin@mce.local")
+user = Accounts.get_user_by_email("admin@anysite.kr")
 Accounts.reset_user_password(user, %{password: "NewAdminPass123!"})
 ```
 
@@ -65,8 +65,12 @@ Accounts.reset_user_password(user, %{password: "NewAdminPass123!"})
 mix run priv/repo/seeds.exs
 
 # Default admin credentials:
-# Email: admin@anysite.com
+# Email: admin@anysite.kr
 # Password: AdminPassword123!
+
+# Default test user credentials:
+# Email: json@anysite.kr
+# Password: json12345678
 ```
 
 ### Option 4: Create Admin via IEx Console
