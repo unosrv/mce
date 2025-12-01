@@ -475,6 +475,7 @@ RUN apt-get update \
     libncurses6 \
     locales \
     ca-certificates \
+    curl \
     chromium \
     fonts-liberation \
     fonts-noto-cjk \
@@ -490,6 +491,7 @@ RUN apt-get update \
 | `libncurses6` | Terminal library (for `remote_console`) |
 | `locales` | Language/locale support |
 | `ca-certificates` | SSL certificate authorities (for HTTPS) |
+| `curl` | HTTP client (for Docker HEALTHCHECK command) |
 | `chromium` | Web browser (for PDF generation with ChromicPDF) |
 | `fonts-liberation` | Standard fonts for PDFs |
 | `fonts-noto-cjk` | Chinese/Japanese/Korean fonts (for Korean text in PDFs) |
@@ -869,10 +871,14 @@ ENV LANG=en_US.UTF-8
 
 **Cause**: `curl` not installed in runtime image
 
-**Solution**: Either:
-- Install `curl`: `apt-get install -y curl`
-- Remove HEALTHCHECK from Dockerfile
-- Use a simpler health check
+**Symptom**: Container shows `(health: starting)` indefinitely, Docker Swarm sends `SIGTERM` after retries, resulting in restart loop and `REPLICAS 0/1`.
+
+**Solution**: Install `curl` in the runtime stage:
+```dockerfile
+RUN apt-get install -y --no-install-recommends curl
+```
+
+**Note**: This issue was encountered and fixed on 2025-12-01. The Dockerfile now includes `curl` in runtime dependencies.
 
 ---
 
@@ -905,5 +911,7 @@ ENV LANG=en_US.UTF-8
 
 ---
 
-**Document Version**: 1.0
+**Document Version**: 1.1
 **Last Updated**: 2025-12-01
+**Changelog**:
+- v1.1: Added `curl` to runtime dependencies for Docker HEALTHCHECK (fix for health check failure causing restart loop)
