@@ -14,6 +14,7 @@
 5. [Verification Steps](#5-verification-steps)
 6. [Troubleshooting](#6-troubleshooting)
 7. [Rollback Procedures](#7-rollback-procedures)
+8. [Dangerous Operations: Reset and Reseed](#8-dangerous-operations-reset-and-reseed)
 
 ---
 
@@ -290,14 +291,129 @@ exit
 
 ---
 
+## 8. Dangerous Operations: Reset and Reseed
+
+These operations will **DELETE DATA**. Use with extreme caution!
+
+### Available Commands
+
+| Command | Description | Data Loss |
+|---------|-------------|-----------|
+| `Mce.Release.reseed` | Truncate all tables + re-seed | Removes all data, keeps schema |
+| `Mce.Release.reset` | Drop all tables + migrate + seed | Removes everything |
+| `Mce.Release.truncate_all` | Truncate all tables only | Removes all data, keeps schema |
+| `Mce.Release.drop_all` | Drop all tables only | Removes everything |
+
+### When to Use Which
+
+| Scenario | Command |
+|----------|---------|
+| Updated `seeds.exs`, want fresh test data | `reseed` |
+| Changed migrations, need clean database | `reset` |
+| Just want to clear data, no re-seed | `truncate_all` |
+
+### Reseed: Clear Data and Re-populate
+
+Use when you've updated `seeds.exs` and want fresh data without changing the schema.
+
+```bash
+# SSH into server
+ssh root@unolab251201
+
+# Find container
+docker ps | grep mce-phoenix
+
+# Run reseed (CAUTION: Deletes all data!)
+docker exec -it <CONTAINER_ID> /app/bin/mce eval "Mce.Release.reseed"
+```
+
+Expected output:
+```
+=== Truncating all tables ===
+WARNING: About to truncate 5 tables...
+Tables: users, farms, livestock, emissions, user_tokens
+Truncating users...
+Truncating farms...
+...
+Done! All tables truncated.
+
+=== Running seeds ===
+Creating admin user...
+Admin user created: admin@anysite.kr
+Creating test user...
+Test user created: jason@anysite.kr
+...
+
+=== Reseed complete! ===
+```
+
+### Reset: Complete Database Reset (like `mix ecto.reset`)
+
+Use when you need a completely fresh database (e.g., migration changes).
+
+```bash
+# SSH into server
+ssh root@unolab251201
+
+# Find container
+docker ps | grep mce-phoenix
+
+# Run reset (CAUTION: Drops ALL tables!)
+docker exec -it <CONTAINER_ID> /app/bin/mce eval "Mce.Release.reset"
+```
+
+Expected output:
+```
+=== HARD RESET: Dropping all tables ===
+WARNING: Dropping all tables...
+Done! All tables dropped.
+
+=== Running migrations ===
+[info] == Running 20241101000001 CreateUsers.change/0 forward
+[info] create table users
+...
+
+=== Running seeds ===
+Creating admin user...
+...
+
+=== Reset complete! ===
+```
+
+### Safety Checklist Before Reset/Reseed
+
+Before running any dangerous operation:
+
+- [ ] **Backup the database** if you have important data
+- [ ] **Verify you're on the correct server** (staging vs production)
+- [ ] **Confirm the container ID** is correct
+- [ ] **Understand the consequences** - data will be lost!
+
+### Database Backup (Optional)
+
+To backup before reset:
+
+```bash
+# Find PostgreSQL container
+docker ps | grep mce-postgresql
+
+# Create backup
+docker exec <POSTGRES_CONTAINER> pg_dump -U postgres mce_prod > backup_$(date +%Y%m%d_%H%M%S).sql
+```
+
+---
+
 ## Notes
 
 - **Always run migrations before seeds**
 - **Seeds are idempotent** - safe to run multiple times
 - **Backup first** - Consider backing up the database before running migrations on production
 - **Test on staging** - Since this server serves as both staging and production, test thoroughly before going live
+- **Reset/Reseed are irreversible** - Always backup before using dangerous operations
 
 ---
 
-**Document Version**: 1.0
+**Document Version**: 1.1
 **Last Updated**: 2025-12-01
+**Changelog**:
+- v1.1: Added dangerous operations section (reset, reseed, truncate_all, drop_all)
