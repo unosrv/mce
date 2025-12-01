@@ -640,6 +640,18 @@ defmodule MceWeb.CoreComponents do
   defp has_form_action?(_form), do: false
 
   @doc """
+  Translates Backpex strings using gettext.
+  Used by Backpex for translating UI labels and messages.
+  """
+  def translate_backpex({msg, opts}) do
+    if count = opts[:count] do
+      Gettext.dngettext(MceWeb.Gettext, "backpex", msg, msg, count, opts)
+    else
+      Gettext.dgettext(MceWeb.Gettext, "backpex", msg, opts)
+    end
+  end
+
+  @doc """
   Translates an error message using gettext.
   """
   def translate_error({msg, opts}) do

@@ -206,7 +206,8 @@ defmodule MceWeb.Layouts do
   end
 
   @doc """
-  Admin layout for Backpex admin panel.
+  Admin layout for Backpex admin panel with responsive collapsible icon-only drawer sidebar.
+  Uses DaisyUI's is-drawer-close and is-drawer-open pattern.
   """
   attr :flash, :map, required: true, doc: "the map of flash messages"
   attr :fluid?, :boolean, default: true, doc: "if the content uses full width"
@@ -218,119 +219,154 @@ defmodule MceWeb.Layouts do
 
   def admin(assigns) do
     ~H"""
-    <div class="min-h-screen bg-base-200">
-      <%!-- Admin Header --%>
-      <header class="navbar bg-base-100 border-b border-base-300 fixed top-0 z-50 px-4">
-        <div class="flex-1 gap-4">
-          <.link href={~p"/admin/users"} class="flex items-center gap-2 text-primary">
-            <.icon name="hero-cog-8-tooth" class="size-7" />
-            <span class="text-lg font-bold">{gettext("Admin")}</span>
-          </.link>
-        </div>
+    <div class="drawer lg:drawer-open h-screen overflow-hidden">
+      <input id="admin-drawer" type="checkbox" class="drawer-toggle" />
 
-        <div class="flex-none">
-          <ul class="flex flex-row px-1 space-x-2 items-center">
-            <li>
-              <.link
-                href={~p"/dashboard"}
-                class="btn btn-ghost btn-sm gap-2"
-              >
-                <.icon name="hero-arrow-left" class="size-4" />
-                {gettext("Back to App")}
-              </.link>
-            </li>
-            <li>
-              <.language_switcher locale={@locale} />
-            </li>
-            <li>
-              <.theme_toggle />
-            </li>
-            <li :if={@current_scope}>
-              <.user_menu user={@current_scope.user} />
-            </li>
-          </ul>
-        </div>
-      </header>
+      <%!-- Main Content Area --%>
+      <div class="drawer-content flex flex-col min-w-0 h-full overflow-hidden">
+        <%!-- Admin Header --%>
+        <nav class="navbar w-full bg-base-100 border-b border-base-300 sticky top-0 z-40">
+          <%!-- Sidebar toggle button --%>
+          <label
+            for="admin-drawer"
+            aria-label="toggle sidebar"
+            class="btn btn-square btn-ghost"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2"
+              fill="none"
+              stroke="currentColor"
+              class="size-5"
+            >
+              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z">
+              </path>
+              <path d="M9 4v16"></path>
+              <path d="M14 10l2 2l-2 2"></path>
+            </svg>
+          </label>
 
-      <div class="flex pt-16">
-        <%!-- Sidebar --%>
-        <aside class="w-64 bg-base-100 border-r border-base-300 fixed left-0 top-16 bottom-0 overflow-y-auto hidden md:block">
-          <nav class="p-4">
-            <ul class="menu menu-lg gap-1">
+          <div class="flex-1 px-4">
+            <span class="text-lg font-semibold">{gettext("Admin")}</span>
+          </div>
+
+          <div class="flex-none">
+            <ul class="flex flex-row px-1 space-x-2 items-center">
               <li>
-                <.link
-                  navigate={~p"/admin/users"}
-                  class={[
-                    "flex items-center gap-3",
-                    active_admin_link?(@current_url, "/admin/users") && "bg-primary/10 text-primary"
-                  ]}
-                >
-                  <.icon name="hero-users" class="size-5" />
-                  {gettext("Users")}
+                <.link href={~p"/dashboard"} class="btn btn-ghost btn-sm gap-2">
+                  <.icon name="hero-arrow-left" class="size-4" />
+                  <span class="hidden sm:inline">{gettext("Back to App")}</span>
                 </.link>
               </li>
               <li>
-                <.link
-                  navigate={~p"/admin/farms"}
-                  class={[
-                    "flex items-center gap-3",
-                    active_admin_link?(@current_url, "/admin/farms") && "bg-primary/10 text-primary"
-                  ]}
-                >
-                  <.icon name="hero-building-office-2" class="size-5" />
-                  {gettext("Farms")}
-                </.link>
+                <.language_switcher locale={@locale} />
               </li>
               <li>
-                <.link
-                  navigate={~p"/admin/livestock-groups"}
-                  class={[
-                    "flex items-center gap-3",
-                    active_admin_link?(@current_url, "/admin/livestock-groups") &&
-                      "bg-primary/10 text-primary"
-                  ]}
-                >
-                  <.icon name="hero-beaker" class="size-5" />
-                  {gettext("Livestock Groups")}
-                </.link>
+                <.theme_toggle />
               </li>
-              <li>
-                <.link
-                  navigate={~p"/admin/feed-presets"}
-                  class={[
-                    "flex items-center gap-3",
-                    active_admin_link?(@current_url, "/admin/feed-presets") &&
-                      "bg-primary/10 text-primary"
-                  ]}
-                >
-                  <.icon name="hero-clipboard-document-list" class="size-5" />
-                  {gettext("Feed Presets")}
-                </.link>
-              </li>
-              <li>
-                <.link
-                  navigate={~p"/admin/ipcc-factors"}
-                  class={[
-                    "flex items-center gap-3",
-                    active_admin_link?(@current_url, "/admin/ipcc-factors") &&
-                      "bg-primary/10 text-primary"
-                  ]}
-                >
-                  <.icon name="hero-document-chart-bar" class="size-5" />
-                  {gettext("IPCC Factors")}
-                </.link>
+              <li :if={@current_scope}>
+                <.user_menu user={@current_scope.user} />
               </li>
             </ul>
-          </nav>
-        </aside>
+          </div>
+        </nav>
 
-        <%!-- Main Content --%>
-        <main class="flex-1 md:ml-64 p-6 min-h-[calc(100vh-4rem)] min-w-0 overflow-x-auto">
+        <%!-- Page Content --%>
+        <main class="flex-1 min-h-0 bg-base-200/50 overflow-auto p-6">
           <Backpex.HTML.Layout.flash_messages flash={@flash} />
           <div class="max-w-full overflow-x-auto">
             {render_slot(@inner_block)}
           </div>
         </main>
+      </div>
+
+      <%!-- Sidebar --%>
+      <div class="drawer-side z-50 is-drawer-close:overflow-visible">
+        <label for="admin-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="flex min-h-full flex-col items-start bg-base-100 border-r border-base-300 is-drawer-close:w-14 is-drawer-open:w-64 transition-[width] duration-200">
+          <%!-- Sidebar Header --%>
+          <div class="flex h-16 w-full items-center border-b border-base-300 px-4 is-drawer-close:justify-center is-drawer-open:justify-start">
+            <.link href={~p"/admin/users"} class="flex items-center gap-2 text-primary">
+              <.icon name="hero-cog-8-tooth" class="size-7 shrink-0" />
+              <span class="text-lg font-bold is-drawer-close:hidden">{gettext("Admin")}</span>
+            </.link>
+          </div>
+
+          <%!-- Navigation Menu --%>
+          <ul class="menu w-full grow gap-1 p-2">
+            <li>
+              <.link
+                navigate={~p"/admin/users"}
+                class={[
+                  "flex items-center gap-3 is-drawer-close:justify-center is-drawer-close:tooltip is-drawer-close:tooltip-right",
+                  active_admin_link?(@current_url, "/admin/users") && "bg-primary/10 text-primary"
+                ]}
+                data-tip={gettext("Users")}
+              >
+                <.icon name="hero-users" class="size-5 shrink-0" />
+                <span class="is-drawer-close:hidden">{gettext("Users")}</span>
+              </.link>
+            </li>
+            <li>
+              <.link
+                navigate={~p"/admin/farms"}
+                class={[
+                  "flex items-center gap-3 is-drawer-close:justify-center is-drawer-close:tooltip is-drawer-close:tooltip-right",
+                  active_admin_link?(@current_url, "/admin/farms") && "bg-primary/10 text-primary"
+                ]}
+                data-tip={gettext("Farms")}
+              >
+                <.icon name="hero-building-office-2" class="size-5 shrink-0" />
+                <span class="is-drawer-close:hidden">{gettext("Farms")}</span>
+              </.link>
+            </li>
+            <li>
+              <.link
+                navigate={~p"/admin/livestock-groups"}
+                class={[
+                  "flex items-center gap-3 is-drawer-close:justify-center is-drawer-close:tooltip is-drawer-close:tooltip-right",
+                  active_admin_link?(@current_url, "/admin/livestock-groups") &&
+                    "bg-primary/10 text-primary"
+                ]}
+                data-tip={gettext("Livestock Groups")}
+              >
+                <.icon name="hero-beaker" class="size-5 shrink-0" />
+                <span class="is-drawer-close:hidden">{gettext("Livestock Groups")}</span>
+              </.link>
+            </li>
+            <li>
+              <.link
+                navigate={~p"/admin/feed-presets"}
+                class={[
+                  "flex items-center gap-3 is-drawer-close:justify-center is-drawer-close:tooltip is-drawer-close:tooltip-right",
+                  active_admin_link?(@current_url, "/admin/feed-presets") &&
+                    "bg-primary/10 text-primary"
+                ]}
+                data-tip={gettext("Feed Presets")}
+              >
+                <.icon name="hero-clipboard-document-list" class="size-5 shrink-0" />
+                <span class="is-drawer-close:hidden">{gettext("Feed Presets")}</span>
+              </.link>
+            </li>
+            <li>
+              <.link
+                navigate={~p"/admin/ipcc-factors"}
+                class={[
+                  "flex items-center gap-3 is-drawer-close:justify-center is-drawer-close:tooltip is-drawer-close:tooltip-right",
+                  active_admin_link?(@current_url, "/admin/ipcc-factors") &&
+                    "bg-primary/10 text-primary"
+                ]}
+                data-tip={gettext("IPCC Factors")}
+              >
+                <.icon name="hero-document-chart-bar" class="size-5 shrink-0" />
+                <span class="is-drawer-close:hidden">{gettext("IPCC Factors")}</span>
+              </.link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     """
