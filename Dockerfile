@@ -14,10 +14,11 @@
 # Find compatible versions at:
 # - https://hub.docker.com/r/hexpm/elixir/tags
 # - https://hub.docker.com/_/debian/tags
-# Verified available image: https://hub.docker.com/r/hexpm/elixir/tags
-ARG ELIXIR_VERSION=1.15.7
-ARG OTP_VERSION=26.1.1
-ARG DEBIAN_VERSION=bookworm-20230612-slim
+# Verified available image: hexpm/elixir:1.19.4-erlang-27.3.3-debian-bookworm-20251117-slim
+# Updated 2025-12-01: Upgraded to satisfy backpex requirement (~> 1.16)
+ARG ELIXIR_VERSION=1.19.4
+ARG OTP_VERSION=27.3.3
+ARG DEBIAN_VERSION=bookworm-20251117-slim
 
 ARG BUILDER_IMAGE="docker.io/hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="docker.io/debian:${DEBIAN_VERSION}"

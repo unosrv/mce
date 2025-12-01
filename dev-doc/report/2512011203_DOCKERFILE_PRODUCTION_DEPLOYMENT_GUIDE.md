@@ -156,22 +156,22 @@ Let's go through the entire Dockerfile, explaining every single line.
 ### Section 2: Build Arguments (ARG)
 
 ```dockerfile
-ARG ELIXIR_VERSION=1.15.8
-ARG OTP_VERSION=26.2.5
-ARG DEBIAN_VERSION=bookworm-20241016-slim
+ARG ELIXIR_VERSION=1.19.4
+ARG OTP_VERSION=27.3.3
+ARG DEBIAN_VERSION=bookworm-20251117-slim
 ```
 
 **What `ARG` does**: Defines variables that can be used during the build process.
 
 | Variable | Value | Meaning |
 |----------|-------|---------|
-| `ELIXIR_VERSION` | `1.15.8` | The Elixir programming language version |
-| `OTP_VERSION` | `26.2.5` | The Erlang/OTP runtime version |
-| `DEBIAN_VERSION` | `bookworm-20241016-slim` | The Linux operating system version |
+| `ELIXIR_VERSION` | `1.19.4` | The Elixir programming language version |
+| `OTP_VERSION` | `27.3.3` | The Erlang/OTP runtime version |
+| `DEBIAN_VERSION` | `bookworm-20251117-slim` | The Linux operating system version |
 
 **Why these specific versions?**
-- `1.15.8` matches the `elixir: "~> 1.15"` requirement in `mix.exs`
-- `26.2.5` is a compatible OTP version for Elixir 1.15
+- `1.19.4` is the latest stable Elixir and satisfies dependency requirements (backpex `~> 1.16`)
+- `27.3.3` is a stable OTP version compatible with Elixir 1.19
 - `bookworm` is Debian 12 (stable, well-supported)
 - `slim` means a minimal installation (smaller image)
 
@@ -182,10 +182,10 @@ ARG RUNNER_IMAGE="docker.io/debian:${DEBIAN_VERSION}"
 
 **What this does**: Constructs the full image names using the version variables.
 
-- `BUILDER_IMAGE` → `hexpm/elixir:1.15.8-erlang-26.2.5-debian-bookworm-20241016-slim`
+- `BUILDER_IMAGE` → `hexpm/elixir:1.19.4-erlang-27.3.3-debian-bookworm-20251117-slim`
   - This is an official image from the Elixir team with Elixir + Erlang pre-installed
 
-- `RUNNER_IMAGE` → `debian:bookworm-20241016-slim`
+- `RUNNER_IMAGE` → `debian:bookworm-20251117-slim`
   - This is a minimal Debian image for running (not building) the app
 
 **Why `hexpm/elixir` instead of `elixir`?**
@@ -911,7 +911,8 @@ RUN apt-get install -y --no-install-recommends curl
 
 ---
 
-**Document Version**: 1.1
+**Document Version**: 1.2
 **Last Updated**: 2025-12-01
 **Changelog**:
+- v1.2: Updated to Elixir 1.19.4 / OTP 27.3.3 to satisfy backpex dependency requirement (~> 1.16)
 - v1.1: Added `curl` to runtime dependencies for Docker HEALTHCHECK (fix for health check failure causing restart loop)
