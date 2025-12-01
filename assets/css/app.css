@@ -246,6 +246,83 @@ button:focus-visible {
 }
 
 /* ============================================
+   Sticky Checkbox Column (First Column)
+   Makes the checkbox column stick to the left
+   when scrolling horizontally in the table.
+   Uses .drawer-content selector for custom admin layout.
+   ============================================ */
+
+/* Sticky header checkbox cell */
+.drawer-content table.table thead tr th:first-child {
+  position: sticky !important;
+  left: 0 !important;
+  z-index: 20 !important;
+  background-color: oklch(95% 0.002 260) !important; /* matches bg-base-200 light */
+}
+
+/* Sticky body checkbox cells */
+.drawer-content table.table tbody tr td:first-child {
+  position: sticky !important;
+  left: 0 !important;
+  z-index: 10 !important;
+  background-color: oklch(98% 0 0) !important; /* matches bg-base-100 light */
+}
+
+/* Row hover effect - solid background on ALL cells */
+.drawer-content table.table tbody tr:hover td {
+  background-color: oklch(94% 0.002 260) !important; /* solid bg-base-200 equivalent */
+  transition: background-color 0.15s ease;
+}
+
+/* Selected row - solid background on ALL cells */
+.drawer-content table.table tbody tr:has(input:checked) td {
+  background-color: oklch(92% 0.04 145) !important; /* solid light green */
+}
+
+/* Shadow on right edge to indicate sticky column */
+.drawer-content table.table thead tr th:first-child::after,
+.drawer-content table.table tbody tr td:first-child::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -4px;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.06), transparent);
+  pointer-events: none;
+}
+
+/* Dark mode support for sticky cells */
+[data-theme="dark"] .drawer-content table.table thead tr th:first-child,
+[data-theme="mce-dark"] .drawer-content table.table thead tr th:first-child {
+  background-color: oklch(15% 0.008 260) !important; /* dark bg-base-200 */
+}
+
+[data-theme="dark"] .drawer-content table.table tbody tr td:first-child,
+[data-theme="mce-dark"] .drawer-content table.table tbody tr td:first-child {
+  background-color: oklch(20% 0.01 260) !important; /* dark bg-base-100 */
+}
+
+/* Dark mode row hover - ALL cells */
+[data-theme="dark"] .drawer-content table.table tbody tr:hover td,
+[data-theme="mce-dark"] .drawer-content table.table tbody tr:hover td {
+  background-color: oklch(18% 0.008 260) !important; /* solid dark hover */
+}
+
+/* Dark mode selected row - ALL cells */
+[data-theme="dark"] .drawer-content table.table tbody tr:has(input:checked) td,
+[data-theme="mce-dark"] .drawer-content table.table tbody tr:has(input:checked) td {
+  background-color: oklch(25% 0.05 145) !important; /* solid dark green */
+}
+
+[data-theme="dark"] .drawer-content table.table thead tr th:first-child::after,
+[data-theme="dark"] .drawer-content table.table tbody tr td:first-child::after,
+[data-theme="mce-dark"] .drawer-content table.table thead tr th:first-child::after,
+[data-theme="mce-dark"] .drawer-content table.table tbody tr td:first-child::after {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+}
+
+/* ============================================
    Pagination Improvements
    ============================================ */
 /* Add proper gap between "Items X to Y (Z total)" and the page size dropdown

@@ -220,7 +220,13 @@ defmodule MceWeb.Layouts do
   def admin(assigns) do
     ~H"""
     <div class="drawer lg:drawer-open h-screen overflow-hidden">
-      <input id="admin-drawer" type="checkbox" class="drawer-toggle" />
+      <input
+        id="admin-drawer"
+        type="checkbox"
+        class="drawer-toggle"
+        phx-hook="DrawerState"
+        phx-update="ignore"
+      />
 
       <%!-- Main Content Area --%>
       <div class="drawer-content flex flex-col min-w-0 h-full overflow-hidden">
@@ -390,7 +396,13 @@ defmodule MceWeb.Layouts do
   def dashboard_layout(assigns) do
     ~H"""
     <div class="drawer lg:drawer-open h-screen overflow-hidden">
-      <input id="dashboard-drawer" type="checkbox" class="drawer-toggle" />
+      <input
+        id="dashboard-drawer"
+        type="checkbox"
+        class="drawer-toggle"
+        phx-hook="DrawerState"
+        phx-update="ignore"
+      />
 
       <%!-- Main Content Area --%>
       <div class="drawer-content flex flex-col min-w-0 h-full overflow-hidden">
