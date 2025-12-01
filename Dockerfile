@@ -114,6 +114,7 @@ FROM ${RUNNER_IMAGE} AS runtime
 # - libncurses6: terminal UI (for remote_console)
 # - locales: UTF-8 locale support
 # - ca-certificates: HTTPS support
+# - curl: for Docker health check
 # - chromium: for ChromicPDF (PDF generation)
 # - fonts-liberation: standard fonts for PDF rendering
 # - fonts-noto-cjk: CJK fonts (Korean, Chinese, Japanese)
@@ -124,6 +125,7 @@ RUN apt-get update \
     libncurses6 \
     locales \
     ca-certificates \
+    curl \
     chromium \
     fonts-liberation \
     fonts-noto-cjk \
