@@ -107,7 +107,24 @@ if config_env() == :prod do
       You can get your API key from https://resend.com/api-keys
       """
 
+  mail_from_name =
+    System.get_env("MAIL_FROM_NAME") ||
+      raise """
+      environment variable MAIL_FROM_NAME is missing.
+      Example: MCE
+      """
+
+  mail_from_email =
+    System.get_env("MAIL_FROM_EMAIL") ||
+      raise """
+      environment variable MAIL_FROM_EMAIL is missing.
+      Must be from a verified domain in Resend.
+      Example: noreply@mail.anysite.kr
+      """
+
   config :mce, Mce.Mailer,
     adapter: Swoosh.Adapters.Resend,
-    api_key: resend_api_key
+    api_key: resend_api_key,
+    from_name: mail_from_name,
+    from_email: mail_from_email
 end

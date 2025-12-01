@@ -90,9 +90,23 @@ config :phoenix_live_view,
 if System.get_env("USE_RESEND") == "true" do
   config :swoosh, :api_client, Swoosh.ApiClient.Req
 
+  resend_api_key =
+    System.get_env("RESEND_API_KEY") ||
+      raise "RESEND_API_KEY is required when USE_RESEND=true"
+
+  mail_from_name =
+    System.get_env("MAIL_FROM_NAME") ||
+      raise "MAIL_FROM_NAME is required when USE_RESEND=true"
+
+  mail_from_email =
+    System.get_env("MAIL_FROM_EMAIL") ||
+      raise "MAIL_FROM_EMAIL is required when USE_RESEND=true"
+
   config :mce, Mce.Mailer,
     adapter: Swoosh.Adapters.Resend,
-    api_key: System.get_env("RESEND_API_KEY")
+    api_key: resend_api_key,
+    from_name: mail_from_name,
+    from_email: mail_from_email
 else
   # Default: use local adapter, emails visible at /dev/mailbox
   config :swoosh, :api_client, false

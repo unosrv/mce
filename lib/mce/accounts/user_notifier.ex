@@ -9,13 +9,25 @@ defmodule Mce.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Mce", "contact@example.com"})
+      |> from({sender_name(), sender_email()})
       |> subject(subject)
       |> text_body(body)
 
     with {:ok, _metadata} <- Mailer.deliver(email) do
       {:ok, email}
     end
+  end
+
+  defp sender_name do
+    mailer_config()[:from_name] || "MCE"
+  end
+
+  defp sender_email do
+    mailer_config()[:from_email] || "noreply@localhost"
+  end
+
+  defp mailer_config do
+    Application.get_env(:mce, Mce.Mailer, [])
   end
 
   @doc """
