@@ -4,6 +4,12 @@ defmodule MceWeb.Router do
   import MceWeb.UserAuth
   import Backpex.Router
 
+  # Health check endpoint for container orchestration (Docker, Kubernetes, Dokploy)
+  # This endpoint bypasses all pipelines for minimal latency
+  scope "/health" do
+    get "/", MceWeb.HealthController, :index
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session

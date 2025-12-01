@@ -1,0 +1,79 @@
+# .dockerignore
+# Exclude files not needed in Docker build context
+# https://docs.docker.com/build/concepts/context/
+
+# Git
+.git
+.gitignore
+
+# Build artifacts
+_build/
+deps/
+.elixir_ls/
+.fetch
+erl_crash.dump
+*.ez
+
+# Node modules (if using npm/yarn in assets)
+assets/node_modules/
+
+# Generated static files (will be regenerated during build)
+priv/static/assets/
+priv/static/cache_manifest.json
+
+# Test files
+/test/
+/cover/
+*.coverdata
+
+# Development files
+.env
+.env.*
+*.local
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Documentation (development)
+/doc/
+dev-doc/
+
+# Claude/AI configuration
+.claude/
+CLAUDE.md
+AGENTS.md
+codebook.toml
+
+# Serena configuration
+.serena/
+
+# Docker files (not needed inside context)
+docker-compose*.yml
+docker-compose*.yaml
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.circleci/
+
+# Kubernetes/Helm (if any)
+k8s/
+helm/
+charts/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.log
+
+# Release artifacts (built fresh each time)
+/rel/artifacts/

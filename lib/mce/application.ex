@@ -33,8 +33,13 @@ defmodule Mce.Application do
   end
 
   defp chromic_pdf_opts do
-    [
-      session_pool: [size: 2]
-    ]
+    opts = [session_pool: [size: 2]]
+
+    # Disable Chrome sandbox in Docker containers (set via CHROMIC_PDF_NO_SANDBOX env var)
+    if System.get_env("CHROMIC_PDF_NO_SANDBOX") == "true" do
+      Keyword.put(opts, :no_sandbox, true)
+    else
+      opts
+    end
   end
 end

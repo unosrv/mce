@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Start the Phoenix server
+# This script ensures PHX_SERVER is set before starting the release
+
+set -e
+
+cd -P -- "$(dirname -- "$0")/.."
+
+export PHX_SERVER=true
+
+exec ./bin/mce start
