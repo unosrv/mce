@@ -25,6 +25,7 @@ words = [
     "healthcheck",
     "htt",
     "iex",
+    "imw",
     "inet",
     "ipcc",
     "ipv",
@@ -46,6 +47,7 @@ words = [
     "otp",
     "poc",
     "prd",
+    "psql",
     "railpack",
     "railpack's",
     "rebar",
@@ -61,6 +63,7 @@ words = [
     "volatilisation",
     "vultr",
     "wishket",
+    "xyz",
     "yymmddhhmm",
 ]
 ignore_paths = ["package.json"]
